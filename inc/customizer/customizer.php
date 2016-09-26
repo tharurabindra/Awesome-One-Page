@@ -19,7 +19,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     require get_template_directory() . '/inc/customizer/customizer-sanitize.php';
 
     /* Custom customizer classes. */
-    require get_template_directory() . '/inc/customizer/aop-customizer-classes.php';
+    require get_template_directory() . '/inc/customizer/customizer-classes.php';
 
 	/*--------------------------------------------------------------------------------------------------*/
     	/**
