@@ -25,11 +25,16 @@ function awesome_one_page_body_classes( $classes ) {
 	}
 
 	// Add a class site layout style.
-	if ( get_theme_mod ( 'aop_website_layout', 'wide' ) == 'wide' ) {
+	if ( get_theme_mod ( 'awesome_one_page_website_layout', 'wide' ) == 'wide' ) {
 		$classes[] = 'wide';
 	} else {
 		$classes[] = 'box';
 	}
+
+    // Activate sticky menu
+    if ( get_theme_mod( 'awesome_one_page_sticky_menu_activate', '' ) == 1 ) {
+        $classes[] = 'sticky-menu';
+    }
 	$classes[] = aop_sidebar_layout_class();
 
 	return $classes;

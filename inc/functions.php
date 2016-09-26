@@ -97,13 +97,13 @@ if ( ! function_exists( 'aop_the_custom_logo' ) ) :
 endif;
 
 /*--------------------------------------------------------------------------------------------------*/
-if ( ! function_exists( 'aop_show_hide_breadcrumbs' ) ) :
+if ( ! function_exists( 'awesome_one_page_display_breadcrumbs' ) ) :
     /**
      * Displays the optional to show the breadcrumbs in innerpages.
      */
-    function aop_show_hide_breadcrumbs() {
-        if ( get_theme_mod( 'aop_breadcrumbs_option', '1') !== '' ) {
-            aop_breadcrumbs(); 
+    function awesome_one_page_display_breadcrumbs() {
+        if ( get_theme_mod( 'awesome_one_page_breadcrumbs_activate', '1') !== '' ) {
+            awesome_one_page_breadcrumbs(); 
         }
     }
 endif;

@@ -17,7 +17,7 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 			
-			<?php aop_show_hide_breadcrumbs(); //breadcrumbs ?>
+			<?php awesome_one_page_display_breadcrumbs(); //breadcrumbs ?>
 
 			<?php
 			while ( have_posts() ) : the_post();

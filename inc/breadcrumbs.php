@@ -6,9 +6,14 @@
  * Add this to any template file by calling dimox_breadcrumbs()
  * Changes: MC added taxonomy support
  */
-function aop_breadcrumbs(){
+function awesome_one_page_breadcrumbs(){
   /* === OPTIONS === */
-	$text['home']     = get_theme_mod( 'aop_breadcrumb_home_text', esc_html__( 'Home', 'awesome-one-page' ) ); // text for the 'Home' link
+	$text['home']     = esc_html__( 'Home', 'awesome-one-page' ); // text for the 'Home' link
+	$delimiter = get_theme_mod( 'awesome_one_page_breadcrumbs_sep' );
+	if ( $delimiter == '' ) {
+		$delimiter    = '/'; // delimiter between crumbs
+	}
+	
 	$text['category'] = '%s'; // text for a category page
 	$text['tax'] 	  = '%s'; // text for a taxonomy page
 	$text['search']   = '%s'; // text for a search results page
@@ -17,7 +22,7 @@ function aop_breadcrumbs(){
 	$text['404']      = 'Error 404'; // text for the 404 page
 	$showCurrent = 1; // 1 - show current post/page title in breadcrumbs, 0 - don't show
 	$showOnHome  = 0; // 1 - show breadcrumbs on the homepage, 0 - don't show
-	$delimiter   = ' &gt '; // delimiter between crumbs
+	
 	$before      = '<span class="current">'; // tag before the current crumb
 	$after       = '</span>'; // tag after the current crumb
 	/* === END OF OPTIONS === */
@@ -122,9 +127,9 @@ function aop_breadcrumbs(){
 		}
 		if ( get_query_var('paged') ) {
 			if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ' (';
-			echo __( 'Page', 'awesome-one-page' ) . ' ' . get_query_var('paged');
+			echo esc_html__( 'Page', 'awesome-one-page' ) . ' ' . get_query_var('paged');
 			if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ')';
 		}
 		echo '</div>';
 	}
-} // end aop_breadcrumbs()
+} // end awesome_one_page_breadcrumbs()
