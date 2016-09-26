@@ -1,0 +1,154 @@
+/*--------------------------------------------------------------
+# Widget style
+--------------------------------------------------------------*/
+ul.aop-widget-repetable-field-items li.aop-widget-accordion-item .accordion-content,
+ul.aop-widget-repetable-field-items li.aop-widget-accordion-item .accordion-title {
+    padding:8px 10px;
+    border:1px solid #e5e5e5;
+    background-color: #aaa;
+    border-top:none
+}
+ul.aop-widget-repetable-field-items li.aop-widget-accordion-item .accordion-title .dashicons {
+    float:right;
+    margin-top:-3px
+}
+ul.aop-widget-repetable-field-items li.aop-widget-accordion-item .accordion-content {
+    display:none
+}
+ul.aop-widget-repetable-field-items li.aop-widget-accordion-item .accordion-content.active {
+    display:block
+}
+
+/*--------------------------------------------------------------
+# customizer layout animated border style
+--------------------------------------------------------------*/
+#aop-img-container .aop-radio-img-img {
+	border: 3px solid #DEDEDE;
+	margin: 0 5px 5px 0;
+	cursor: pointer;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#aop-img-container .aop-radio-img-selected {
+	border: 3px solid #AAA;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+input[type=checkbox]:before {
+	content: '';
+	margin: -3px 0 0 -4px;
+}
+
+
+/*--------------------------------------------------------------
+# Admin input
+--------------------------------------------------------------*/
+.aop-admin-input-wrap {
+    margin-top: 15px;
+}
+
+.aop-admin-input-wrap:last-child {
+    margin-bottom: 15px;
+}
+
+.aop-admin-input-wrap a {
+    text-decoration: none;
+}
+
+.aop-admin-input-wrap label {
+    font-weight: bold;
+
+    display: inline-block;
+
+    width: 96px;
+
+    float: left;
+
+    margin-top: 12px;
+}
+
+.aop-admin-input-wrap input[type='text'],
+.aop-admin-input-wrap input[type='email'],
+.aop-admin-input-wrap input[type='number'],
+.aop-admin-input-wrap input[type='phone'],
+.aop-admin-input-wrap input[type='password'],
+.aop-admin-input-wrap input[type='url'],
+.aop-admin-input-wrap input[type='number'],
+.aop-admin-input-wrap select,
+.aop-admin-input-wrap textarea {
+    width: calc( 100% - 104px );
+    padding: 8px 10px;
+
+    box-shadow: none;
+}
+
+.aop-admin-input-wrap select,
+.aop-admin-input-wrap input[type='number'] {
+    height: 38px;
+}
+
+.aop-admin-input-wrap img {
+    max-width: calc( 100% - 115px );
+    height: auto;
+    margin-bottom: 15px;
+
+    border: 6px solid #fff;
+    box-shadow: 0 0 1px #ccc;
+}
+
+.aop-custom-media-button {
+    margin: 0 96px;
+    padding: 8px 20px;
+
+    cursor: pointer;
+    -webkit-transition: all .35s ease;
+    -moz-transition: all .35s ease;
+    -o-transition: all .35s ease;
+    transition: all .35s ease;
+
+
+    border: 2px dashed #ddd;
+    border-radius: 3px;
+    outline: none !important;
+    background: #fdfdfd;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: capitalize;
+    color: #888;
+}
+
+.aop-custom-media-button:hover {
+    border-color: #888;
+    color: #555;
+}
+
+.aop-admin-radio-wrap {
+    margin-top: -30px;
+    padding-left: 102px;
+}
+
+.aop-admin-slider-wrap,
+.aop-admin-logos-wrap {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    margin-top: 15px;
+    background: #fdfdfd;
+}
+
+.aop-admin-slider-wrap:last-child,
+.aop-admin-logos-wrap:last-child {
+    margin-bottom: 15px;
+}
+
+.aop-admin-testimonials {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.aop-admin-testimonials textarea {
+    min-height: 100px;
+}
+

@@ -1,0 +1,15 @@
+
+#page-layout .aop-radio-image-wrapper .aop-description .aop-radio-image {
+    border: 3px solid #DEDEDE;
+    margin: 0 5px 5px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#page-layout .aop-radio-image-wrapper .aop-description .aop-radio-image-selected {
+    border: 3px solid #AAA;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
