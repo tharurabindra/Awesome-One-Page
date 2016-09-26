@@ -118,7 +118,7 @@ require get_template_directory() . '/inc/widgets/widgets.php';
 /**
  * Metabox Custom function
  */
-require get_template_directory() . '/inc/metabox/aop-metaboxes.php';
+require get_template_directory() . '/inc/metabox/metaboxes.php';
 /**
  * Load Jetpack compatibility file.
  */
@@ -127,9 +127,9 @@ require get_template_directory() . '/inc/jetpack.php';
 /**
  * Load awesome-one-page extra/custom functions file
  */
-require get_template_directory() . '/inc/aop-functions.php';
+require get_template_directory() . '/inc/functions.php';
 
 /**
  * Awesome-one-page Breadcrumbs function
  */
-require get_template_directory() . '/inc/aop-breadcrumbs.php';
+require get_template_directory() . '/inc/breadcrumbs.php';
