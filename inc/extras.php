@@ -31,6 +31,13 @@ function awesome_one_page_body_classes( $classes ) {
 		$classes[] = 'box';
 	}
 
+    // Menu style.
+    if ( get_theme_mod ( 'awesome_one_page_menu_display_style', 'inline' ) == 'inline' ) {
+        $classes[] = 'inline';
+    } else {
+        $classes[] = 'centered';
+    }
+
     // Activate sticky menu
     if ( get_theme_mod( 'awesome_one_page_sticky_menu_activate', '' ) == 1 ) {
         $classes[] = 'stick';
