@@ -10,7 +10,7 @@
 
 <aside id="secondary" class="widget-area" role="complementary">
 	<?php do_action( 'aop_before_sidebar' ); ?>
-      <?php if ( ! dynamic_sidebar( 'aop_sidebar_right' ) ) :
+      <?php if ( ! dynamic_sidebar( 'awesome_one_page_right_sidebar' ) ) :
          the_widget( 'WP_Widget_Text',
             array(
                'title'  => esc_html__( 'Example Widget', 'awesome-one-page' ),
