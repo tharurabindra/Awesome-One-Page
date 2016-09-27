@@ -33,7 +33,7 @@ function awesome_one_page_body_classes( $classes ) {
 
     // Activate sticky menu
     if ( get_theme_mod( 'awesome_one_page_sticky_menu_activate', '' ) == 1 ) {
-        $classes[] = 'sticky-menu';
+        $classes[] = 'stick';
     }
 	$classes[] = aop_sidebar_layout_class();
 

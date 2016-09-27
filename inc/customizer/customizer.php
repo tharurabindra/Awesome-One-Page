@@ -16,7 +16,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
     // Remove
-    //$wp_customize->remove_section( 'header_image' );
+    $wp_customize->remove_section( 'header_image' );
     //$wp_customize->remove_control( 'header_textcolor' );
 
     //Custom Controls
@@ -336,6 +336,13 @@ function awesome_one_page_customize_register( $wp_customize ) {
                 'inline'     => esc_html__('Inline', 'awesome-one-page'),
                 'centered'   => esc_html__('Centered', 'awesome-one-page'),
             ),
+    ) );
+
+    // Header Image
+    $wp_customize->add_section( 'header_image', array(
+        'priority'              => 4,
+        'title'                 => esc_html__( 'Header Image', 'awesome-one-page' ),
+        'panel'                 => 'awesome_one_page_header'
     ) );
 
 

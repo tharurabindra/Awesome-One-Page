@@ -55,12 +55,17 @@
 			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
+	
+	<?php if ( get_header_image() ) : ?>
+		<div class="header-image-wrap">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+				<img src="<?php header_image(); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" alt="">
+			</a>
+		</div><!-- .header-image-wrap -->
+	<?php endif; // End header image check. ?>
 
 	<?php do_action( 'aop_after_header' ); ?>
 
-	<?php if( get_theme_mod( 'aop_slider_enable' ) == '1' && is_front_page() && is_home() ) :
-		do_action( 'aop_header_slider' );
-	endif; ?>
 
 	<?php do_action( 'aop_before_main' ); ?>
 
