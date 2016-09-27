@@ -263,21 +263,20 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'awesome_one_page_website_layout', array(
         'default'            => 'wide',
         'capability'         => 'edit_theme_options',
-        'sanitize_callback'  => 'good_news_pro_sanitize_select'
+        'sanitize_callback'  => 'awesome_one_page_sanitize_website_layout'
     ) );
 
     $wp_customize->add_control( 'awesome_one_page_website_layout', array(
-            'label'    => esc_html__( 'Website Layout', 'awesome-one-page' ),
-            'description'    => esc_html__( 'Choose your site layout. The change is reflected in whole site.', 'awesome-one-page' ),
-            'section'  => 'awesome_one_page_basic',
-            'type'     => 'select',
-            'choices'    => array(
-                'box'               => esc_html__('Boxed layout', 'awesome-one-page'),
-                'wide'              => esc_html__('Wide layout', 'awesome-one-page')
+        'type'               => 'radio',
+        'label'              => esc_html__( 'Website Layout', 'awesome-one-page'),
+        'description'        => esc_html__( 'Choose your site layout. The change is reflected in whole site.', 'awesome-one-page' ),
+        'section'            => 'awesome_one_page_basic',
+        'choices'            => array(
+            'box'    => esc_html__('Boxed layout', 'awesome-one-page'),
+            'wide'   => esc_html__('Wide layout', 'awesome-one-page')
             ),
-            'settings'              => 'awesome_one_page_website_layout'
-        )
-    );
+        'settings'           => 'awesome_one_page_website_layout'
+    ) );
 
     // Background Image
     $wp_customize->add_section( 'background_image', array(
@@ -1267,6 +1266,13 @@ function awesome_one_page_customize_register( $wp_customize ) {
             return 1;
         } else {
             return '';
+        }
+    }
+
+    //Menu style
+    function awesome_one_page_sanitize_website_layout( $input ) {
+        if ( in_array( $input, array( 'box', 'wide' ), true ) ) {
+            return $input;
         }
     }
 
