@@ -29,12 +29,40 @@ function awesome_one_page_posted_on() {
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
+	  
 	$byline = sprintf(
 		esc_html_x( 'by %s', 'post author', 'awesome-one-page' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+	if ( is_single() ) : 
+		if ( get_theme_mod('awesome_one_page_post_meta_date', '1') == 1 ) :
+			echo '<span class="posted-on">';
+			echo $posted_on;
+			echo '</span>';
+		endif;
+
+		if ( get_theme_mod('awesome_one_page_post_meta_author', '1') == 1 ) :
+			echo '<span class="byline">';
+			echo $byline;
+			echo '</span>';
+		endif;
+	else :
+		if ( get_theme_mod('awesome_one_page_blog_post_date', '1') == 1 ) :
+			echo '<span class="posted-on">';
+			echo $posted_on;
+			echo '</span>';
+		endif;
+
+		echo '<span class="byline">';
+		echo $byline;
+		echo '</span>';
+	endif; 
+
+
+	
+	// WPCS: XSS OK.
+
 
 }
 endif;
@@ -44,22 +72,43 @@ if ( ! function_exists( 'awesome_one_page_entry_footer' ) ) :
  * Prints HTML with meta information for the categories, tags and comments.
  */
 function awesome_one_page_entry_footer() {
-	// Hide category and tag text for pages.
-	if ( 'post' === get_post_type() ) {
-		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'awesome-one-page' ) );
-		if ( $categories_list && awesome_one_page_categorized_blog() ) {
-			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'awesome-one-page' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+	if ( is_single() ) {
+		// Hide category and tag text for pages.
+		if ( 'post' === get_post_type() ) {
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( esc_html__( ', ', 'awesome-one-page' ) );
+			if ( $categories_list && awesome_one_page_categorized_blog() && ( get_theme_mod('awesome_one_page_post_meta_categories', '1') == 1 ) ) {
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'awesome-one-page' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+			}
+
+			/* translators: used between list items, there is a space after the comma */
+			$tags_list = get_the_tag_list( '', esc_html__( ', ', 'awesome-one-page' ) );
+			if ( $tags_list && ( get_theme_mod('awesome_one_page_post_meta_tags', '1') == 1 ) ) {
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'awesome-one-page' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+			}
 		}
 
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'awesome-one-page' ) );
-		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'awesome-one-page' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+	} else {
+
+		// Hide category and tag text for pages.
+		if ( 'post' === get_post_type() ) {
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( esc_html__( ', ', 'awesome-one-page' ) );
+			if ( $categories_list && awesome_one_page_categorized_blog() && ( get_theme_mod('awesome_one_page_blog_post_categories', '1') == 1 ) ) {
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'awesome-one-page' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+			}
+
+			/* translators: used between list items, there is a space after the comma */
+			$tags_list = get_the_tag_list( '', esc_html__( ', ', 'awesome-one-page' ) );
+			if ( $tags_list && ( get_theme_mod('awesome_one_page_blog_post_tags', '1') == 1 ) ) {
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'awesome-one-page' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+			}
 		}
+
 	}
+	
 
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) && ( get_theme_mod('awesome_one_page_blog_post_comments', '1') == 1 ) ) {
 		echo '<span class="comments-link">';
 		/* translators: %s: post title */
 		comments_popup_link( sprintf( wp_kses( __( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'awesome-one-page' ), array( 'span' => array( 'class' => array() ) ) ), get_the_title() ) );
@@ -120,3 +169,61 @@ function awesome_one_page_category_transient_flusher() {
 }
 add_action( 'edit_category', 'awesome_one_page_category_transient_flusher' );
 add_action( 'save_post',     'awesome_one_page_category_transient_flusher' );
+
+/*--------------------------------------------------------------------------------------------------*/
+
+/**
+ * Categories lists
+ */
+
+if( ! function_exists( 'awesome_one_page_post_cat_lists' ) ) :
+	function awesome_one_page_post_cat_lists() {
+		// Hide category  text for pages.
+		if ( 'post' === get_post_type() ) {
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( esc_html__( ', ', 'awesome-one-page' ) );
+			if ( $categories_list && awesome_one_page_categorized_blog() ) {
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'awesome-one-page' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+			}
+		}
+	}
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+
+/**
+ * Tags lists
+ */
+
+if( ! function_exists( 'awesome_one_page_post_tag_lists' ) ) :
+	function awesome_one_page_post_tag_lists() {
+		// Hide tag text for pages.
+		if ( 'post' === get_post_type() ) {
+
+			/* translators: used between list items, there is a space after the comma */
+			$tags_list = get_the_tag_list( '', esc_html__( ', ', 'awesome-one-page' ) );
+			if ( $tags_list ) {
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'awesome-one-page' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+			}
+		}
+	}
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+
+/**
+ * Comment number
+ */
+
+if( ! function_exists( 'awesome_one_page_post_comments' ) ) :
+	function awesome_one_page_post_comments() {
+		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+			echo '<span class="comments-link">';
+			/* translators: %s: post title */
+			comments_popup_link( sprintf( wp_kses( __( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'awesome-one-page' ), array( 'span' => array( 'class' => array() ) ) ), get_the_title() ) );
+			echo '</span>';
+		}
+	}
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/

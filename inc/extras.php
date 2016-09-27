@@ -55,7 +55,7 @@ if ( ! function_exists( 'awesome_one_page_sidebar_layout_class' ) ) :
  */
 function awesome_one_page_sidebar_layout_class() {
     global $post;
-    $layout = get_theme_mod( 'aop_archive_sidebar', 'right_sidebar' );
+    $layout = get_theme_mod( 'awesome_one_page_blog_global_sidebar', 'right_sidebar' );
     // Front page displays in Reading Settings
     $page_for_posts = get_option('page_for_posts');
     // Get Layout meta
@@ -109,6 +109,7 @@ if ( ! function_exists( 'awesome_one_page_navigation' ) ) :
  * Return the navigations.
  */
 function awesome_one_page_navigation() {
+    $show_post_nex_prev_article = get_theme_mod( 'awesome_one_page_post_nex_prev_article' , 1 ); 
     if( is_archive() || is_home() || is_search() ) {
     /**
      * Checking WP-PageNaviplugin exist
@@ -139,7 +140,7 @@ function awesome_one_page_navigation() {
     endif;
   }
 
-  if ( is_single() ) {
+  if ( is_single() && $show_post_nex_prev_article == 1 ) {
     if( is_attachment() ) {
     ?>
     <nav class="navigation post-navigation" role="navigation">
@@ -181,3 +182,86 @@ function awesome_one_page_navigation() {
   } 
 }
 endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'awesome_one_page_post_thumbnail' ) ) :
+/**
+ * Displays an optional post thumbnail.
+ */
+function awesome_one_page_post_thumbnail() {
+    global $post;
+    $show_post_thumbnail_image = get_theme_mod( 'awesome_one_page_post_featured_image', '' );
+    $show_blog_post_thumbnail_image = get_theme_mod( 'awesome_one_page_blog_post_thumb_image', '' );
+
+    if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+        return;
+    }
+
+    if ( is_single() ) : ?>
+
+        <?php if ( has_post_thumbnail () && $show_post_thumbnail_image != '' ) :
+        $title_attribute  = the_title_attribute( 'echo=0' );
+        $image_id         = get_post_thumbnail_id();
+        $image_path       = wp_get_attachment_image_src( $image_id, 'full', true );
+        $image_alt        = get_post_meta( $image_id, '_wp_attachment_image_alt', true ); ?>
+        <div class="single-thumb">
+            <img src="<?php echo esc_url( $image_path[0] ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" title="<?php echo esc_attr( $title_attribute ); ?>"/>
+        </div><!-- .post-thumbnail -->
+
+        <?php endif; ?>
+
+    <?php else : ?>
+
+        <?php if ( has_post_thumbnail () && $show_blog_post_thumbnail_image == 1 ) :
+        $title_attribute  = the_title_attribute( 'echo=0' );
+        $image_id         = get_post_thumbnail_id();
+        $image_path       = wp_get_attachment_image_src( $image_id, 'medium', true );
+        $image_alt        = get_post_meta( $image_id, '_wp_attachment_image_alt', true ); ?>
+        <div class="entry-thumb">
+            <a href="<?php the_permalink(); ?>" aria-hidden="true"><img src="<?php echo esc_url( $image_path[0] ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" title="<?php echo esc_attr( $title_attribute ); ?>" /></a>
+        </div><!-- .post-thumbnail -->
+
+        <?php endif; ?>
+
+    <?php endif; // End is_singular()
+}
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'aop_the_custom_logo' ) ) :
+    /**
+     * Displays the optional custom logo.
+     *
+     * Does nothing if the custom logo is not available.
+     */
+    function aop_the_custom_logo() {
+        if ( function_exists( 'the_custom_logo' ) ) {
+            the_custom_logo();
+        }
+    }
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+if ( ! function_exists( 'awesome_one_page_display_breadcrumbs' ) ) :
+    /**
+     * Displays the optional to show the breadcrumbs in innerpages.
+     */
+    function awesome_one_page_display_breadcrumbs() {
+        if ( get_theme_mod( 'awesome_one_page_breadcrumbs_activate', '1') !== '' ) {
+            awesome_one_page_breadcrumbs(); 
+        }
+    }
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+
+/**
+ * Excerpt length
+ */
+function awesome_one_page_excerpt_length( $length ) {
+  $excerpt = get_theme_mod('awesome_one_page_blog_post_excerpt_length', '40');
+  return absint($excerpt);
+}
+add_filter( 'excerpt_length', 'awesome_one_page_excerpt_length', 99 );

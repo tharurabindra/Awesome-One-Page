@@ -47,7 +47,7 @@ function awesome_one_page_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'awesome_one_page_scripts' );
 
-
+/*--------------------------------------------------------------------------------------------------*/
 
 function aop_admin_scripts() {
     global $aop_version;
@@ -58,6 +58,7 @@ function aop_admin_scripts() {
 }
 add_action( 'admin_enqueue_scripts', 'aop_admin_scripts' );
 
+/*--------------------------------------------------------------------------------------------------*/
 /**
  * Added customizer scripts
  */
@@ -83,31 +84,6 @@ add_action('admin_enqueue_scripts', 'awesome_one_page_customizer_script');
 
 
 /*--------------------------------------------------------------------------------------------------*/
-if ( ! function_exists( 'aop_the_custom_logo' ) ) :
-    /**
-     * Displays the optional custom logo.
-     *
-     * Does nothing if the custom logo is not available.
-     */
-    function aop_the_custom_logo() {
-        if ( function_exists( 'the_custom_logo' ) ) {
-            the_custom_logo();
-        }
-    }
-endif;
 
-/*--------------------------------------------------------------------------------------------------*/
-if ( ! function_exists( 'awesome_one_page_display_breadcrumbs' ) ) :
-    /**
-     * Displays the optional to show the breadcrumbs in innerpages.
-     */
-    function awesome_one_page_display_breadcrumbs() {
-        if ( get_theme_mod( 'awesome_one_page_breadcrumbs_activate', '1') !== '' ) {
-            awesome_one_page_breadcrumbs(); 
-        }
-    }
-endif;
-
-/*--------------------------------------------------------------------------------------------------*/
 
 
