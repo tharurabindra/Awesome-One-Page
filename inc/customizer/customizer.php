@@ -16,7 +16,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
     // Remove
-    $wp_customize->remove_section( 'header_image' );
+    //$wp_customize->remove_section( 'header_image' );
     //$wp_customize->remove_control( 'header_textcolor' );
 
     //Custom Controls
