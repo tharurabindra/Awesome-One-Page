@@ -61,20 +61,6 @@ function awesome_one_page_customize_register( $wp_customize ) {
             }
         }
 
-        // Date Picker
-        class Date_Picker_Custom_Control extends WP_Customize_Control {
-
-            public function render_content() {
-                ?>
-                <label>
-                    <span class="customize-date-picker-control"><?php echo esc_html( $this->label ); ?></span>
-                    <input type="date" <?php $this->link(); ?> value="<?php echo esc_attr( $this->value() ); ?>">
-                </label>
-                <?php
-            }
-
-        }
-
         // Demo Import Button
         class WP_Customize_Demo_Import_Control extends WP_Customize_Control {
 
@@ -84,20 +70,6 @@ function awesome_one_page_customize_register( $wp_customize ) {
                 <label>
                     <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
                     <input type="submit" id="<?php echo $this->id; ?>" name="<?php echo $this->id; ?>" value="<?php _e( 'Import Demo Content', 'awesome-one-page' ); ?>" class="dt-demo-data-import" />
-                </label>
-                <?php
-            }
-        }
-
-        // Blank
-        class WP_Customize_Blank_Control extends WP_Customize_Control {
-
-            public function render_content() {
-
-                ?>
-                <label>
-                    <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-                    <span class="dt-customize-description"><i><?php echo esc_html( $this->description ); ?></i></span>
                 </label>
                 <?php
             }
@@ -122,77 +94,8 @@ function awesome_one_page_customize_register( $wp_customize ) {
             }
         }
 
-        // Layout Picker
-        class good_news_pro_layout_picker_custom_control extends WP_Customize_Control {
-
-            /**
-             * Render the content on the theme customizer page
-             */
-            public function render_content() {
-
-                if ( empty( $this->choices ) )
-                    return;
-
-                $name = $this->id;
-
-                ?>
-                <h3 class="awesome-one-page-layout-title"><?php echo esc_html( $this->label ); ?></h3>
-
-                <?php foreach ( $this->choices as $value => $label ) : ?>
-
-                    <input type="radio" id="<?php echo esc_attr( $value ); ?>" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
-
-                    <label for="<?php echo esc_attr( $value ); ?>">
-                        <span class="awesome-one-page-radio-img">
-                            <span class="awesome-one-page-checked"></span>
-                        </span>
-
-                        <?php echo esc_html( $label ); ?>
-                    </label>
-
-                    <?php
-
-                endforeach;
-            }
-        }
-
-        // Theme Color
-        class good_news_pro_theme_color_picker extends WP_Customize_Control {
-
-            /**
-             * Render the content on the theme customizer page
-             */
-            public function render_content() {
-
-                if ( empty( $this->choices ) )
-                    return;
-
-                $name = $this->id;
-
-                ?>
-
-                <h3 class="awesome-one-page-layout-title"><?php echo esc_html( $this->label ); ?></h3>
-
-                <?php foreach ( $this->choices as $value => $label ) : ?>
-
-                    <input type="radio" id="<?php echo esc_attr( $value ); ?>" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
-
-                    <label for="<?php echo esc_attr( $value ); ?>">
-                        <?php echo esc_html( $label ); ?>
-
-                        <span class="awesome-one-page-radio-color">
-                            <span class="awesome-one-page-color-checked"></span>
-                        </span>
-                    </label>
-
-                    <?php
-
-                endforeach;
-            }
-        }
-
         // Image radio control
-        class Aop_Image_Radio_Control extends WP_Customize_Control {
+        class WP_Customizer_Image_Radio_Control extends WP_Customize_Control {
 
             public function render_content() {
 
@@ -290,7 +193,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'awesome_one_page_breadcrumbs_sep', array(
         'default'               => '/',
         'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_nohtml'
+        'sanitize_callback'     => 'awesome_one_page_sanitize_nohtml'
     ) );
 
     $wp_customize->add_control( 'awesome_one_page_breadcrumbs_sep', array(
@@ -456,7 +359,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'sanitize_callback' => 'awesome_one_page_sanitize_post_sidebar'                 
     ) );
 
-    $wp_customize->add_control( new Aop_Image_Radio_Control( $wp_customize, 'awesome_one_page_post_global_sidebar', array(
+    $wp_customize->add_control( new WP_Customizer_Image_Radio_Control( $wp_customize, 'awesome_one_page_post_global_sidebar', array(
         'type'               => 'radio',
         'priority'           => 1,
         'label'              => esc_html__('Available Sidebar', 'awesome-one-page'),
@@ -577,7 +480,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'sanitize_callback' => 'awesome_one_page_sanitize_post_sidebar'                 
     ) );
 
-    $wp_customize->add_control( new Aop_Image_Radio_Control( $wp_customize, 'awesome_one_page_blog_global_sidebar', array(
+    $wp_customize->add_control( new WP_Customizer_Image_Radio_Control( $wp_customize, 'awesome_one_page_blog_global_sidebar', array(
         'type'               => 'radio',
         'priority'           => 1,
         'label'              => esc_html__('Available Sidebar', 'awesome-one-page'),
@@ -770,7 +673,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'awesome_one_page_custom_css_code', array(
         'default'               => '',
         'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_nohtml'
+        'sanitize_callback'     => 'awesome_one_page_sanitize_nohtml'
     ) );
 
     $wp_customize->add_control( 'awesome_one_page_custom_css_code', array(
@@ -791,7 +694,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'awesome_one_page_help_support_links', array(
         'default'               => '',
         'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_nohtml'
+        'sanitize_callback'     => 'awesome_one_page_sanitize_nohtml'
     ) );
 
     $wp_customize->add_control( new WP_Customize_Help_support_Control( $wp_customize, 'awesome_one_page_help_support_links', array(
@@ -834,7 +737,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
     //Footer Widgets
     function awesome_one_page_sanitize_post_sidebar( $input ) {
-        if ( in_array( $input, array( '1right_sidebar', 'left_sidebar', 'no_sidebar_full_width', 'no_sidebar_content_centered' ), true ) ) {
+        if ( in_array( $input, array( 'right_sidebar', 'left_sidebar', 'no_sidebar_full_width', 'no_sidebar_content_centered' ), true ) ) {
             return $input;
         }
     }
@@ -847,100 +750,8 @@ function awesome_one_page_customize_register( $wp_customize ) {
     /**
      * No-HTML sanitization callback
      */
-    function good_news_pro_sanitize_nohtml( $nohtml ) {
+    function awesome_one_page_sanitize_nohtml( $nohtml ) {
         return wp_filter_nohtml_kses( $nohtml );
-    }
-
-    /**
-     * HTML sanitization callback
-     */
-    function good_news_pro_sanitize_html( $html ) {
-        $allowed_html = array(
-            'a' => array(
-                'href' => array(),
-            )
-        );
-
-        return wp_kses( $html, $allowed_html );
-    }
-
-    /**
-     * Header Layout Sanitize
-     */
-    function good_news_pro_sanitize_header_layout( $value ) {
-        if ( ! in_array( $value, array( 'header-layout1', 'header-layout2', 'header-layout3', 'header-layout4' ) ) )
-            $value = 'header-layout1';
-
-        return $value;
-    }
-
-    /**
-     * Header Layout Sanitize
-     */
-    function good_news_pro_sanitize_theme_color( $value ) {
-        if ( ! in_array( $value, array( 'watermelon', 'red', 'orange', 'yellow', 'lime', 'green', 'mint', 'teal', 'sky-blue', 'blue', 'purple', 'pink', 'magenta', 'plum', 'brown', 'maroon' ) ) )
-            $value = 'sky-blue';
-
-        return $value;
-    }
-
-    /**
-     * Select Sanitize
-     */
-    function good_news_pro_sanitize_select( $input, $setting ) {
-
-        // Ensure input is a slug.
-        $input = sanitize_key( $input );
-
-        // Get list of choices from the control associated with the setting.
-        $choices = $setting->manager->get_control( $setting->id )->choices;
-
-        // If the input is a valid key, return it; otherwise, return the default.
-        return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
-    }
-
-    /**
-     * Google Fonts Sanitize
-     */
-    function good_news_pro_sanitize_google_fonts( $value ) {
-        if ( '0' == $value ) {
-            return '0';
-        } else if ( array_key_exists( $value, good_news_pro_google_font_list() ) ) {
-            return $value;
-        } else {
-            return 'Roboto';
-        }
-    }
-
-    /**
-     * Number Sanitize
-     */
-    function good_news_pro_sanitize_number_absint( $number, $setting ) {
-        // Ensure $number is an absolute integer (whole number, zero or greater).
-        $number = absint( $number );
-
-        // If the input is an absolute integer, return it; otherwise, return the default
-        return ( $number ? $number : $setting->default );
-    }
-
-    /**
-     * Sidebar Layout Sanitize
-     */
-    function good_news_pro_sanitize_sidebar_layout( $value ) {
-        if ( ! in_array( $value, array( 'sidebar-right', 'sidebar-left', 'sidebar-none' ) ) )
-            $value = 'sidebar-right';
-
-        return $value;
-    }
-
-    /**
-     * Post Template Sanitize
-     */
-    function good_news_pro_sanitize_post_template_layout( $value ) {
-        if ( ! in_array( $value, array( 'post-template1', 'post-template2', 'post-template3', 'post-template4', 'post-template5', 'post-template6', 'post-template7', 'post-template8', 'post-template9', 'post-template10' ) ) )
-            $value = 'post-template1';
-
-        return $value;
     }
 
     /**
@@ -966,87 +777,6 @@ function awesome_one_page_customize_register( $wp_customize ) {
         // If the number is within the valid range, return it; otherwise, return the default
         return ( $min <= $number && $number <= $max && is_int( $number / $step ) ? $number : $setting->default );
     }
-
-    /**
-     * Archive Header Layout Sanitize
-     */
-    function good_news_pro_sanitize_archive_header_layout( $value ) {
-        if ( ! in_array( $value, array( 'archive-header1', 'archive-header2',  'archive-header3' , 'archive-header4' , 'archive-header5' ) ) )
-            $value = 'archive-header1';
-
-        return $value;
-    }
-
-    /**
-     * Default Archive Layout Sanitize
-     */
-    function good_news_pro_sanitize_default_archive_layout( $value ) {
-        if ( ! in_array( $value, array( 'archive-layout1', 'archive-layout2', 'archive-layout3', 'archive-layout4', 'archive-layout5', 'archive-layout6', 'archive-layout7', 'archive-layout8', 'archive-layout9', 'archive-layout10' ) ) )
-            $value = 'archive-layout1';
-
-        return $value;
-    }
-
-    /**
-     * Category Layout Sanitize
-     */
-    function good_news_pro_sanitize_archive_category_layout( $value ) {
-        if ( ! in_array( $value, array( 'archive-category-layout1', 'archive-category-layout2', 'archive-category-layout3', 'archive-category-layout4', 'archive-category-layout5', 'archive-category-layout6', 'archive-category-layout7', 'archive-category-layout8', 'archive-category-layout9', 'archive-category-layout10' ) ) )
-            $value = 'archive-category-layout1';
-
-        return $value;
-    }
-
-    /**
-     * Tag Layout Sanitize
-     */
-    function good_news_pro_sanitize_archive_tag_layout( $value ) {
-        if ( ! in_array( $value, array( 'archive-tag-layout1', 'archive-tag-layout2', 'archive-tag-layout3', 'archive-tag-layout4', 'archive-tag-layout5', 'archive-tag-layout6', 'archive-tag-layout7', 'archive-tag-layout8', 'archive-tag-layout9', 'archive-tag-layout10' ) ) )
-            $value = 'archive-tag-layout1';
-
-        return $value;
-    }
-
-    /**
-     * User Layout Sanitize
-     */
-    function good_news_pro_sanitize_archive_author_layout( $value ) {
-        if ( ! in_array( $value, array( 'archive-author-layout1', 'archive-author-layout2', 'archive-author-layout3', 'archive-author-layout4', 'archive-author-layout5', 'archive-author-layout6', 'archive-author-layout7', 'archive-author-layout8', 'archive-author-layout9', 'archive-author-layout10' ) ) )
-            $value = 'archive-author-layout1';
-
-        return $value;
-    }
-
-    /**
-     * Search Layout Sanitize
-     */
-    function good_news_pro_sanitize_archive_search_layout( $value ) {
-        if ( ! in_array( $value, array( 'archive-search-layout1', 'archive-search-layout2', 'archive-search-layout3', 'archive-search-layout4', 'archive-search-layout5', 'archive-search-layout6', 'archive-search-layout7', 'archive-search-layout8', 'archive-search-layout9', 'archive-search-layout10' ) ) )
-            $value = 'archive-search-layout1';
-
-        return $value;
-    }
-
-    /**
-     * Footer Widgets Layout Sanitize
-     */
-    function good_news_pro_sanitize_footer_widgets_layout( $value ) {
-        if ( ! in_array( $value, array( 'footer-widgets1', 'footer-widgets2', 'footer-widgets3', 'footer-widgets4', 'footer-widgets5', 'footer-widgets6', 'footer-widgets7', 'footer-widgets8', 'footer-widgets9', 'footer-widgets10' ) ) )
-            $value = 'footer-widgets1';
-
-        return $value;
-    }
-
-    /**
-     * Footer Bar Layout Sanitize
-     */
-    function good_news_pro_sanitize_footer_bar_layout( $value ) {
-        if ( ! in_array( $value, array( 'footer-bar-layout1', 'footer-bar-layout2', 'footer-bar-layout3', 'footer-bar-layout4', 'footer-bar-layout5' ) ) )
-            $value = 'footer-bar-layout1';
-
-        return $value;
-    }
-
 }
 add_action( 'customize_register', 'awesome_one_page_customize_register' );
 

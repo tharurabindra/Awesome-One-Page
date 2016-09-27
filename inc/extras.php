@@ -237,7 +237,7 @@ if ( ! function_exists( 'aop_the_custom_logo' ) ) :
      * Does nothing if the custom logo is not available.
      */
     function aop_the_custom_logo() {
-        if ( function_exists( 'the_custom_logo' ) ) {
+        if ( function_exists( 'the_custom_logo' ) ) { 
             the_custom_logo();
         }
     }
