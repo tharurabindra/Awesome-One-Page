@@ -42,18 +42,18 @@ function awesome_one_page_body_classes( $classes ) {
     if ( get_theme_mod( 'awesome_one_page_sticky_menu_activate', '' ) == 1 ) {
         $classes[] = 'stick';
     }
-	$classes[] = aop_sidebar_layout_class();
+	$classes[] = awesome_one_page_sidebar_layout_class();
 
 	return $classes;
 }
 add_filter( 'body_class', 'awesome_one_page_body_classes' );
 
 /*--------------------------------------------------------------------------------------------------*/
-if ( ! function_exists( 'aop_sidebar_layout_class' ) ) :
+if ( ! function_exists( 'awesome_one_page_sidebar_layout_class' ) ) :
 /**
  * Generate layout class for sidebar based on customizer and post meta settings.
  */
-function aop_sidebar_layout_class() {
+function awesome_one_page_sidebar_layout_class() {
     global $post;
     $layout = get_theme_mod( 'aop_archive_sidebar', 'right_sidebar' );
     // Front page displays in Reading Settings
@@ -72,13 +72,12 @@ function aop_sidebar_layout_class() {
         }
     }
     elseif( is_page() ) {
-        $layout = get_theme_mod( 'aop_page_sidebar', 'right_sidebar' );
         if( $layout_meta != 'default_layout' && $layout_meta != '' ) {
             $layout = get_post_meta( $post->ID, 'aop_page_specific_layout', true );
         }
     }
     elseif( is_single() ) {
-        $layout = get_theme_mod( 'aop_post_sidebar', 'right_sidebar' );
+        $layout = get_theme_mod( 'awesome_one_page_post_global_sidebar', 'right_sidebar' );
         if( $layout_meta != 'default_layout' && $layout_meta != '' ) {
             $layout = get_post_meta( $post->ID, 'aop_page_specific_layout', true );
         }
@@ -88,12 +87,12 @@ function aop_sidebar_layout_class() {
 endif;
 
 /*--------------------------------------------------------------------------------------------------*/
-if ( ! function_exists( 'aop_sidebar_select' ) ) :
+if ( ! function_exists( 'awesome_one_page_sidebar_select' ) ) :
 /**
  * Select and show sidebar based on post meta and customizer default settings
  */
-function aop_sidebar_select() {
-    $layout = aop_sidebar_layout_class();
+function awesome_one_page_sidebar_select() {
+    $layout = awesome_one_page_sidebar_layout_class();
     if( $layout != "no_sidebar_full_width" &&  $layout != "no_sidebar_content_centered" ) {
         if ( $layout == "right_sidebar" ) {
             get_sidebar();
@@ -101,5 +100,84 @@ function aop_sidebar_select() {
             get_sidebar('left');
         }
     }
+}
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
+if ( ! function_exists( 'awesome_one_page_navigation' ) ) :
+/**
+ * Return the navigations.
+ */
+function awesome_one_page_navigation() {
+    if( is_archive() || is_home() || is_search() ) {
+    /**
+     * Checking WP-PageNaviplugin exist
+     */
+    if ( function_exists('wp_pagenavi' ) ) :
+        wp_pagenavi();
+    else:
+      global $wp_query;
+      if ( $wp_query->max_num_pages > 1 ) :
+      ?>
+        <nav class="navigation post-navigation" role="navigation">
+            <div class="nav-links">
+                <?php if ( get_adjacent_post( false, '', true ) ): // if there are older posts ?>
+                    <div class="nav-previous">
+                        <?php next_posts_link( esc_html__( '&larr; Previous', 'awesome-one-page' ) ); ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ( get_adjacent_post( false, '', false ) ): // if there are newer posts ?>
+                    <div class="nav-next">
+                        <?php previous_posts_link( esc_html__( 'Next &rarr;', 'awesome-one-page' ) ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </nav>
+      <?php
+      endif;
+    endif;
+  }
+
+  if ( is_single() ) {
+    if( is_attachment() ) {
+    ?>
+    <nav class="navigation post-navigation" role="navigation">
+        <div class="nav-links">
+            <?php if ( get_adjacent_post( false, '', true ) ): // if there are older posts ?>
+                <div class="nav-previous">
+                    <?php previous_image_link( false, esc_html__( '&larr; Previous', 'awesome-one-page' ) ); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ( get_adjacent_post( false, '', false ) ): // if there are newer posts ?>
+                <div class="nav-next">
+                    <?php next_image_link( false, esc_html__( 'Next &rarr;', 'awesome-one-page' ) ); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </nav>
+    <?php
+    }
+    else {
+    ?>
+    <nav class="navigation post-navigation" role="navigation">
+        <div class="nav-links">
+            <?php if ( get_adjacent_post( false, '', true ) ): // if there are older posts ?>
+                <div class="nav-previous">
+                    <?php previous_post_link( '%link', '<span class="meta-nav">' . esc_html_x( '&larr; Previous Post', 'Previous post link', 'awesome-one-page' ) . '</span>' ); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ( get_adjacent_post( false, '', false ) ): // if there are newer posts ?>
+                <div class="nav-next">
+                    <?php next_post_link( '%link', '<span class="meta-nav">' . esc_html_x( 'Next Post &rarr;', 'Next post link', 'awesome-one-page' ) . '</span>' ); ?>
+                </div>
+            <?php endif; ?>                
+        </div>
+    </nav>
+    <?php
+    }
+  } 
 }
 endif;

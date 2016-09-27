@@ -191,6 +191,47 @@ function awesome_one_page_customize_register( $wp_customize ) {
             }
         }
 
+        // Image radio control
+        class Aop_Image_Radio_Control extends WP_Customize_Control {
+
+            public function render_content() {
+
+            if ( empty( $this->choices ) )
+                return;
+
+            $name = '_customize-radio-' . $this->id;
+
+            ?>
+            <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+            <span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+            <ul class="controls" id = 'aop-img-container'>
+
+                <?php   foreach ( $this->choices as $value => $label ) :
+
+                    $class = ($this->value() == $value)?'aop-radio-img-selected aop-radio-img-img':'aop-radio-img-img';
+
+                    ?>
+
+                    <li style="display: inline;">
+
+                    <label>
+
+                        <input <?php $this->link(); ?>style = 'display:none' type="radio" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
+
+                        <img src = '<?php echo esc_html( $label ); ?>' class = '<?php echo esc_attr( $class) ; ?>' />
+
+                    </label>
+
+                    </li>
+
+                <?php   endforeach; ?>
+
+            </ul>
+
+            <?php
+            }
+        }
+
     endif;
 
     // General Settings
@@ -394,31 +435,41 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'settings'              => 'good_news_pro_custom_secondary_color',
     ) ) );
 
+/*--------------------------------------------------------------------------------------------------*/
 
     // Posts Settings
-    $wp_customize->add_panel( 'good_news_pro_post_settings', array(
+    $wp_customize->add_panel( 'awesome_one_page_post_settings', array(
         'priority'              => 112,
-        'title'                 => __( 'Post Settings', 'awesome-one-page' ),
+        'title'                 => esc_html__( 'Post Settings', 'awesome-one-page' ),
     ) );
 
     // Post Settings
-    $wp_customize->add_section( 'good_news_pro_post_settings_sec', array(
-        'title'                 => __( 'General Settings', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_post_settings',
+    $wp_customize->add_section( 'awesome_one_page_post_settings_general_sec', array(
+        'title'                 => esc_html__( 'General Settings', 'awesome-one-page' ),
+        'panel'                 => 'awesome_one_page_post_settings',
     ) );
 
-    // Post Author Box
-    $wp_customize->add_setting( 'good_news_pro_post_author_box', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
+    // Post global sidebar.
+    $wp_customize->add_setting( 'awesome_one_page_post_global_sidebar', array(
+        'default'           => 'right_sidebar',
+        'capability'        => 'edit_theme_options',
+        'sanitize_callback' => 'awesome_one_page_sanitize_post_sidebar'                 
     ) );
 
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_author_box', array(
-        'label'                 => __( 'Post Author Box', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_settings_sec',
-        'settings'              => 'good_news_pro_post_author_box',
-    ) ) );
+    $wp_customize->add_control( new Aop_Image_Radio_Control( $wp_customize, 'awesome_one_page_post_global_sidebar', array(
+        'type'               => 'radio',
+        'priority'           => 1,
+        'label'              => esc_html__('Available Sidebar', 'awesome-one-page'),
+        'description'        => esc_html__('Select default layout for single posts. This layout will be reflected in all single posts unless unique layout is set for specific post.', 'awesome-one-page'),
+        'section'            => 'awesome_one_page_post_settings_general_sec',
+        'settings'          => 'awesome_one_page_post_global_sidebar',
+        'choices'            => array(
+            'right_sidebar'                 => get_template_directory_uri() . '/inc/assets/images/right-sidebar.png',
+            'left_sidebar'                  => get_template_directory_uri() . '/inc/assets/images/left-sidebar.png',
+            'no_sidebar_full_width'         => get_template_directory_uri() . '/inc/assets/images/no-sidebar-full-width-layout.png',
+            'no_sidebar_content_centered'   => get_template_directory_uri() . '/inc/assets/images/no-sidebar-content-centered-layout.png'
+        ) )
+    ) );
 
     // Post Nex/Prev article
     $wp_customize->add_setting( 'good_news_pro_post_nex_prev_article', array(
@@ -429,7 +480,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_nex_prev_article', array(
         'label'                 => __( 'Next/Previous Article', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_settings_sec',
+        'section'               => 'awesome_one_page_post_settings_general_sec',
         'settings'              => 'good_news_pro_post_nex_prev_article',
     ) ) );
 
@@ -442,7 +493,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_featured_image', array(
         'label'                 => __( 'First Image as Featured Image', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_settings_sec',
+        'section'               => 'awesome_one_page_post_settings_general_sec',
         'settings'              => 'good_news_pro_post_featured_image',
     ) ) );
 
@@ -456,45 +507,14 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'good_news_pro_post_default_post_image', array(
         'label'                 => __( 'Default Image', 'awesome-one-page' ),
         'description'           => __( 'Select the image(3:2 ratio) to be used for no image found.', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_settings_sec',
+        'section'               => 'awesome_one_page_post_settings_general_sec',
         'settings'              => 'good_news_pro_post_default_post_image',
-    ) ) );
-
-    // Post Template Layout
-    $wp_customize->add_section( 'good_news_pro_post_template', array(
-        'title'                 => __( 'Post Templates', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_post_settings',
-    ) );
-
-    $wp_customize->add_setting( 'good_news_pro_post_template_layout', array(
-        'default'               => __( 'post-template1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_post_template_layout'
-    ) );
-
-    $wp_customize->add_control( new good_news_pro_layout_picker_custom_control( $wp_customize, 'good_news_pro_post_template_layout', array(
-        'label'                 => __( 'Select Post Layout Template', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_template',
-        'settings'              => 'good_news_pro_post_template_layout',
-        'type'                  => 'radio',
-        'choices'               => array(
-            'post-template1'            => __( 'Post Template 1', 'awesome-one-page' ),
-            'post-template2'            => __( 'Post Template 2', 'awesome-one-page' ),
-            'post-template3'            => __( 'Post Template 3', 'awesome-one-page' ),
-            'post-template4'            => __( 'Post Template 4', 'awesome-one-page' ),
-            'post-template5'            => __( 'Post Template 5', 'awesome-one-page' ),
-            'post-template6'            => __( 'Post Template 6', 'awesome-one-page' ),
-            'post-template7'            => __( 'Post Template 7', 'awesome-one-page' ),
-            'post-template8'            => __( 'Post Template 8', 'awesome-one-page' ),
-            'post-template9'            => __( 'Post Template 9', 'awesome-one-page' ),
-            'post-template10'           => __( 'Post Template 10', 'awesome-one-page' )
-        )
     ) ) );
 
     // Posts meta Settings
     $wp_customize->add_section( 'good_news_pro_post_meta_settings', array(
         'title'                 => __( 'Post Meta', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_post_settings',
+        'panel'                 => 'awesome_one_page_post_settings',
     ) );
 
     // Post Author
@@ -561,246 +581,8 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'section'               => 'good_news_pro_post_meta_settings',
         'settings'              => 'good_news_pro_post_meta_comments',
     ) ) );
-
-    // Post Views
-    $wp_customize->add_setting( 'good_news_pro_post_meta_views', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_meta_views', array(
-        'label'                 => __( 'Post Views', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_meta_settings',
-        'settings'              => 'good_news_pro_post_meta_views',
-    ) ) );
-
-    // Posts Social Share
-    $wp_customize->add_section( 'good_news_pro_post_social_share_settings', array(
-        'title'                 => __( 'Social Share', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_post_settings',
-    ) );
-
-    // Activate Social Share
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_activate', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_social_share_activate', array(
-        'label'                 => __( 'Activate Social Share', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_activate',
-    ) ) );
-
-    // Facebook
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_facebook', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_social_share_facebook', array(
-        'label'                 => __( 'Facebook', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_facebook',
-    ) ) );
-
-    // Twitter
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_twitter', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_social_share_twitter', array(
-        'label'                 => __( 'Twitter', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_twitter',
-    ) ) );
-
-    // Google+
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_google_plus', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_social_share_google_plus', array(
-        'label'                 => __( 'Google+', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_google_plus',
-    ) ) );
-
-    // Linkedin
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_linkedin', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_social_share_linkedin', array(
-        'label'                 => __( 'Linkedin', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_linkedin',
-    ) ) );
-
-    // Pinterest
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_pinterest', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_post_social_share_pinterest', array(
-        'label'                 => __( 'Pinterest', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_pinterest',
-    ) ) );
-
-    // Social Share Type
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_type', array(
-        'default'               => __( 'social-share-inside-post', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_select'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_post_social_share_type', array(
-        'label'                 => __( 'Social Share Type', 'awesome-one-page' ),
-        'type'                  => 'select',
-        'choices'               => array(
-            'social-share-floating'         => 'Floating',
-            'social-share-inside-article'   => 'Inside Article',
-        ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_type',
-    ) );
-
-    // Social Share Positions (Inside Article)
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_inside_article_position', array(
-        'default'               => __( 'after-content', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_select'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_post_social_share_inside_article_position', array(
-        'label'                 => __( 'Social Icons Position', 'awesome-one-page' ),
-        'description'           => __( 'Apply only for Social Share Type: Inside Article', 'awesome-one-page' ),
-        'type'                  => 'select',
-        'choices'               => array(
-            'after-title'               => 'After Title',
-            'after-content'             => 'After Content',
-        ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_inside_article_position',
-    ) );
-
-    // Social Share Positions (Floating)
-    $wp_customize->add_setting( 'good_news_pro_post_social_share_floating_position', array(
-        'default'               => __( 'right-bottom', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_select'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_post_social_share_floating_position', array(
-        'label'                 => __( 'Social Icons Position', 'awesome-one-page' ),
-        'description'           => __( 'Apply only for Social Share Type: Floating', 'awesome-one-page' ),
-        'type'                  => 'select',
-        'choices'               => array(
-            'left-top'              => 'Left Top',
-            'left-middle'           => 'Left Middle',
-            'left-bottom'           => 'Left Bottom',
-            'right-top'             => 'Right Top',
-            'right-middle'          => 'Right Middle',
-            'right-bottom'          => 'Right Bottom',
-        ),
-        'section'               => 'good_news_pro_post_social_share_settings',
-        'settings'              => 'good_news_pro_post_social_share_floating_position',
-    ) );
-
-    // Related Posts
-    $wp_customize->add_section( 'good_news_pro_related_posts_settings', array(
-        'title'                 => __( 'Related Posts', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_post_settings',
-    ) );
-
-    // Activate
-    $wp_customize->add_setting( 'good_news_pro_related_posts_activate', array(
-        'default'               => __( '1', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'good_news_pro_related_posts_activate', array(
-        'label'                 => __( 'Activate Related Posts', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_related_posts_settings',
-        'settings'              => 'good_news_pro_related_posts_activate',
-    ) ) );
-
-    // Related Posts Header Title
-    $wp_customize->add_setting( 'good_news_pro_related_posts_title', array(
-        'default'               => __( 'Related Posts', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_nohtml'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_related_posts_title', array(
-        'label'                 => __( 'Block Title', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_related_posts_settings',
-        'settings'              => 'good_news_pro_related_posts_title',
-        'type'                  => 'text',
-    ) );
-
-    // Related Posts Type
-    $wp_customize->add_setting( 'good_news_pro_related_posts_type', array(
-        'default'               => __( 'normal', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_select'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_related_posts_type', array(
-        'label'                 => __( 'Related Posts Type', 'awesome-one-page' ),
-        'type'                  => 'select',
-        'choices'               => array(
-            'normal'                => 'Normal',
-            'slider'                => 'Slider'
-        ),
-        'section'               => 'good_news_pro_related_posts_settings',
-        'settings'              => 'good_news_pro_related_posts_type',
-    ) );
-
-    // Related posts query
-    $wp_customize->add_setting( 'good_news_pro_related_posts_query', array(
-        'default'               => __( 'same-category', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_select'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_related_posts_query', array(
-        'label'                 => __( 'Posts Query', 'awesome-one-page' ),
-        'type'                  => 'select',
-        'choices'               => array(
-            'same-category'         => 'From same Category',
-            'same-tag'              => 'From same Tag',
-            'same-author'           => 'From same Author'
-        ),
-        'section'               => 'good_news_pro_related_posts_settings',
-        'settings'              => 'good_news_pro_related_posts_query',
-    ) );
-
-    // Number of Posts
-    $wp_customize->add_setting( 'good_news_pro_related_posts_number', array(
-        'default'               => '3',
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_number_range'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Font_Control(  $wp_customize, 'good_news_pro_post_meta_font_size', array(
-        'label'                 => __( 'Number of Posts', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_related_posts_settings',
-        'settings'              => 'good_news_pro_related_posts_number',
-    ) ) );
+    
+/*--------------------------------------------------------------------------------------------------*/
 
     // Archive/Category Settings
     $wp_customize->add_panel( 'good_news_pro_archive_settings', array(
@@ -1164,7 +946,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_setting( 'awesome_one_page_footer_widgets_area', array(
         'default'            => 3,
         'capability'         => 'edit_theme_options',
-        'sanitize_callback'  => 'awesome_one_page_fwidgets'
+        'sanitize_callback'  => 'awesome_one_page_post_sanitize_fwidget_area'
     ) );
 
     $wp_customize->add_control( 'awesome_one_page_footer_widgets_area', array(
@@ -1181,90 +963,45 @@ function awesome_one_page_customize_register( $wp_customize ) {
         )
     );
 
-    // Show Footer contact and logo area.
-    $wp_customize->add_setting( 'awesome_one_page_footer_contact_area_activate', array(
-        'default'               => 1,
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
-    ) );
-
-    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_footer_contact_area_activate', array(
-        'label'                 => esc_html__( 'Show Footer Widgets', 'awesome-one-page' ),
-        'section'               => 'awesome_one_page_footer_widgets_sec',
-        'settings'              => 'awesome_one_page_footer_contact_area_activate',
-    ) ) );
-
-
-    // Footer Bar
-    $wp_customize->add_section( 'good_news_pro_footer_bar', array(
-        'title'                 => __( 'Footer Bar', 'awesome-one-page' ),
-        'panel'                 => 'awesome_one_page_footer_settings',
-    ) );
-
-    // Footer Copyright
-    $wp_customize->add_setting( 'good_news_pro_footer_bar_copyright', array(
-        'default'               => __( '© Copyright %year%, All Rights Reserved', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_html'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_footer_bar_copyright', array(
-        'label'                 => __( 'Copyrights', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_footer_bar',
-        'settings'              => 'good_news_pro_footer_bar_copyright',
-        'type'                  => 'textarea',
-    ) );
-
-    // Footer Developer
-    $wp_customize->add_setting( 'good_news_pro_footer_bar_developer', array(
-        'default'               => __( 'Designed by <a href="http://daisythemes.com/">Daisy Themes</a>', 'awesome-one-page' ),
-        'capability'            => 'edit_theme_options',
-        'sanitize_callback'     => 'good_news_pro_sanitize_html'
-    ) );
-
-    $wp_customize->add_control( 'good_news_pro_footer_bar_developer', array(
-        'label'                 => __( 'Developer', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_footer_bar',
-        'settings'              => 'good_news_pro_footer_bar_developer',
-        'type'                  => 'textarea',
-    ) );
-
+/*--------------------------------------------------------------------------------------------------*/
 
     // Custom CSS
-    $wp_customize->add_section( 'good_news_pro_custom_css', array(
+    $wp_customize->add_section( 'awesome_one_page_custom_css', array(
         'priority'              => 125,
         'title'                 => esc_html__( 'Custom CSS', 'awesome-one-page' ),
     ) );
 
-    $wp_customize->add_setting( 'good_news_pro_custom_css_code', array(
+    $wp_customize->add_setting( 'awesome_one_page_custom_css_code', array(
         'default'               => '',
         'capability'            => 'edit_theme_options',
         'sanitize_callback'     => 'good_news_pro_sanitize_nohtml'
     ) );
 
-    $wp_customize->add_control( 'good_news_pro_custom_css_code', array(
+    $wp_customize->add_control( 'awesome_one_page_custom_css_code', array(
         'label'                 => esc_html__( 'Add Custom CSS Code', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_custom_css',
-        'settings'              => 'good_news_pro_custom_css_code',
+        'section'               => 'awesome_one_page_custom_css',
+        'settings'              => 'awesome_one_page_custom_css_code',
         'type'                  => 'textarea',
     ) );
 
+/*--------------------------------------------------------------------------------------------------*/
+
     // Help & Support
-    $wp_customize->add_section( 'good_news_pro_help_support', array(
+    $wp_customize->add_section( 'awesome_one_page_help_support', array(
         'priority'              => 126,
         'title'                 => esc_html__( 'Help & Support', 'awesome-one-page' ),
     ) );
 
-    $wp_customize->add_setting( 'good_news_pro_help_support_links', array(
-        'default'               => esc_html__( '', 'awesome-one-page' ),
+    $wp_customize->add_setting( 'awesome_one_page_help_support_links', array(
+        'default'               => '',
         'capability'            => 'edit_theme_options',
         'sanitize_callback'     => 'good_news_pro_sanitize_nohtml'
     ) );
 
-    $wp_customize->add_control( new WP_Customize_Help_support_Control( $wp_customize, 'good_news_pro_help_support_links', array(
+    $wp_customize->add_control( new WP_Customize_Help_support_Control( $wp_customize, 'awesome_one_page_help_support_links', array(
         'label'                 => esc_html__( 'Help & Support', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_help_support',
-        'settings'              => 'good_news_pro_help_support_links',
+        'section'               => 'awesome_one_page_help_support',
+        'settings'              => 'awesome_one_page_help_support_links',
     ) ) );
 
     /**
@@ -1292,9 +1029,16 @@ function awesome_one_page_customize_register( $wp_customize ) {
         }
     }
 
-    //Menu style
-    function awesome_one_page_fwidgets( $input ) {
+    //Footer Widgets
+    function awesome_one_page_post_sanitize_fwidget_area( $input ) {
         if ( in_array( $input, array( '1', '2', '3', '4' ), true ) ) {
+            return $input;
+        }
+    }
+
+    //Footer Widgets
+    function awesome_one_page_sanitize_post_sidebar( $input ) {
+        if ( in_array( $input, array( '1right_sidebar', 'left_sidebar', 'no_sidebar_full_width', 'no_sidebar_content_centered' ), true ) ) {
             return $input;
         }
     }
