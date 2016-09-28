@@ -40,7 +40,7 @@ get_header(); ?>
 
 			endwhile;
 
-			the_posts_navigation();
+			awesome_one_page_navigation();
 
 		else :
 
@@ -51,6 +51,6 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<?php aop_sidebar_select(); ?>
+	<?php awesome_one_page_sidebar_select(); ?>
 
 <?php get_footer();

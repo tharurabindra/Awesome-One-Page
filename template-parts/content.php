@@ -26,20 +26,34 @@
 		endif; ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<?php
-			the_content( sprintf(
-				/* translators: %s: Name of current post. */
-				wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'awesome-one-page' ), array( 'span' => array( 'class' => array() ) ) ),
-				the_title( '<span class="screen-reader-text">"', '"</span>', false )
-			) );
+	<?php awesome_one_page_post_thumbnail(); ?>
 
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'awesome-one-page' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
+	<?php if ( is_singular() ) : ?>
+
+		<div class="entry-content">
+			<?php the_content(); ?>
+		</div><!-- .entry-content -->
+
+	<?php else: ?>
+
+		<div class="entry-summary">
+			<?php the_excerpt(); ?>
+		</div><!-- .entry-summary -->
+
+		<?php if ( get_theme_mod( 'awesome_one_page_blog_show_read_more', '1' ) == 1 ) : ?>
+			<div class="read-more clearfix">
+				<a class="button post-button" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php esc_html_e( get_theme_mod( 'awesome_one_page_blog_read_more_text', esc_html__('Read More', 'awesome-one-page') ) ); ?></a>
+			</div>
+		<?php endif; ?>
+
+	<?php endif; ?>
+
+	<?php
+		wp_link_pages( array(
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'awesome-one-page' ),
+			'after'  => '</div>',
+		) );
+	?>
 
 	<footer class="entry-footer">
 		<?php awesome_one_page_entry_footer(); ?>

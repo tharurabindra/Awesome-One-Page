@@ -12,7 +12,7 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 		
-		<?php aop_show_hide_breadcrumbs(); //breadcrumbs ?>
+		<?php awesome_one_page_display_breadcrumbs(); //breadcrumbs ?>
 		
 		<?php
 		if ( have_posts() ) : ?>
@@ -37,7 +37,7 @@ get_header(); ?>
 
 			endwhile;
 
-			the_posts_navigation();
+			awesome_one_page_navigation();
 
 		else :
 
@@ -48,6 +48,6 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<?php aop_sidebar_select(); ?>
+	<?php awesome_one_page_sidebar_select(); ?>
 
 <?php get_footer();
