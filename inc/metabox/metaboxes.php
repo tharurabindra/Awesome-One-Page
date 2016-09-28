@@ -21,7 +21,7 @@ $aop_page_specific_layout = array(
 	'default-layout' 	=> array(
 		'id'			=> 'aop_page_specific_layout',
 		'value' 		=> 'default_layout',
-		'label' 		=> esc_html__( 'Default', 'pageline' ),
+		'label' 		=> esc_html__( 'Default', 'awesome-one-page' ),
 		'thumbnail' 	=> get_template_directory_uri() . '/inc/assets/images/default-sidebar.png'
 	),
 	'right-sidebar' 	=> array(
@@ -160,37 +160,31 @@ global $aop_metabox_field_service_icons, $aop_metabox_field_team_desigmation, $a
 
 $aop_metabox_field_service_icons = array(
 	array(
-		'id'			=> 'aop_service_font_icon',
-		'label' 		=> esc_html__( 'If featured image is not used than display the icon in Services.', 'awesome-one-page' )
+		'id'			=> 'aop_service_font_icon'
 	)
 );
 
 $aop_metabox_field_team_desigmation = array(
 	array(
-		'id'			=> 'aop_team_designation',
-		'label' 		=> esc_html__( 'Show designation in Team Widget.', 'awesome-one-page' )
+		'id'			=> 'aop_team_designation'
 	)
 );
 
 $aop_metabox_field_team_social = array(
 	array(
-		'id'			=> 'aop_team_social_1',
-		'label' 		=> esc_html__( 'Social Link One:', 'awesome-one-page' )
+		'id'			=> 'aop_team_social_1' 
 	),
 	array(
-		'id'			=> 'aop_team_social_2',
-		'label' 		=> esc_html__( 'Social Link Two:', 'awesome-one-page' )
+		'id'			=> 'aop_team_social_2'
 	),
 	array(
-		'id'			=> 'aop_team_social_3',
-		'label' 		=> esc_html__( 'Social Link Three:', 'awesome-one-page' )
+		'id'			=> 'aop_team_social_3'
 	)
 );
 
 $aop_metabox_field_testimonial_designation = array(
 	array(
-		'id'			=> 'aop_testimonial_designation',
-		'label' 		=> esc_html__( 'Testimonial Designation', 'awesome-one-page' )
+		'id'			=> 'aop_testimonial_designation'
 	)
 );
 
@@ -230,7 +224,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			// Font icon
 			case 'aop_service_font_icon': ?>
 			<div class="aop-metabox-input-wrap">
-	        	<label><?php esc_html_e( $field['label'] ); ?></label>
+	        	<label><?php esc_html_e( 'If featured image is not used than display the icon in Services.', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
 	          	<?php 
 				$url = 'http://fontawesome.io/icons/';
@@ -242,7 +236,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			// Team Designation
 			case 'aop_team_designation': ?>
 			<div class="aop-metabox-input-wrap">
-	        	<label><?php esc_html_e( $field['label'] ); ?></label>
+	        	<label><?php esc_html_e( 'Show designation in Team Widget.', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
 	        </div><!-- .aop-metabox-input-wrap -->
 			<?php break;
@@ -250,7 +244,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			// Team Social Links One
 			case 'aop_team_social_1': ?>
 			<div class="aop-metabox-input-wrap">
-	        	<label><?php esc_html_e( $field['label'] ); ?></label>
+	        	<label><?php esc_html_e( 'Social Link One:', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
 	        </div><!-- .aop-metabox-input-wrap -->
 			<?php break;
@@ -258,7 +252,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			// Team Social Links Two
 			case 'aop_team_social_2': ?>
 			<div class="aop-metabox-input-wrap">
-	        	<label><?php esc_html_e( $field['label'] ); ?></label>
+	        	<label><?php esc_html_e( 'Social Link Two:', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
 	        </div><!-- .aop-metabox-input-wrap -->
 			<?php break;
@@ -266,7 +260,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			// Team Social Links Three
 			case 'aop_team_social_3': ?>
 			<div class="aop-metabox-input-wrap">
-	        	<label><?php esc_html_e( $field['label'] ); ?></label>
+	        	<label><?php esc_html_e( 'Social Link Three:', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
 	        </div><!-- .aop-metabox-input-wrap -->
 			<?php break;
@@ -274,7 +268,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			// Testimonial Designation
 			case 'aop_testimonial_designation': ?>
 			<div class="aop-metabox-input-wrap">
-	        	<label><?php esc_html_e( $field['label'] ); ?></label>
+	        	<label><?php esc_html_e( 'Testimonial Designation', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
 	        </div><!-- .aop-metabox-input-wrap -->
 			<?php break;

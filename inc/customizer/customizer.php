@@ -17,7 +17,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
     // Remove
     //$wp_customize->remove_section( 'header_image' );
-    //$wp_customize->remove_control( 'header_textcolor' );
+    $wp_customize->remove_control( 'header_textcolor' );
 
     //Custom Controls
     if ( class_exists( 'WP_Customize_Control' ) ):
@@ -69,7 +69,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
                 ?>
                 <label>
                     <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-                    <input type="submit" id="<?php echo $this->id; ?>" name="<?php echo $this->id; ?>" value="<?php _e( 'Import Demo Content', 'awesome-one-page' ); ?>" class="dt-demo-data-import" />
+                    <input type="submit" id="<?php echo $this->id; ?>" name="<?php echo $this->id; ?>" value="<?php esc_html_e( 'Import Demo Content', 'awesome-one-page' ); ?>" class="dt-demo-data-import" />
                 </label>
                 <?php
             }
@@ -84,10 +84,10 @@ function awesome_one_page_customize_register( $wp_customize ) {
                 <div class="dt-customizer-supports">
                     <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
                     <ul>
-                        <li><a href="#"><i class="dashicons dashicons-welcome-learn-more"></i> <?php _e( 'Documentation', 'awesome-one-page' ); ?></a></li>
-                        <li><a href="#"><i class="dashicons dashicons-groups"></i> <?php _e( 'Support Forum', 'awesome-one-page' ); ?></a></li>
-                        <li><a href="#"><i class="dashicons dashicons-tickets-alt"></i> <?php _e( 'Create Support Ticket', 'awesome-one-page' ); ?></a></li>
-                        <li><?php _e( 'If you like the GoodNews theme, we would love to receive a', 'awesome-one-page' ); ?> <a href="#"><span class="dt-customizer-stars">★★★★★</span></a> <?php _e( 'rating.', 'awesome-one-page' ); ?> <a href="#"><?php _e( 'Click Here', 'awesome-one-page' ); ?></a><?php _e( 'to rate this theme. Thanks', 'awesome-one-page' ); ?> <i class="dashicons dashicons-smiley"></i></li>
+                        <li><a href="#"><i class="dashicons dashicons-welcome-learn-more"></i> <?php esc_html_e( 'Documentation', 'awesome-one-page' ); ?></a></li>
+                        <li><a href="#"><i class="dashicons dashicons-groups"></i> <?php esc_html_e( 'Support Forum', 'awesome-one-page' ); ?></a></li>
+                        <li><a href="#"><i class="dashicons dashicons-tickets-alt"></i> <?php esc_html_e( 'Create Support Ticket', 'awesome-one-page' ); ?></a></li>
+                        <li><?php esc_html_e( 'If you like the GoodNews theme, we would love to receive a', 'awesome-one-page' ); ?> <a href="#"><span class="dt-customizer-stars">★★★★★</span></a> <?php esc_html_e( 'rating.', 'awesome-one-page' ); ?> <a href="#"><?php esc_html_e( 'Click Here', 'awesome-one-page' ); ?></a><?php esc_html_e( 'to rate this theme. Thanks', 'awesome-one-page' ); ?> <i class="dashicons dashicons-smiley"></i></li>
                     </ul>
                 </div>
                 <?php

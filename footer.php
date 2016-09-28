@@ -22,9 +22,7 @@
 
 		<footer id="colophon" class="site-footer" role="contentinfo">
 			<div class="site-info">
-				<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'awesome-one-page' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'awesome-one-page' ), 'WordPress' ); ?></a>
-				<span class="sep"> | </span>
-				<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'awesome-one-page' ), 'awesome-one-page', '<a href="http://precisethemes.com" rel="designer">Precise Themes</a>' ); ?>
+				<?php do_action( 'awesome_one_page_footer' );?>
 			</div><!-- .site-info -->
 		</footer><!-- #colophon -->
 		
