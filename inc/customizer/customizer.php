@@ -135,6 +135,41 @@ function awesome_one_page_customize_register( $wp_customize ) {
             }
         }
 
+        // Theme Color
+        class good_news_pro_theme_color_picker extends WP_Customize_Control {
+
+            /**
+             * Render the content on the theme customizer page
+             */
+            public function render_content() {
+
+                if ( empty( $this->choices ) )
+                    return;
+
+                $name = $this->id;
+
+                ?>
+
+                <h3 class="awesome-one-page-layout-title"><?php echo esc_html( $this->label ); ?></h3>
+
+                <?php foreach ( $this->choices as $value => $label ) : ?>
+
+                    <input type="radio" id="<?php echo esc_attr( $value ); ?>" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
+
+                    <label for="<?php echo esc_attr( $value ); ?>">
+                        <?php echo esc_html( $label ); ?>
+
+                        <span class="awesome-one-page-radio-color">
+                            <span class="awesome-one-page-color-checked"></span>
+                        </span>
+                    </label>
+
+                    <?php
+
+                endforeach;
+            }
+        }
+
     endif;
 
     // General Settings
@@ -293,7 +328,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 /*--------------------------------------------------------------------------------------------------*/
 
     // Colors
-    $wp_customize->add_panel( 'good_news_pro_colors', array(
+    $wp_customize->add_panel( 'awesome_one_page_colors', array(
         'priority'              => 101,
         'title'                 => esc_html__( 'Colors', 'awesome-one-page' )
     ) );
@@ -302,40 +337,72 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_section( 'colors', array(
         'priority'              => 1,
         'title'                 => esc_html__( 'Background Color', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_colors'
+        'panel'                 => 'awesome_one_page_colors'
     ) );
 
     // Theme Color
-    $wp_customize->add_section( 'good_news_pro_custom_theme_color_sec', array(
+    $wp_customize->add_section( 'awesome_one_page_custom_theme_color_sec', array(
         'priority'              => 1,
         'title'                 => esc_html__( 'Theme Color', 'awesome-one-page' ),
-        'panel'                 => 'good_news_pro_colors'
+        'panel'                 => 'awesome_one_page_colors'
     ) );
 
+    $wp_customize->add_setting( 'awesome_one_page_theme_color', array(
+        'default'               => 'magenta',
+        'capability'            => 'edit_theme_options',
+        'sanitize_callback'     => 'awesome_one_page_sanitize_theme_color'
+    ) );
+
+    $wp_customize->add_control( new good_news_pro_theme_color_picker( $wp_customize, 'awesome_one_page_theme_color', array(
+        'label'                 => esc_html__( 'Choose Theme Color', 'awesome-one-page' ),
+        'section'               => 'awesome_one_page_custom_theme_color_sec',
+        'settings'              => 'awesome_one_page_theme_color',
+        'type'                  => 'radio',
+        'choices'               => array(
+            'watermelon'            => esc_html__( 'Watermelon', 'awesome-one-page' ),
+            'red'                   => esc_html__( 'Red', 'awesome-one-page' ),
+            'orange'                => esc_html__( 'Orange', 'awesome-one-page' ),
+            'yellow'                => esc_html__( 'Yellow', 'awesome-one-page' ),
+            'lime'                  => esc_html__( 'Lime', 'awesome-one-page' ),
+            'green'                 => esc_html__( 'Green', 'awesome-one-page' ),
+            'mint'                  => esc_html__( 'Mint', 'awesome-one-page' ),
+            'teal'                  => esc_html__( 'Teal', 'awesome-one-page' ),
+            'sky-blue'              => esc_html__( 'Sky Blue', 'awesome-one-page' ),
+            'blue'                  => esc_html__( 'Blue', 'awesome-one-page' ),
+            'purple'                => esc_html__( 'Purple', 'awesome-one-page' ),
+            'pink'                  => esc_html__( 'Pink', 'awesome-one-page' ),
+            'magenta'               => esc_html__( 'Magenta', 'awesome-one-page' ),
+            'plum'                  => esc_html__( 'Plum', 'awesome-one-page' ),
+            'brown'                 => esc_html__( 'Brown', 'awesome-one-page' ),
+            'maroon'                => esc_html__( 'Maroon', 'awesome-one-page' )
+        )
+    ) ) );
+
     // Custom Primary Color
-    $wp_customize->add_setting( 'good_news_pro_custom_primary_color', array(
-        'default'               => null,
+    $wp_customize->add_setting( 'awesome_one_page_custom_primary_color', array(
+        'default'               => '',
         'capability'            => 'edit_theme_options',
         'sanitize_callback'     => 'sanitize_hex_color'
     ) );
 
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'good_news_pro_custom_primary_color', array(
-        'label'                 => esc_html__( 'Primary Color', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_custom_theme_color_sec',
-        'settings'              => 'good_news_pro_custom_primary_color',
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'awesome_one_page_custom_primary_color', array(
+        'label'                 => esc_html__( 'Custom Primary Color', 'awesome-one-page' ),
+        'description'           => esc_html__( 'You can override theme color by custom color', 'awesome-one-page' ),
+        'section'               => 'awesome_one_page_custom_theme_color_sec',
+        'settings'              => 'awesome_one_page_custom_primary_color',
     ) ) );
 
     // Custom Secondary Color
-    $wp_customize->add_setting( 'good_news_pro_custom_secondary_color', array(
-        'default'               => null,
+    $wp_customize->add_setting( 'awesome_one_page_custom_secondary_color', array(
+        'default'               => esc_html__( '', 'awesome-one-page' ),
         'capability'            => 'edit_theme_options',
         'sanitize_callback'     => 'sanitize_hex_color'
     ) );
 
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'good_news_pro_custom_secondary_color', array(
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'awesome_one_page_custom_secondary_color', array(
         'label'                 => esc_html__( 'Secondary Color', 'awesome-one-page' ),
-        'section'               => 'good_news_pro_custom_theme_color_sec',
-        'settings'              => 'good_news_pro_custom_secondary_color',
+        'section'               => 'awesome_one_page_custom_theme_color_sec',
+        'settings'              => 'awesome_one_page_custom_secondary_color',
     ) ) );
 
 /*--------------------------------------------------------------------------------------------------*/
@@ -776,6 +843,16 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
         // If the number is within the valid range, return it; otherwise, return the default
         return ( $min <= $number && $number <= $max && is_int( $number / $step ) ? $number : $setting->default );
+    }
+
+    /**
+     * Header Layout Sanitize
+     */
+    function awesome_one_page_sanitize_theme_color( $value ) {
+        if ( ! in_array( $value, array( 'watermelon', 'red', 'orange', 'yellow', 'lime', 'green', 'mint', 'teal', 'sky-blue', 'blue', 'purple', 'pink', 'magenta', 'plum', 'brown', 'maroon' ) ) )
+            $value = 'sky-blue';
+
+        return $value;
     }
 }
 add_action( 'customize_register', 'awesome_one_page_customize_register' );

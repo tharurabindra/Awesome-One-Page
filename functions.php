@@ -106,6 +106,12 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/extras.php';
 
 /**
+ * Customizer Styles
+ */
+require get_template_directory() . '/inc/customizer-styles.php';
+
+
+/**
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer/customizer.php';

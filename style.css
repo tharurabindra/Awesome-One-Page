@@ -892,3 +892,9 @@ object {
 .gallery-caption {
 	display: block;
 }
+
+
+
+.site-title a {
+    color: green;
+}

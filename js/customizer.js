@@ -20,25 +20,12 @@
 		} );
 	} );
 
-	// Header text color.
-	wp.customize( 'header_textcolor', function( value ) {
+	wp.customize( 'awesome_one_page_custom_primary_color', function( value ) {
 		value.bind( function( to ) {
-			if ( 'blank' === to ) {
-				$( '.site-title a, .site-description' ).css( {
-					'clip': 'rect(1px, 1px, 1px, 1px)',
-					'position': 'absolute'
-				} );
-			} else {
-				$( '.site-title a, .site-description' ).css( {
-					'clip': 'auto',
-					'position': 'relative'
-				} );
-				$( '.site-title a, .site-description' ).css( {
-					'color': to
-				} );
-			}
+			$( '.site-title a' ).css('color', to );
 		} );
 	} );
+
 
 	/* Shows a live preview of changing the breadcrumbs text. */
 	wp.customize( 'aop_breadcrumb_home_text', function( value ) {
