@@ -20,6 +20,14 @@
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
+	<?php if ( has_post_thumbnail() ) : ?>
+		<div class="entry-thumb">
+		    <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+		        <?php the_post_thumbnail( 'medium' ); ?>
+		    </a>
+	    </div><!-- .entry-thumb -->
+	<?php endif; ?>
+
 	<div class="entry-summary">
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
