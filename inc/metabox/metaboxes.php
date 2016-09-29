@@ -11,58 +11,58 @@
  */
 function aop_add_layout_metabox() {
 	// Adding layout meta box for Page
-	add_meta_box( 'page-layout', esc_html__( 'Select Layout', 'awesome-one-page' ), 'aop_layout_call', 'page', 'normal', 'high' );
+	add_meta_box( 'page-layout', esc_html__( 'Select Layout', 'awesome-one-page' ), 'awesome_one_page_layout_call', 'page', 'normal', 'high' );
 	// Adding layout meta box for Post
-	add_meta_box( 'page-layout', esc_html__( 'Select Layout', 'awesome-one-page' ), 'aop_layout_call', 'post', 'normal', 'high' );
+	add_meta_box( 'page-layout', esc_html__( 'Select Layout', 'awesome-one-page' ), 'awesome_one_page_layout_call', 'post', 'normal', 'high' );
 }
 
-global $aop_page_specific_layout;
-$aop_page_specific_layout = array(
+global $awesome_one_page_spacific_layout;
+$awesome_one_page_spacific_layout = array(
 	'default-layout' 	=> array(
-		'id'			=> 'aop_page_specific_layout',
+		'id'			=> 'awesome_one_page_spacific_layout',
 		'value' 		=> 'default_layout',
 		'label' 		=> esc_html__( 'Default', 'awesome-one-page' ),
 		'thumbnail' 	=> get_template_directory_uri() . '/inc/assets/images/default-sidebar.png'
 	),
 	'right-sidebar' 	=> array(
-		'id'			=> 'aop_page_specific_layout',
+		'id'			=> 'awesome_one_page_spacific_layout',
 		'value' 		=> 'right_sidebar',
 		'label' 		=> esc_html__( 'Right Sidebar', 'awesome-one-page' ),
 		'thumbnail' 	=> get_template_directory_uri() . '/inc/assets/images/right-sidebar.png'
 	),
 	'left-sidebar' 		=> array(
-		'id'			=> 'aop_page_specific_layout',
+		'id'			=> 'awesome_one_page_spacific_layout',
 		'value' 		=> 'left_sidebar',
 		'label' 		=> esc_html__( 'Left Sidebar', 'awesome-one-page' ),
 		'thumbnail' 	=> get_template_directory_uri() . '/inc/assets/images/left-sidebar.png'
 	),
 	'no-sidebar-full-width' => array(
-		'id'			=> 'aop_page_specific_layout',
+		'id'			=> 'awesome_one_page_spacific_layout',
 		'value' 		=> 'no_sidebar_full_width',
 		'label' 		=> esc_html__( 'No Sidebar Full Width', 'awesome-one-page' ),
 		'thumbnail' 	=> get_template_directory_uri() . '/inc/assets/images/no-sidebar-full-width-layout.png'
 	),
 	'no-sidebar-content-centered' => array(
-		'id'			=> 'aop_page_specific_layout',
+		'id'			=> 'awesome_one_page_spacific_layout',
 		'value' 		=> 'no_sidebar_content_centered',
 		'label' 		=> esc_html__( 'No Sidebar Content Centered', 'awesome-one-page' ),
 		'thumbnail' 	=> get_template_directory_uri() . '/inc/assets/images/no-sidebar-content-centered-layout.png'
 	)
 );
 
-function aop_layout_call() {
-	global $aop_page_specific_layout;
-	aop_layout_meta_form( $aop_page_specific_layout );
+function awesome_one_page_layout_call() {
+	global $awesome_one_page_spacific_layout;
+	awesome_one_page_layout_meta_form( $awesome_one_page_spacific_layout );
 }
 
 /**
  * Displays metabox to for select layout option
  */
-function aop_layout_meta_form( $aop_layout_metabox_field ) {
+function awesome_one_page_layout_meta_form( $awesome_one_page_layout_metabox_field ) {
 	global $post;
 
 	// Use nonce for verification
-	wp_nonce_field( basename( __FILE__ ), 'aop_layout_metabox_nonce' ); ?>
+	wp_nonce_field( basename( __FILE__ ), 'awesome_one_page_layout_metabox_nonce' ); ?>
 
 	<table class="form-table">
 		<tr>
@@ -72,14 +72,14 @@ function aop_layout_meta_form( $aop_layout_metabox_field ) {
 			<td>
 			<?php 
 				$img_count = 0 ;
-				foreach ( $aop_layout_metabox_field as $field ) {
+				foreach ( $awesome_one_page_layout_metabox_field as $field ) {
 					$img_count++;
 					$layout_meta = get_post_meta( $post->ID, $field['id'], true );
 					$default_class ='';
 					switch( $field['id'] ) {
 
 						// Layout
-						case 'aop_page_specific_layout':
+						case 'awesome_one_page_spacific_layout':
 							if( empty( $layout_meta ) && $img_count == '1' ) { 
 								$layout_meta = 'default_layout'; $default_class = 'aop-radio-image-selected'; 
 							}
@@ -103,16 +103,16 @@ function aop_layout_meta_form( $aop_layout_metabox_field ) {
 <?php 
 }
 
-add_action('save_post', 'aop_save_layout_metabox');
+add_action('save_post', 'awesome_one_page_save_layout_metabox');
 /**
  * save the custom metabox data
  * @hooked to save_post hook
  */
-function aop_save_layout_metabox( $post_id ) {
-	global $aop_page_specific_layout, $post;
+function awesome_one_page_save_layout_metabox( $post_id ) {
+	global $awesome_one_page_spacific_layout, $post;
 
 	// Verify the nonce before proceeding.
-   if ( !isset( $_POST[ 'aop_layout_metabox_nonce' ] ) || !wp_verify_nonce( $_POST[ 'aop_layout_metabox_nonce' ], basename( __FILE__ ) ) )
+   if ( !isset( $_POST[ 'awesome_one_page_layout_metabox_nonce' ] ) || !wp_verify_nonce( $_POST[ 'awesome_one_page_layout_metabox_nonce' ], basename( __FILE__ ) ) )
 		return;
 
 	// Stop WP from clearing custom fields on autosave
@@ -127,7 +127,7 @@ function aop_save_layout_metabox( $post_id ) {
 		return $post_id;
 	}
 
-	foreach ( $aop_page_specific_layout as $field ) {
+	foreach ( $awesome_one_page_spacific_layout as $field ) {
 		//Execute this saving function
 		$old = get_post_meta( $post_id, $field['id'], true);
 		$new = sanitize_key( $_POST[$field['id']] );
@@ -141,71 +141,71 @@ function aop_save_layout_metabox( $post_id ) {
 
 /****************************************************************************************/
 
-add_action( 'add_meta_boxes', 'aop_add_custom_metabox' );
+add_action( 'add_meta_boxes', 'awesome_one_page_add_page_template_custom_metabox' );
 /**
  * Add Meta Boxes.
  */
-function aop_add_custom_metabox() {
+function awesome_one_page_add_page_template_custom_metabox() {
 	//Adding fontawesome icons
-	add_meta_box( 'services-icon', esc_html__( 'Icon Class', 'awesome-one-page' ), 'aop_service_icon_call', 'page', 'side' );
+	add_meta_box( 'services-icon', esc_html__( 'Icon Class', 'awesome-one-page' ), 'awesome_one_page_service_template_icon_call', 'page', 'side' );
 	//Adding Team designation meta box
-	add_meta_box( 'team-designation', esc_html__( 'Designation', 'awesome-one-page' ), 'aop_team_designation_call', 'page', 'side' );
+	add_meta_box( 'team-designation', esc_html__( 'Designation', 'awesome-one-page' ), 'awesome_one_page_team_template_designation_call', 'page', 'side' );
 	//Adding Team Social Links meta box
-	add_meta_box( 'team-social', esc_html__( 'Social Links', 'awesome-one-page' ), 'aop_team_social_call', 'page', 'side' );
+	add_meta_box( 'team-social', esc_html__( 'Social Links', 'awesome-one-page' ), 'awesome_one_page_team_template_social_call', 'page', 'side' );
 	//Adding Testimonial designation meta box
-	add_meta_box( 'testimonial-designation', esc_html__( 'Designation', 'awesome-one-page' ), 'aop_testimonial_designation_call', 'page', 'side' );
+	add_meta_box( 'testimonial-designation', esc_html__( 'Designation', 'awesome-one-page' ), 'awesome_one_page_testimonial_template_designation_call', 'page', 'side' );
 }
 
-global $aop_metabox_field_service_icons, $aop_metabox_field_team_desigmation, $aop_metabox_field_team_social, $aop_metabox_field_testimonial_designation;
+global $awesome_one_page_service_template_icon, $awesome_one_page_team_template_designation, $awesome_one_page_team_template_social, $awesome_one_page_tesimonial_template_designation;
 
-$aop_metabox_field_service_icons = array(
+$awesome_one_page_service_template_icon = array(
 	array(
-		'id'			=> 'aop_service_font_icon'
+		'id'			=> 'awesome_one_page_service_icon'
 	)
 );
 
-$aop_metabox_field_team_desigmation = array(
+$awesome_one_page_team_template_designation = array(
 	array(
-		'id'			=> 'aop_team_designation'
+		'id'			=> 'awesome_one_page_team_designation'
 	)
 );
 
-$aop_metabox_field_team_social = array(
+$awesome_one_page_team_template_social = array(
 	array(
-		'id'			=> 'aop_team_social_1' 
+		'id'			=> 'awesome_one_page_team_social_1' 
 	),
 	array(
-		'id'			=> 'aop_team_social_2'
+		'id'			=> 'awesome_one_page_team_social_2'
 	),
 	array(
-		'id'			=> 'aop_team_social_3'
+		'id'			=> 'awesome_one_page_team_social_3'
 	)
 );
 
-$aop_metabox_field_testimonial_designation = array(
+$awesome_one_page_tesimonial_template_designation = array(
 	array(
-		'id'			=> 'aop_testimonial_designation'
+		'id'			=> 'awesome_one_page_testimonial_designation'
 	)
 );
 
-function aop_service_icon_call() {
-	global $aop_metabox_field_service_icons;
-	aop_metabox_form( $aop_metabox_field_service_icons );
+function awesome_one_page_service_template_icon_call() {
+	global $awesome_one_page_service_template_icon;
+	aop_metabox_form( $awesome_one_page_service_template_icon );
 }
 
-function aop_team_designation_call() {
-	global $aop_metabox_field_team_desigmation;
-	aop_metabox_form( $aop_metabox_field_team_desigmation );
+function awesome_one_page_team_template_designation_call() {
+	global $awesome_one_page_team_template_designation;
+	aop_metabox_form( $awesome_one_page_team_template_designation );
 }
 
-function aop_team_social_call() {
-	global $aop_metabox_field_team_social;
-	aop_metabox_form( $aop_metabox_field_team_social );
+function awesome_one_page_team_template_social_call() {
+	global $awesome_one_page_team_template_social;
+	aop_metabox_form( $awesome_one_page_team_template_social );
 }
 
-function aop_testimonial_designation_call() {
-	global $aop_metabox_field_testimonial_designation;
-	aop_metabox_form( $aop_metabox_field_testimonial_designation );
+function awesome_one_page_testimonial_template_designation_call() {
+	global $awesome_one_page_tesimonial_template_designation;
+	aop_metabox_form( $awesome_one_page_tesimonial_template_designation );
 }
 
 /**
@@ -215,14 +215,14 @@ function aop_metabox_form( $aop_metabox_fields ) {
 	global $post;
 
 	// Use nonce for verification
-	wp_nonce_field( basename( __FILE__ ), 'custom_metabox_nonce' );
+	wp_nonce_field( basename( __FILE__ ), 'awesome_one_page_template_nonce' );
 
 	foreach ( $aop_metabox_fields as $field ) {
 		$layout_meta = get_post_meta( $post->ID, $field['id'], true );
 		switch( $field['id'] ) {
 
 			// Font icon
-			case 'aop_service_font_icon': ?>
+			case 'awesome_one_page_service_icon': ?>
 			<div class="aop-metabox-input-wrap">
 	        	<label><?php esc_html_e( 'If featured image is not used than display the icon in Services.', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
@@ -234,7 +234,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			<?php break;
 
 			// Team Designation
-			case 'aop_team_designation': ?>
+			case 'awesome_one_page_team_designation': ?>
 			<div class="aop-metabox-input-wrap">
 	        	<label><?php esc_html_e( 'Show designation in Team Widget.', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
@@ -242,7 +242,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			<?php break;
 
 			// Team Social Links One
-			case 'aop_team_social_1': ?>
+			case 'awesome_one_page_team_social_1': ?>
 			<div class="aop-metabox-input-wrap">
 	        	<label><?php esc_html_e( 'Social Link One:', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
@@ -250,7 +250,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			<?php break;
 
 			// Team Social Links Two
-			case 'aop_team_social_2': ?>
+			case 'awesome_one_page_team_social_2': ?>
 			<div class="aop-metabox-input-wrap">
 	        	<label><?php esc_html_e( 'Social Link Two:', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
@@ -258,7 +258,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			<?php break;
 
 			// Team Social Links Three
-			case 'aop_team_social_3': ?>
+			case 'awesome_one_page_team_social_3': ?>
 			<div class="aop-metabox-input-wrap">
 	        	<label><?php esc_html_e( 'Social Link Three:', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
@@ -266,7 +266,7 @@ function aop_metabox_form( $aop_metabox_fields ) {
 			<?php break;
 
 			// Testimonial Designation
-			case 'aop_testimonial_designation': ?>
+			case 'awesome_one_page_testimonial_designation': ?>
 			<div class="aop-metabox-input-wrap">
 	        	<label><?php esc_html_e( 'Testimonial Designation', 'awesome-one-page' ); ?></label>
 	          	<input type="text" name="<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $layout_meta ); ?>"></br>
@@ -282,10 +282,10 @@ add_action('save_post', 'aop_save_custom_meta');
  * @hooked to save_post hook
  */
 function aop_save_custom_meta( $post_id ) {
-	global $aop_metabox_field_service_icons, $aop_metabox_field_team_desigmation, $aop_metabox_field_team_social, $aop_metabox_field_testimonial_designation, $post;
+	global $awesome_one_page_service_template_icon, $awesome_one_page_team_template_designation, $awesome_one_page_team_template_social, $awesome_one_page_tesimonial_template_designation, $post;
 
 	// Verify the nonce before proceeding.
-   if ( !isset( $_POST[ 'custom_metabox_nonce' ] ) || !wp_verify_nonce( $_POST[ 'custom_metabox_nonce' ], basename( __FILE__ ) ) )
+   if ( !isset( $_POST[ 'awesome_one_page_template_nonce' ] ) || !wp_verify_nonce( $_POST[ 'awesome_one_page_template_nonce' ], basename( __FILE__ ) ) )
       return;
 
 	// Stop WP from clearing custom fields on autosave
@@ -302,7 +302,7 @@ function aop_save_custom_meta( $post_id ) {
 
 	if ('page' == $_POST['post_type']) {
    	// loop through fields and save the data- Service widget
-	   foreach ( $aop_metabox_field_service_icons as $field ) {
+	   foreach ( $awesome_one_page_service_template_icon as $field ) {
 	    	$old = get_post_meta( $post_id, $field['id'], true );
 	      $new = $_POST[$field['id']];
 	      if ($new && $new != $old) {
@@ -313,7 +313,7 @@ function aop_save_custom_meta( $post_id ) {
 	   } // end foreach
 
 	   // loop through fields and save the data- Team widget
-	   foreach ( $aop_metabox_field_team_desigmation as $field ) {
+	   foreach ( $awesome_one_page_team_template_designation as $field ) {
 	    	$old = get_post_meta( $post_id, $field['id'], true );
 	      $new = $_POST[$field['id']];
 	      if ($new && $new != $old) {
@@ -324,7 +324,7 @@ function aop_save_custom_meta( $post_id ) {
 	   } // end foreach
 
 	   // loop through fields and save the data- Team widget
-	   foreach ( $aop_metabox_field_team_social as $field ) {
+	   foreach ( $awesome_one_page_team_template_social as $field ) {
 	    	$old = get_post_meta( $post_id, $field['id'], true );
 	      $new = $_POST[$field['id']];
 	      if ($new && $new != $old) {
@@ -335,7 +335,7 @@ function aop_save_custom_meta( $post_id ) {
 	   } // end foreach
 
 	   // loop through fields and save the data- Testimonial widget
-	   foreach ( $aop_metabox_field_testimonial_designation as $field ) {
+	   foreach ( $awesome_one_page_tesimonial_template_designation as $field ) {
 	    	$old = get_post_meta( $post_id, $field['id'], true );
 	      $new = $_POST[$field['id']];
 	      if ($new && $new != $old) {

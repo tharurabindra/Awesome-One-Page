@@ -120,7 +120,24 @@ add_action( 'awesome_one_page_footer', 'awesome_one_page_footer_credits' );
 
 /*--------------------------------------------------------------------------------------------------*/
 
+/**
+ * Excerpt length
+ */
+function awesome_one_page_excerpt_length( $length ) {
+  $excerpt = get_theme_mod('awesome_one_page_blog_post_excerpt_length', '40');
+  return absint($excerpt);
+}
+add_filter( 'excerpt_length', 'awesome_one_page_excerpt_length', 99 );
 
+/*--------------------------------------------------------------------------------------------------*/
+/**
+ * Excerpt String .
+ */
+function awesome_one_page_excerpt_more( $more ) {
+    return '...';
+}
+add_filter( 'excerpt_more', 'awesome_one_page_excerpt_more' );
 
+/*--------------------------------------------------------------------------------------------------*/
 
 

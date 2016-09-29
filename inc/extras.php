@@ -60,26 +60,26 @@ function awesome_one_page_sidebar_layout_class() {
     $page_for_posts = get_option('page_for_posts');
     // Get Layout meta
     if($post) {
-        $layout_meta = get_post_meta( $post->ID, 'aop_page_specific_layout', true );
+        $layout_meta = get_post_meta( $post->ID, 'awesome_one_page_spacific_layout', true );
     }
     // Home page if Posts page is assigned
     if( is_home() && !( is_front_page() ) ) {
         $queried_id = get_option( 'page_for_posts' );
-        $layout_meta = get_post_meta( $queried_id, 'aop_page_specific_layout', true );
+        $layout_meta = get_post_meta( $queried_id, 'awesome_one_page_spacific_layout', true );
 
         if( $layout_meta != 'default_layout' && $layout_meta != '' ) {
-            $layout = get_post_meta( $queried_id, 'aop_page_specific_layout', true );
+            $layout = get_post_meta( $queried_id, 'awesome_one_page_spacific_layout', true );
         }
     }
     elseif( is_page() ) {
         if( $layout_meta != 'default_layout' && $layout_meta != '' ) {
-            $layout = get_post_meta( $post->ID, 'aop_page_specific_layout', true );
+            $layout = get_post_meta( $post->ID, 'awesome_one_page_spacific_layout', true );
         }
     }
     elseif( is_single() ) {
         $layout = get_theme_mod( 'awesome_one_page_post_global_sidebar', 'right_sidebar' );
         if( $layout_meta != 'default_layout' && $layout_meta != '' ) {
-            $layout = get_post_meta( $post->ID, 'aop_page_specific_layout', true );
+            $layout = get_post_meta( $post->ID, 'awesome_one_page_spacific_layout', true );
         }
     }
     return $layout;
@@ -256,12 +256,3 @@ if ( ! function_exists( 'awesome_one_page_display_breadcrumbs' ) ) :
 endif;
 
 /*--------------------------------------------------------------------------------------------------*/
-
-/**
- * Excerpt length
- */
-function awesome_one_page_excerpt_length( $length ) {
-  $excerpt = get_theme_mod('awesome_one_page_blog_post_excerpt_length', '40');
-  return absint($excerpt);
-}
-add_filter( 'excerpt_length', 'awesome_one_page_excerpt_length', 99 );

@@ -196,7 +196,7 @@ class aop_testimonial_widget extends WP_Widget {
                   $image_id                 = get_post_thumbnail_id();
                   $image_path               = wp_get_attachment_image_src( $image_id, 'thumbnail', true );
                   $image_alt                = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
-                  $testimonial_designation  = get_post_meta( $post->ID, 'aop_testimonial_designation', true );
+                  $testimonial_designation  = get_post_meta( $post->ID, 'awesome_one_page_testimonial_designation', true );
                   if( has_post_thumbnail() ) {
                     $testimonial_image_holder = '<figure><img src="'.esc_url( $image_path[0] ).'" alt="'.esc_attr( $image_alt ).'" title="'.esc_attr( $title_attribute ).'" /></figure>';
                   } ?>
