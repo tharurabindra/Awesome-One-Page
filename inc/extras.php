@@ -191,8 +191,8 @@ if ( ! function_exists( 'awesome_one_page_post_thumbnail' ) ) :
  */
 function awesome_one_page_post_thumbnail() {
     global $post;
-    $show_post_thumbnail_image = get_theme_mod( 'awesome_one_page_post_featured_image', '' );
-    $show_blog_post_thumbnail_image = get_theme_mod( 'awesome_one_page_blog_post_thumb_image', '' );
+    $show_post_thumbnail_image = get_theme_mod( 'awesome_one_page_post_featured_image', '1' );
+    $show_blog_post_thumbnail_image = get_theme_mod( 'awesome_one_page_blog_post_thumb_image', '1' );
 
     if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
         return;
