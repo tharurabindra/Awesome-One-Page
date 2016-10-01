@@ -21,10 +21,12 @@ class aop_page_slider_widget extends WP_Widget {
       $defaults[ 'section_id' ]         = '';
       $defaults[ 'widget_title_color' ] = '';
       $defaults[ 'text_color' ]         = '';
-      $defaults[ 'image_link' ]         = 'on';
-      $defaults[ 'show_navigation' ]         = 'on';
+      $defaults[ 'image_link' ]         = '0';
+      $defaults[ 'show_navigation' ]         = '1';
       $defaults[ 'navigation_type' ]         = 'arrow';
-      $instance = wp_parse_args( (array) $instance, $defaults ); ?>
+      $instance = wp_parse_args( (array) $instance, $defaults );
+      $image_link = $instance[ 'image_link' ] ? 'checked="checked"' : '';
+      $show_navigation = $instance[ 'show_navigation' ] ? 'checked="checked"' : ''; ?>
 
       <div class="aop-fun-facts">
         <div class="aop-admin-input-wrap">
@@ -86,23 +88,23 @@ class aop_page_slider_widget extends WP_Widget {
 
                 <div class="aop-admin-input-wrap">
                   <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php esc_html_e( 'Check to enable link in Slider Image.', 'awesome-one-page' ); ?></label>
-                  <input type="checkbox" <?php checked( $instance[ 'image_link' ], 'on' ); ?> id="<?php echo $this->get_field_id( 'image_link' ); ?>" name="<?php echo $this->get_field_name( 'image_link' ); ?>" >
+                  <input type="checkbox" <?php echo $image_link; ?> id="<?php echo $this->get_field_id( 'image_link' ); ?>" name="<?php echo $this->get_field_name( 'image_link' ); ?>" >
                 </div><!-- .aop-admin-input-wrap -->
 
                 <div class="aop-admin-input-wrap">
                   <label for="<?php echo $this->get_field_id( 'show_navigation' ); ?>"><?php esc_html_e( 'Show Navigation', 'awesome-one-page' ); ?></label>
-                  <input type="checkbox" <?php checked( $instance[ 'show_navigation' ], 'on' ); ?> id="<?php echo $this->get_field_id( 'show_navigation' ); ?>" name="<?php echo $this->get_field_name( 'show_navigation' ); ?>" >
+                  <input type="checkbox" <?php echo $show_navigation; ?> id="<?php echo $this->get_field_id( 'show_navigation' ); ?>" name="<?php echo $this->get_field_name( 'show_navigation' ); ?>" >
                 </div><!-- .aop-admin-input-wrap -->
 
-                <?php if ( $instance[ 'show_navigation' ] == 'on' ) : ?>
-                  <div class="aop-admin-input-wrap">
-                    <label for="<?php echo $this->get_field_id( 'navigation_type' ); ?>"><?php esc_html_e( 'Navigation Type', 'awesome-one-page' ); ?></label>
-                    <select id="<?php echo $this->get_field_id( 'navigation_type' ); ?>" name="<?php echo $this->get_field_name( 'navigation_type' ); ?>">
-                      <option value="arrow" <?php selected( $instance['navigation_type'], 'arrow' ); ?>><?php esc_html_e( 'Arrow', 'awesome-one-page' ); ?></option>
-                      <option value="pagination" <?php selected( $instance['navigation_type'], 'pagination' );?>><?php esc_html_e( 'Pagination', 'awesome-one-page' ); ?></option>
-                    </select>
-                  </div><!-- .aop-admin-input-wrap -->
-                <?php endif; ?>
+                
+                <div class="aop-admin-input-wrap">
+                  <label for="<?php echo $this->get_field_id( 'navigation_type' ); ?>"><?php esc_html_e( 'Navigation Type', 'awesome-one-page' ); ?></label>
+                  <select id="<?php echo $this->get_field_id( 'navigation_type' ); ?>" name="<?php echo $this->get_field_name( 'navigation_type' ); ?>">
+                    <option value="arrow" <?php selected( $instance['navigation_type'], 'arrow' ); ?>><?php esc_html_e( 'Arrow', 'awesome-one-page' ); ?></option>
+                    <option value="pagination" <?php selected( $instance['navigation_type'], 'pagination' );?>><?php esc_html_e( 'Pagination', 'awesome-one-page' ); ?></option>
+                  </select>
+                </div><!-- .aop-admin-input-wrap -->
+                
 
               </div><!-- .accordion-content -->
             </li><!-- .aop-widget-accordion-item -->
@@ -119,8 +121,8 @@ class aop_page_slider_widget extends WP_Widget {
       $instance[ 'section_id' ]         = sanitize_text_field( $new_instance[ 'section_id' ] );
       $instance[ 'widget_title_color' ] = sanitize_text_field( $new_instance[ 'widget_title_color' ] );
       $instance[ 'text_color' ]         = sanitize_text_field( $new_instance[ 'text_color' ] );
-      $instance[ 'image_link' ]       = strip_tags( $new_instance[ 'image_link' ] );
-      $instance[ 'show_navigation' ]       = strip_tags( $new_instance[ 'show_navigation' ] );
+      $instance[ 'image_link' ] = isset( $new_instance[ 'image_link' ] ) ? 1 : 0;
+      $instance[ 'show_navigation' ] = isset( $new_instance[ 'show_navigation' ] ) ? 1 : 0;
       $instance[ 'navigation_type' ]        = sanitize_text_field( $new_instance[ 'navigation_type' ] );
 
       for( $i=0; $i<4; $i++ ) {
@@ -140,8 +142,8 @@ class aop_page_slider_widget extends WP_Widget {
       $background_color   = isset( $instance[ 'background_color' ] ) ? $instance[ 'background_color' ] : null;
       $text_color         = isset( $instance[ 'text_color' ] ) ? $instance[ 'text_color' ] : null;
       $widget_title_color = isset( $instance[ 'widget_title_color' ] ) ? $instance[ 'widget_title_color' ] : null;
-      $image_link       = isset( $instance[ 'image_link' ] ) ? $instance[ 'image_link' ] : '';
-      $show_navigation  = isset( $instance[ 'show_navigation' ] ) ? $instance[ 'show_navigation' ] : '';
+      $image_link = !empty( $instance[ 'image_link' ] ) ? 'true' : 'false';
+      $show_navigation = !empty( $instance[ 'show_navigation' ] ) ? 'true' : 'false';
       $navigation_type = isset( $instance[ 'navigation_type' ] ) ? $instance[ 'navigation_type' ] : 'arrow';
 
       $page_id    = array();
@@ -217,7 +219,7 @@ class aop_page_slider_widget extends WP_Widget {
             <?php endif; ?>
           </div><!-- .aop-section-title-wrapper -->
 
-          <?php if ( !empty( $get_pages ) ) : $slider_count = 0; ?>
+          <?php if ( $get_pages->have_posts() ) : $slider_count = 0; ?>
             <!-- Swiper -->
             <div class="aop-page-slider-container">
               <div class="swiper-wrapper">
@@ -229,7 +231,7 @@ class aop_page_slider_widget extends WP_Widget {
                 <?php if( has_post_thumbnail() ) : ?>
                   <div class="swiper-slide">
                     <div class="sldier-image">
-                      <?php if ( $image_link == 'on' ) : ?>
+                      <?php if ( $image_link == 'true' ) : ?>
                         <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $image_alt ); ?>" ><img src="<?php echo esc_url( $image_path[0] ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" title="<?php echo esc_attr( $title_attribute ); ?>" ></a>
                       <?php else : ?>
                         <img src="<?php echo esc_url( $image_path[0] ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" title="<?php echo esc_attr( $title_attribute ); ?>" >                        
@@ -258,18 +260,18 @@ class aop_page_slider_widget extends WP_Widget {
                 wp_reset_postdata();
                 ?>
               </div>
-              <?php if ( $show_navigation == 'on' ) : ?>
+              <?php if ( $show_navigation == 'true' ) : ?>
+                <div class="aop-slider-controller">
+                  <?php if ( $navigation_type == 'arrow' ) : ?>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
 
-                <?php if ( $navigation_type == 'arrow' ) : ?>
-                  <!-- Add Arrows -->
-                  <div class="swiper-button-next"></div>
-                  <div class="swiper-button-prev"></div>
-                <?php endif; ?>
-
-                <?php if ( $navigation_type == 'pagination' ) : ?>
-                  <!-- Add Pagination -->
-                  <div class="swiper-pagination"></div>
-                <?php endif; ?>
+                  <?php else : ?>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                  <?php endif; ?>
+                </div><!-- .aop-slider-controller -->
                 
               <?php endif; ?>
             </div>
