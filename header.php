@@ -36,17 +36,24 @@
 			
 		<div class="site-branding">
 			<?php
+			
+			$screen_reader = 'screen-reader-text';
+			if ( get_theme_mod( 'awesome_one_page_site_title_activate', '1' ) == 1 ) {
+				$screen_reader = '';
+			}
 			if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<h1 class="site-title <?php echo esc_attr( $screen_reader ); ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<p class="site-title <?php echo esc_attr( $screen_reader ); ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 			<?php
 			endif;
 
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php
+			if ( get_theme_mod( 'awesome_one_page_site_tagline_activate', '1' ) == 1 ) :
+				$description = get_bloginfo( 'description', 'display' );
+				if ( $description || is_customize_preview() ) : ?>
+					<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
+				<?php
+				endif;
 			endif; ?>
 		</div><!-- .site-branding -->
 

@@ -16,7 +16,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
     // Remove
-    //$wp_customize->remove_section( 'header_image' );
+    $wp_customize->remove_control( 'display_header_text' );
     $wp_customize->remove_control( 'header_textcolor' );
 
     //Custom Controls
@@ -278,6 +278,33 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'title'                 => esc_html__( 'Site Title & Tagline', 'awesome-one-page' ),
         'panel'                 => 'awesome_one_page_header'
     ) );
+
+    // Display Site Title
+    $wp_customize->add_setting( 'awesome_one_page_site_title_activate', array(
+        'default'               => 1,
+        'capability'            => 'edit_theme_options',
+        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_site_title_activate', array(
+        'label'                 => esc_html__( 'Display Site Title', 'awesome-one-page' ),
+        'section'               => 'title_tagline',
+        'settings'              => 'awesome_one_page_site_title_activate'
+    ) ) );
+
+    // Display tag line
+    $wp_customize->add_setting( 'awesome_one_page_site_tagline_activate', array(
+        'default'               => 1,
+        'capability'            => 'edit_theme_options',
+        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_site_tagline_activate', array(
+        'label'                 => esc_html__( 'Display Tagline', 'awesome-one-page' ),
+        'section'               => 'title_tagline',
+        'settings'              => 'awesome_one_page_site_tagline_activate'
+    ) ) );
+
 
     // Sticky Menu
     $wp_customize->add_section( 'awesome_one_page_menu_style', array(
