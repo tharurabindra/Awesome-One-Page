@@ -85,5 +85,4 @@ require get_template_directory() . '/inc/widgets/featured-posts-widget.php';
 require get_template_directory() . '/inc/widgets/video-widget.php';
 require get_template_directory() . '/inc/widgets/fun-facts-widget.php';
 require get_template_directory() . '/inc/widgets/social-icons-widget.php';
-require get_template_directory() . '/inc/widgets/post-slider-widget.php';
 require get_template_directory() . '/inc/widgets/page-slider-widget.php';
