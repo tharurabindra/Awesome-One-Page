@@ -7,11 +7,13 @@ project.properties
 .settings*
 .idea
 
+# Sass
+.sass-cache
+.sass-cache/*
+
 # Grunt
 /node_modules/
-
-# Sass
-.sass-cache/
+/deploy/
 
 # OS X metadata
 .DS_Store
