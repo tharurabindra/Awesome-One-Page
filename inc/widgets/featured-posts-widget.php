@@ -14,7 +14,6 @@ class aop_featured_posts_widget extends WP_Widget {
       $instance = wp_parse_args(
         (array) $instance, array(
           'title'             => '',
-          'text'              => '',
           'no_of_posts'       => '4',
           'type'              => 'latest',
           'category'          => '',
@@ -23,7 +22,7 @@ class aop_featured_posts_widget extends WP_Widget {
           'section_id'        => '',
           'background_color'  => '',
           'text_color'        => '',
-          'widget_title_color'=> '',
+          'title_color'       => '',
           'background_image'  => ''  
         )
       );
@@ -35,12 +34,7 @@ class aop_featured_posts_widget extends WP_Widget {
         
         <div class="aop-admin-input-wrap">
           <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title', 'awesome-one-page' ); ?></label>
-          <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title'] ); ?>" placeholder="<?php esc_html_e( 'Title', 'awesome-one-page' ); ?>">
-        </div><!-- .aop-admin-input-wrap -->
-
-        <div class="aop-admin-input-wrap">
-          <?php esc_html_e( 'Description:','awesome-one-page' ); ?>
-           <textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name('text'); ?>" placeholder="<?php esc_html_e( 'Description', 'awesome-one-page' ); ?>" ><?php echo esc_textarea( $instance[ 'text' ] ); ?></textarea>
+          <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title'] ); ?>" placeholder="<?php esc_attr_e( 'Title', 'awesome-one-page' ); ?>">
         </div><!-- .aop-admin-input-wrap -->
 
         <div class="aop-admin-input-wrap">
@@ -60,7 +54,7 @@ class aop_featured_posts_widget extends WP_Widget {
 
         <div class="aop-admin-input-wrap">
           <label for="<?php echo $this->get_field_id( 'exclude_posts_ids' ); ?>"><?php esc_html_e( 'Exclude Posts IDs', 'awesome-one-page' ); ?></label>
-          <input type="text" id="<?php echo $this->get_field_id( 'exclude_posts_ids' ); ?>" name="<?php echo $this->get_field_name( 'exclude_posts_ids' ); ?>" value="<?php echo esc_attr( $instance[ 'exclude_posts_ids'] ); ?>" placeholder="<?php esc_html_e( '11,43,50', 'awesome-one-page' ); ?>">
+          <input type="text" id="<?php echo $this->get_field_id( 'exclude_posts_ids' ); ?>" name="<?php echo $this->get_field_name( 'exclude_posts_ids' ); ?>" value="<?php echo esc_attr( $instance[ 'exclude_posts_ids'] ); ?>" placeholder="<?php esc_attr_e( '11,43,50', 'awesome-one-page' ); ?>">
         </div><!-- .aop-admin-input-wrap -->
 
         <div class="aop-admin-input-wrap">
@@ -83,12 +77,12 @@ class aop_featured_posts_widget extends WP_Widget {
 
                 <div class="aop-admin-input-wrap">
                   <label for="<?php echo $this->get_field_id( 'section_id' ); ?>"><?php esc_html_e( 'Section ID', 'awesome-one-page' ); ?></label>
-                  <input type="text" id="<?php echo $this->get_field_id( 'section_id' ); ?>" name="<?php echo $this->get_field_name( 'section_id' ); ?>" value="<?php echo esc_attr( $instance[ 'section_id'] ); ?>" placeholder="<?php esc_html_e( 'Blog', 'awesome-one-page' ); ?>">
+                  <input type="text" id="<?php echo $this->get_field_id( 'section_id' ); ?>" name="<?php echo $this->get_field_name( 'section_id' ); ?>" value="<?php echo esc_attr( $instance[ 'section_id'] ); ?>" placeholder="<?php esc_attr_e( 'Blog', 'awesome-one-page' ); ?>">
                 </div><!-- .aop-admin-input-wrap -->
 
                 <div class="aop-admin-input-wrap">
-                  <label for="<?php echo $this->get_field_id( 'widget_title_color' ); ?>"><?php esc_html_e( 'Widget Title Color', 'awesome-one-page' ); ?></label>
-                  <input type="text" id="<?php echo $this->get_field_id( 'widget_title_color' ); ?>" class="aop-color-picker" name="<?php echo $this->get_field_name( 'widget_title_color' ); ?>" value="<?php echo esc_attr( $instance[ 'widget_title_color' ] ); ?>" >
+                  <label for="<?php echo $this->get_field_id( 'title_color' ); ?>"><?php esc_html_e( 'Widget Title Color', 'awesome-one-page' ); ?></label>
+                  <input type="text" id="<?php echo $this->get_field_id( 'title_color' ); ?>" class="aop-color-picker" name="<?php echo $this->get_field_name( 'title_color' ); ?>" value="<?php echo esc_attr( $instance[ 'title_color' ] ); ?>" >
                 </div><!-- .aop-admin-input-wrap -->
 
                 <div class="aop-admin-input-wrap">
@@ -134,13 +128,8 @@ class aop_featured_posts_widget extends WP_Widget {
       $instance[ 'section_id' ]         = sanitize_text_field( $new_instance[ 'section_id' ] );
       $instance[ 'background_color' ]   = sanitize_text_field( $new_instance[ 'background_color' ] );
       $instance[ 'text_color' ]         = sanitize_text_field( $new_instance[ 'text_color' ] );
-      $instance[ 'widget_title_color' ] = sanitize_text_field( $new_instance[ 'widget_title_color' ] );
+      $instance[ 'title_color' ]        = sanitize_text_field( $new_instance[ 'title_color' ] );
       $instance[ 'background_image' ]   = esc_url_raw( $new_instance[ 'background_image' ] );
-
-      if ( current_user_can('unfiltered_html') )
-        $instance[ 'text' ] =  $new_instance[ 'text' ];
-      else
-        $instance[ 'text' ] = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'text' ] ) ) ); // wp_filter_post_kses() expects slashed
       return $instance;
     }
 
@@ -149,32 +138,27 @@ class aop_featured_posts_widget extends WP_Widget {
       extract( $args );
 
       $title              = apply_filters( 'widget_title', isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '');
-      $text               = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
       $no_of_posts        = empty( $instance[ 'no_of_posts' ] ) ? 4 : intval( $instance[ 'no_of_posts' ] );
       $exclude_posts_ids  = isset( $instance[ 'exclude_posts_ids' ] ) ? $instance[ 'exclude_posts_ids' ] : '' ;
       $type               = isset( $instance[ 'type' ] ) ? $instance[ 'type' ] : 'latest' ;
       $category           = isset( $instance[ 'category' ] ) ? $instance[ 'category' ] : '';
       $random_posts       = !empty( $instance[ 'random_posts' ] ) ? 'true' : 'false';
-      $section_id         = isset( $instance[ 'section_id' ] ) ? $instance[ 'section_id' ] : '';
+      $section_id         = isset( $instance[ 'section_id' ] ) ? esc_attr( $instance[ 'section_id' ] ) : '';
       $background_color   = isset( $instance[ 'background_color' ] ) ? $instance[ 'background_color' ] : null;
-      $text_color         = isset( $instance[ 'text_color' ] ) ? $instance[ 'text_color' ] : null;
-      $widget_title_color = isset( $instance[ 'widget_title_color' ] ) ? $instance[ 'widget_title_color' ] : null;
-      $background_image   = isset( $instance[ 'background_image' ] ) ? $instance[ 'background_image' ] : '';
+      $text_color         = isset( $instance[ 'text_color' ] ) ? esc_attr( $instance[ 'text_color' ] ) : null;
+      $title_color = isset( $instance[ 'title_color' ] ) ? $instance[ 'title_color' ] : null;
+      $background_image   = isset( $instance[ 'background_image' ] ) ? esc_url( $instance[ 'background_image' ] ) : '';
 
       if ( $text_color ) {
         $inherit = 'inherit';
       } else {
         $inherit = 'noinherit';
       }
-      $section = '';
-      if ( !empty( $section_id ) ) {
-        $section = 'id="' . esc_attr( $section_id ) . '"';
-      }
-      $background_style = '';
-      if ( !empty( $background_image ) ) {
-         $background_style .= 'background-image:url('.esc_url( $background_image ).');background-repeat:no-repeat;background-size:cover;background-attachment:fixed;';
-      }else {
-         $background_style .= 'background-color:'.esc_attr( $background_color ).';';
+
+      if ($section_id) {
+        $id =  ' id="' . $section_id . '"';
+      } else {
+        $id = '';
       }
 
       if ( $exclude_posts_ids ) {
@@ -207,7 +191,7 @@ class aop_featured_posts_widget extends WP_Widget {
           'no_found_rows'         => true,
           'post__not_in'          => $ids
         ) );
-      } else {
+      } elseif ( $type == 'category' && $random_posts == 'true' ) {
         $get_featured_posts = new WP_Query( array(
           'posts_per_page'        => $no_of_posts,
           'post_type'             => 'post',
@@ -218,20 +202,16 @@ class aop_featured_posts_widget extends WP_Widget {
         ) );
       }
 
-      echo $args['before_widget']; ?>
+      echo $args['before_widget'] = str_replace('<section', '<section' . $id . ' data-color="' . $inherit . '" style="color:' . $text_color . ';background-color:' . $background_color . ';background-image:url(' . $background_image . ');"', $args['before_widget']); ?>
 
-      <div <?php echo $section; ?> >
-        <div class="widget aop-portfolio-pages" style="<?php echo $background_style; ?>">
+        <div class="widget aop-portfolio-pages">
           <div class="aop-section-title-wrapper">
             <?php if ( !empty( $title ) ) : ?> 
-              <h2 class="widget-title" style="color: <?php echo esc_attr( $widget_title_color );?>"><?php echo esc_attr( $title ); ?></h2> 
-            <?php endif; ?>
-            <?php if ( !empty( $text ) ) : ?> 
-              <p class="widget-desciption" style="color: <?php echo esc_attr( $text_color );?>"><?php echo esc_textarea( $text ); ?></p> 
+              <h2 class="widget-title" style="color: <?php echo esc_attr( $title_color );?>"><?php echo esc_attr( $title ); ?></h2> 
             <?php endif; ?>
           </div><!-- .aop-section-title-wrapper -->
 
-          <div class="aop-section-content-wrapper" data-color="<?php echo esc_attr( $inherit ); ?>" style="color: <?php echo esc_attr( $text_color );?>" >
+          <div class="aop-section-content-wrapper">
             <?php if ( $get_featured_posts->have_posts() ) : ?>
               <div class="entry-content">
                 <?php while( $get_featured_posts->have_posts() ) : $get_featured_posts->the_post(); 
@@ -250,14 +230,14 @@ class aop_featured_posts_widget extends WP_Widget {
                     <?php endif; ?>
 
                     <h2 class="featured-posts-title">
-                      <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $title_attribute ); ?>" style="color: <?php echo esc_attr( $inherit );?>"> <?php the_title(); ?></a>                    
+                      <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $title_attribute ); ?>"> <?php the_title(); ?></a>                    
                     </h2><!-- .featured-posts-title -->
 
                     <div class="featured-posts-content">
                        <?php the_excerpt(); ?>
                     </div><!-- .featured-posts-content -->
 
-                    <a class="featured-posts-read-more" title="<?php echo esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php echo esc_attr( $title_attribute ); ?>" style="color: <?php echo esc_attr( $inherit );?>"><?php esc_html_e( 'Read More', 'awesome-one-page' ); ?></a>
+                    <a class="featured-posts-read-more" title="<?php echo esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php echo esc_attr( $title_attribute ); ?>"><?php esc_html_e( 'Read More', 'awesome-one-page' ); ?></a>
                   </div><!-- .featured-posts-column-3 -->
                 <?php endwhile; 
                 // Reset Post Data
@@ -266,7 +246,6 @@ class aop_featured_posts_widget extends WP_Widget {
             <?php endif; ?>
           </div><!-- .aop-section-title-wrapper -->
         </div><!-- .aop-featured-posts-pages -->
-      </div>
       <?php echo $args['after_widget'];
       ob_end_flush();
     }

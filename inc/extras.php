@@ -244,6 +244,73 @@ if ( ! function_exists( 'aop_the_custom_logo' ) ) :
 endif;
 
 /*--------------------------------------------------------------------------------------------------*/
+if ( ! function_exists( 'awesome_one_page_breadcrumbs' ) ) :
+    /**
+ * Breadcrumbs
+ */
+
+function awesome_one_page_breadcrumbs() {
+
+    $delimiter = get_theme_mod( 'awesome_one_page_breadcrumbs_sep' );
+    if ( $delimiter == '' ) {
+        $delimiter    = '/'; // delimiter between crumbs
+    }
+
+    $delimiter = get_theme_mod( 'good_news_pro_breadcrumbs_sep' );
+    if ( $delimiter == '' ) {
+        $delimiter = '/';
+    }
+
+    global $post;
+    echo '<ul id="aop_breadcrumbs">';
+    if ( !is_home() ) {
+        echo '<li><a href="';
+        echo esc_url( home_url() );
+        echo '">';
+        echo esc_html__( 'Home', 'awesome-one-page' );
+        echo '</a></li><li class="separator">' . $delimiter . '</li>';
+        if ( is_category() || is_single() ) {
+            echo '<li>';
+            the_category( ' </li><li class="separator">' . $delimiter . '</li><li>' );
+            if ( is_single() ) {
+                echo '</li><li class="separator">' . $delimiter . '</li><li>';
+                the_title();
+                echo '</li>';
+            }
+        } elseif ( is_page() ) {
+            if ( $post->post_parent ){
+                $anc = get_post_ancestors( $post->ID );
+                $title = get_the_title();
+                $output = '';
+                foreach ( $anc as $ancestor ) {
+                    $output = '<li><a href="'. esc_url( get_permalink( $ancestor ) ) .'" title="'. esc_attr( get_the_title( $ancestor ) ) .'">'. esc_attr( get_the_title( $ancestor ) ) .'</a></li> <li class="separator">' . $delimiter . '</li>' . $output;
+                }
+                echo $output;
+                echo esc_attr( $title );
+            } else {
+                echo '<li>'. the_title_attribute() .'</li>';
+            }
+        }
+    } elseif ( is_tag() ) {
+        single_tag_title();
+    } elseif ( is_day() ) {
+        echo"<li>" . esc_html__( 'Archive for', 'awesome-one-page' ); the_time( 'F jS, Y' ); echo'</li>';
+    } elseif ( is_month() ) {
+        echo"<li>" . esc_html__( 'Archive for', 'awesome-one-page' ); the_time( 'F, Y' ); echo'</li>';
+    } elseif ( is_year() ) {
+        echo"<li>" . esc_html__( 'Archive for', 'awesome-one-page' ); the_time( 'Y' ); echo'</li>';
+    } elseif ( is_author( ) ) {
+        echo"<li>" . esc_html__( 'Author Archive', 'awesome-one-page' ); echo'</li>';
+    } elseif ( isset( $_GET['paged'] ) && !empty( $_GET['paged'] ) ) {
+        echo "<li>" . esc_html__( 'Blog Archive', 'awesome-one-page' ); echo'</li>';
+    } elseif ( is_search() ) {
+        echo"<li>" . esc_html__( 'Search Results', 'awesome-one-page' ); echo'</li>';
+    }
+    echo '</ul>';
+}
+endif;
+
+/*--------------------------------------------------------------------------------------------------*/
 if ( ! function_exists( 'awesome_one_page_display_breadcrumbs' ) ) :
     /**
      * Displays the optional to show the breadcrumbs in innerpages.
@@ -255,4 +322,4 @@ if ( ! function_exists( 'awesome_one_page_display_breadcrumbs' ) ) :
     }
 endif;
 
-/*--------------------------------------------------------------------------------------------------*/
+

@@ -138,4 +138,4 @@ require get_template_directory() . '/inc/functions.php';
 /**
  * Awesome-one-page Breadcrumbs function
  */
-require get_template_directory() . '/inc/breadcrumbs.php';
+//require get_template_directory() . '/inc/breadcrumbs.php';

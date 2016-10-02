@@ -14,7 +14,6 @@ class aop_testimonial_widget extends WP_Widget {
       $instance = wp_parse_args(
         (array) $instance, array(
             'title'             => '',
-            'text'              => '',
             'no_of_posts'       => '4',
             'exclude_page_ids'  => '',
             'section_id'        => '',
@@ -33,12 +32,7 @@ class aop_testimonial_widget extends WP_Widget {
 
         <div class="aop-admin-input-wrap">
           <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title', 'awesome-one-page' ); ?></label>
-          <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title'] ); ?>" placeholder="<?php esc_html_e( 'Title', 'awesome-one-page' ); ?>">
-        </div><!-- .aop-admin-input-wrap -->
-
-        <div class="aop-admin-input-wrap">
-          <?php esc_html_e( 'Description:','awesome-one-page' ); ?>
-           <textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name('text'); ?>" placeholder="<?php esc_html_e( 'Description', 'awesome-one-page' ); ?>" ><?php echo esc_textarea( $instance[ 'text' ] ); ?></textarea>
+          <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title'] ); ?>" placeholder="<?php esc_attr_e( 'Title', 'awesome-one-page' ); ?>">
         </div><!-- .aop-admin-input-wrap -->
 
         <div class="aop-admin-input-wrap">
@@ -48,7 +42,7 @@ class aop_testimonial_widget extends WP_Widget {
 
         <div class="aop-admin-input-wrap">
           <label for="<?php echo $this->get_field_id( 'exclude_page_ids' ); ?>"><?php esc_html_e( 'Exclude Page IDs', 'awesome-one-page' ); ?></label>
-          <input type="text" id="<?php echo $this->get_field_id( 'exclude_page_ids' ); ?>" name="<?php echo $this->get_field_name( 'exclude_page_ids' ); ?>" value="<?php echo esc_attr( $instance[ 'exclude_page_ids'] ); ?>" placeholder="<?php esc_html_e( '11,43,50', 'awesome-one-page' ); ?>">
+          <input type="text" id="<?php echo $this->get_field_id( 'exclude_page_ids' ); ?>" name="<?php echo $this->get_field_name( 'exclude_page_ids' ); ?>" value="<?php echo esc_attr( $instance[ 'exclude_page_ids'] ); ?>" placeholder="<?php esc_attr_e( '11,43,50', 'awesome-one-page' ); ?>">
         </div><!-- .aop-admin-input-wrap -->
 
         <div class="accordion-sortables ui-droppable ui-sortable">
@@ -66,7 +60,7 @@ class aop_testimonial_widget extends WP_Widget {
 
                 <div class="aop-admin-input-wrap">
                   <label for="<?php echo $this->get_field_id( 'section_id' ); ?>"><?php esc_html_e( 'Section ID', 'awesome-one-page' ); ?></label>
-                  <input type="text" id="<?php echo $this->get_field_id( 'section_id' ); ?>" name="<?php echo $this->get_field_name( 'section_id' ); ?>" value="<?php echo esc_attr( $instance[ 'section_id'] ); ?>" placeholder="<?php esc_html_e( 'testimonial', 'awesome-one-page' ); ?>">
+                  <input type="text" id="<?php echo $this->get_field_id( 'section_id' ); ?>" name="<?php echo $this->get_field_name( 'section_id' ); ?>" value="<?php echo esc_attr( $instance[ 'section_id'] ); ?>" placeholder="<?php esc_attr_e( 'testimonial', 'awesome-one-page' ); ?>">
                 </div><!-- .aop-admin-input-wrap -->
 
                 <div class="aop-admin-input-wrap">
@@ -116,20 +110,15 @@ class aop_testimonial_widget extends WP_Widget {
       $instance[ 'text_color' ]         = sanitize_text_field( $new_instance[ 'text_color' ] );
       $instance[ 'widget_title_color' ] = sanitize_text_field( $new_instance[ 'widget_title_color' ] );
       $instance[ 'background_image' ]   = esc_url_raw( $new_instance[ 'background_image' ] );
-
-      if ( current_user_can('unfiltered_html') )
-        $instance[ 'text' ] =  $new_instance[ 'text' ];
-      else
-        $instance[ 'text' ] = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'text' ] ) ) ); // wp_filter_post_kses() expects slashed
       return $instance;
     }
 
     function widget( $args, $instance ) {
       ob_start();
       extract( $args );
-
+      global $post;
+      
       $title              = apply_filters( 'widget_title', isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '');
-      $text               = isset( $instance[ 'text' ] ) ? $instance[ 'text' ] : '';
       $no_of_posts        = empty( $instance[ 'no_of_posts' ] ) ? 4 : intval( $instance[ 'no_of_posts' ] );
       $exclude_page_ids   = isset( $instance[ 'exclude_page_ids' ] ) ? $instance[ 'exclude_page_ids' ] : '';
       $section_id         = isset( $instance[ 'section_id' ] ) ? $instance[ 'section_id' ] : '';
@@ -143,15 +132,11 @@ class aop_testimonial_widget extends WP_Widget {
       } else {
         $inherit = 'noinherit';
       }
-      $section = '';
-      if ( !empty( $section_id ) ) {
-        $section = 'id="' . esc_attr( $section_id ) . '"';
-      }
-      $background_style = '';
-      if ( !empty( $background_image ) ) {
-        $background_style .= 'background-image:url('.esc_url( $background_image ).');background-repeat:no-repeat;background-size:cover;background-attachment:fixed;';
-      }else {
-        $background_style .= 'background-color:'.esc_attr( $background_color ).';';
+
+      if ($section_id) {
+        $id =  ' id="' . $section_id . '"';
+      } else {
+        $id = '';
       }
 
       if ( $exclude_page_ids ) {
@@ -175,20 +160,16 @@ class aop_testimonial_widget extends WP_Widget {
           )
       ) );
 
-      echo $args['before_widget']; ?>
+      echo $args['before_widget'] = str_replace('<section', '<section' . esc_attr( $id ) . ' data-color="' . esc_attr( $inherit ) . '" style="color:' . esc_attr( $text_color ) . ';background-color:' . esc_attr( $background_color ) . ';background-image:url(' . esc_url( $background_image ) . ');"', $args['before_widget']); ?>
 
-      <div <?php echo $section; ?> >
-        <div class="widget aop-testimonial-pages" style="<?php echo $background_style; ?>">
+        <div class="widget aop-testimonial-pages">
           <div class="aop-section-title-wrapper">
             <?php if ( !empty( $title ) ) : ?> 
               <h2 class="widget-title" style="color: <?php echo esc_attr( $widget_title_color );?>"><?php echo esc_attr( $title ); ?></h2> 
             <?php endif; ?>
-            <?php if ( !empty( $text ) ) : ?> 
-              <p class="widget-desciption" style="color: <?php echo esc_attr( $text_color );?>"><?php echo esc_textarea( $text ); ?></p> 
-            <?php endif; ?>
           </div><!-- .aop-section-title-wrapper -->
 
-          <div class="aop-section-content-wrapper" data-color="<?php echo esc_attr( $inherit ); ?>" style="color: <?php echo esc_attr( $text_color );?>">
+          <div class="aop-section-content-wrapper">
             <?php if ( $get_featured_pages->have_posts() ) : ?>
               <div class="entry-content">
                 <?php while( $get_featured_pages->have_posts() ) : $get_featured_pages->the_post(); 
@@ -208,7 +189,7 @@ class aop_testimonial_widget extends WP_Widget {
                     <?php endif; ?>
 
                     <h2 class="testimonial-title">
-                      <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $title_attribute ); ?>" style="color: <?php echo esc_attr( $inherit );?>"> <?php the_title(); ?></a>                    
+                      <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $title_attribute ); ?>"> <?php the_title(); ?></a>                    
                     </h2><!-- .testimonial-title -->
 
                     <?php if ( $testimonial_designation ) : ?>
@@ -229,7 +210,7 @@ class aop_testimonial_widget extends WP_Widget {
             <?php endif; ?>
           </div><!-- .aop-section-title-wrapper -->
         </div><!-- .aop-testimonial-pages -->
-      </div>
+
       <?php echo $args['after_widget'];
       ob_end_flush();
     }

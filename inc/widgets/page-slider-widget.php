@@ -35,7 +35,7 @@ class aop_page_slider_widget extends WP_Widget {
 
         <div class="aop-admin-input-wrap">
           <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title', 'awesome-one-page' ); ?></label>
-          <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title'] ); ?>" placeholder="<?php esc_html_e( 'Title', 'awesome-one-page' ); ?>">
+          <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title'] ); ?>" placeholder="<?php esc_attr_e( 'Title', 'awesome-one-page' ); ?>">
         </div><!-- .aop-admin-input-wrap -->
 
         <?php for ( $i=0; $i<4 ; $i++ ) : ?>
@@ -47,12 +47,12 @@ class aop_page_slider_widget extends WP_Widget {
 
           <div class="aop-admin-input-wrap">
             <label for="<?php echo $this->get_field_id( 'button_text_'. $i ); ?>"><?php esc_html_e( 'Button Text ', 'awesome-one-page' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'button_text_'. $i ); ?>" name="<?php echo $this->get_field_name( 'button_text_'. $i ); ?>" type="text" value="<?php echo esc_attr( $instance[ 'button_text_'. $i ] ); ?>" placeholder="<?php esc_html_e( 'Get in Touch', 'awesome-one-page' ); ?>"/>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'button_text_'. $i ); ?>" name="<?php echo $this->get_field_name( 'button_text_'. $i ); ?>" type="text" value="<?php echo esc_attr( $instance[ 'button_text_'. $i ] ); ?>" placeholder="<?php esc_attr_e( 'Get in Touch', 'awesome-one-page' ); ?>"/>
           </div><!-- .aop-admin-input-wrap -->
 
           <div class="aop-admin-input-wrap">
             <label for="<?php echo $this->get_field_id( 'button_url_'. $i ); ?>"><?php esc_html_e( 'Icon Class:', 'awesome-one-page' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'button_url_'. $i ); ?>" name="<?php echo $this->get_field_name( 'button_url_'. $i ); ?>" type="text" value="<?php echo esc_attr( $instance[ 'button_url_'. $i ] ); ?>" placeholder="<?php esc_html_e( 'http://url.com/', 'awesome-one-page' ); ?>"/>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'button_url_'. $i ); ?>" name="<?php echo $this->get_field_name( 'button_url_'. $i ); ?>" type="text" value="<?php echo esc_attr( $instance[ 'button_url_'. $i ] ); ?>" placeholder="<?php esc_attr_e( 'http://url.com/', 'awesome-one-page' ); ?>"/>
           </div><!-- .aop-admin-input-wrap -->
           <hr/>
 
@@ -73,7 +73,7 @@ class aop_page_slider_widget extends WP_Widget {
 
                 <div class="aop-admin-input-wrap">
                   <label for="<?php echo $this->get_field_id( 'section_id' ); ?>"><?php esc_html_e( 'Section ID', 'awesome-one-page' ); ?></label>
-                  <input type="text" id="<?php echo $this->get_field_id( 'section_id' ); ?>" name="<?php echo $this->get_field_name( 'section_id' ); ?>" value="<?php echo esc_attr( $instance[ 'section_id'] ); ?>" placeholder="<?php esc_html_e( 'home', 'awesome-one-page' ); ?>">
+                  <input type="text" id="<?php echo $this->get_field_id( 'section_id' ); ?>" name="<?php echo $this->get_field_name( 'section_id' ); ?>" value="<?php echo esc_attr( $instance[ 'section_id'] ); ?>" placeholder="<?php esc_attr_e( 'home', 'awesome-one-page' ); ?>">
                 </div><!-- .aop-admin-input-wrap -->
 
                 <div class="aop-admin-input-wrap">
@@ -139,7 +139,6 @@ class aop_page_slider_widget extends WP_Widget {
 
       $title              = apply_filters( 'widget_title', isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '');
       $section_id         = isset( $instance[ 'section_id' ] ) ? $instance[ 'section_id' ] : '';
-      $background_color   = isset( $instance[ 'background_color' ] ) ? $instance[ 'background_color' ] : null;
       $text_color         = isset( $instance[ 'text_color' ] ) ? $instance[ 'text_color' ] : null;
       $widget_title_color = isset( $instance[ 'widget_title_color' ] ) ? $instance[ 'widget_title_color' ] : null;
       $image_link = !empty( $instance[ 'image_link' ] ) ? 'true' : 'false';
@@ -167,13 +166,14 @@ class aop_page_slider_widget extends WP_Widget {
         $inherit = 'noinherit';
       }
 
-      $section = '';
-      if ( !empty( $section_id ) )
-        $section = 'id="' . esc_attr( $section_id ) . '"';
+      if ($section_id) {
+        $id =  ' id="' . esc_attr( $section_id ) . '"';
+      } else {
+        $id = '';
+      }
 
-      echo $args['before_widget']; ?>
+      echo $args['before_widget'] = str_replace('<section', '<section' . $id . ' data-color="' . esc_attr( $inherit ) . '" style="color:' . esc_attr( $text_color ) . ';"', $args['before_widget']); ?>
 
-      <div <?php echo $section; ?> >
       <!-- Demo styles -->
     <style>
     html, body {
@@ -239,10 +239,10 @@ class aop_page_slider_widget extends WP_Widget {
                     </div><!-- .slider-image -->  
 
                     <h2 class="slider-title">
-                      <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $title_attribute ); ?>" style="color: <?php echo esc_attr( $widget_title_color );?>"> <?php the_title(); ?></a>                    
+                      <a title="<?php esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php esc_attr( $title_attribute ); ?>"> <?php the_title(); ?></a>                    
                     </h2><!-- .slider-title -->
 
-                    <div class="slider-content" style="color: <?php echo esc_attr( $text_color );?>">
+                    <div class="slider-content">
                       <?php the_excerpt(); ?>
                     </div><!-- .slider-content -->
 
@@ -277,7 +277,7 @@ class aop_page_slider_widget extends WP_Widget {
             </div>
           <?php endif; ?>
         </div><!-- .aop-page-slider -->
-      </div>
+
       <?php echo $args['after_widget'];
       ob_end_flush();
     }

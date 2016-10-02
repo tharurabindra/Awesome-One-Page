@@ -36,6 +36,14 @@ jQuery(document).ready(function() {
     jQuery('body').fitVids();
   }
 
+  // Colors for the widgts.
+  var elements = 'h1,h2:not(.widget-title),h3,h4,h5,h6,a,div,span';
+  jQuery('.page-template-template-awesome-one-page #main section').each( function() {
+    if (jQuery(this).data('color') == 'inherit') {
+      jQuery(this).find(elements).css('color','inherit');
+    }   
+  });
+
   /* Fun-Facts Counter Count start */
   if ( typeof jQuery.fn.counterUp !== 'undefined' ) {
     jQuery('.count-number').counterUp({
