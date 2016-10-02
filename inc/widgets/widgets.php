@@ -71,7 +71,6 @@ function awesome_one_page_widgets_init() {
   register_widget( "aop_video_widget" );
   register_widget( "aop_fun_facts_widget" );
   register_widget( "aop_social_icons_widget" );
-  register_widget( "aop_post_slider_widget" );
   register_widget( "aop_page_slider_widget" );
 }
 add_action( 'widgets_init', 'awesome_one_page_widgets_init' );

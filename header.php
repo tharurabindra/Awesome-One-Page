@@ -65,14 +65,17 @@
 	
 	<?php if ( get_header_image() ) : ?>
 		<div class="header-image-wrap">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+			<?php if ( get_theme_mod( 'awesome_one_page_header_image_link_activate', '' ) == 1 ) : ?>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<img src="<?php header_image(); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" alt="">
+				</a>
+			<?php else : ?>
 				<img src="<?php header_image(); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" alt="">
-			</a>
+			<?php endif; ?>
 		</div><!-- .header-image-wrap -->
 	<?php endif; // End header image check. ?>
 
 	<?php do_action( 'aop_after_header' ); ?>
-
 
 	<?php do_action( 'aop_before_main' ); ?>
 

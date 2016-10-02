@@ -1,4 +1,27 @@
 jQuery(document).ready(function() {
+
+  // Init WOW.js
+  if (typeof WOW == 'function') {
+    new WOW().init();
+  }
+
+  // js to scroll button to pop
+  jQuery("#scroll-up").hide();
+
+  jQuery(window).scroll(function() {
+      if (jQuery(this).scrollTop() > 1000) {
+          jQuery('#scroll-up').fadeIn();
+      } else {
+          jQuery('#scroll-up').fadeOut();
+      }
+  });
+  jQuery('a#scroll-up').click(function() {
+      jQuery('body,html').animate({
+          scrollTop: 0
+      }, 800);
+      return false;
+  });
+
   /* Page Scroll to id fn call */
   var headerHeight = jQuery('#masthead').outerHeight();
     jQuery('#site-navigation a,a[href="#top"],a[rel="m_PageScroll2id"]').mPageScroll2id({

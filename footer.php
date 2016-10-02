@@ -32,5 +32,11 @@
 
 <?php wp_footer(); ?>
 
+<?php if ( get_theme_mod( 'awesome_one_page_footer_go_to_top', '1') == 1 ) : ?>
+	<a id="scroll-up" href="#masthead" style="display: inline;">
+		<i class="fa fa-long-arrow-up"></i>
+	</a>
+<?php endif; ?>
+
 </body>
 </html>

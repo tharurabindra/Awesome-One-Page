@@ -334,14 +334,14 @@ function awesome_one_page_customize_register( $wp_customize ) {
     ) );
 
     $wp_customize->add_control( 'awesome_one_page_menu_display_style', array(
-        'type'      => 'radio',
+        'type'                  => 'radio',
         'label'                 => esc_html__( 'Menu style', 'awesome-one-page'),
         'section'               => 'awesome_one_page_menu_style',
         'settings'              => 'awesome_one_page_menu_display_style',
-        'choices'   => array(
-                'inline'     => esc_html__('Inline', 'awesome-one-page'),
-                'centered'   => esc_html__('Centered', 'awesome-one-page'),
-            ),
+        'choices'               => array(
+            'inline'     => esc_html__('Inline', 'awesome-one-page'),
+            'centered'   => esc_html__('Centered', 'awesome-one-page')
+        )
     ) );
 
     // Header Image
@@ -350,6 +350,19 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'title'                 => esc_html__( 'Header Image', 'awesome-one-page' ),
         'panel'                 => 'awesome_one_page_header'
     ) );
+
+    // Activate header link back to home page
+    $wp_customize->add_setting( 'awesome_one_page_header_image_link_activate', array(
+        'default'               => '',
+        'capability'            => 'edit_theme_options',
+        'sanitize_callback'     => 'awesome_one_page_checkbox_sanitize'
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_header_image_link_activate', array(
+        'label'                 => esc_html__( 'Activate Image Link Back to Home', 'awesome-one-page' ),
+        'section'               => 'header_image',
+        'settings'              => 'awesome_one_page_header_image_link_activate'
+    ) ) );
 
 
 /*--------------------------------------------------------------------------------------------------*/
@@ -416,7 +429,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'label'                 => esc_html__( 'Custom Primary Color', 'awesome-one-page' ),
         'description'           => esc_html__( 'You can override theme color by custom color', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_custom_theme_color_sec',
-        'settings'              => 'awesome_one_page_custom_primary_color',
+        'settings'              => 'awesome_one_page_custom_primary_color'
     ) ) );
 
     // Custom Secondary Color
@@ -429,7 +442,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'awesome_one_page_custom_secondary_color', array(
         'label'                 => esc_html__( 'Secondary Color', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_custom_theme_color_sec',
-        'settings'              => 'awesome_one_page_custom_secondary_color',
+        'settings'              => 'awesome_one_page_custom_secondary_color'
     ) ) );
 
 /*--------------------------------------------------------------------------------------------------*/
@@ -459,7 +472,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'label'              => esc_html__('Available Sidebar', 'awesome-one-page'),
         'description'        => esc_html__('Select default layout for single posts. This layout will be reflected in all single posts unless unique layout is set for specific post.', 'awesome-one-page'),
         'section'            => 'awesome_one_page_post_settings_general_sec',
-        'settings'          => 'awesome_one_page_post_global_sidebar',
+        'settings'           => 'awesome_one_page_post_global_sidebar',
         'choices'            => array(
             'right_sidebar'                 => get_template_directory_uri() . '/inc/assets/images/right-sidebar.png',
             'left_sidebar'                  => get_template_directory_uri() . '/inc/assets/images/left-sidebar.png',
@@ -491,13 +504,13 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_post_featured_image', array(
         'label'                 => esc_html__( 'Show Featured Image', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_post_settings_general_sec',
-        'settings'              => 'awesome_one_page_post_featured_image',
+        'settings'              => 'awesome_one_page_post_featured_image'
     ) ) );
 
     // Posts meta Settings
     $wp_customize->add_section( 'awesome_one_page_post_meta_settings_sec', array(
         'title'                 => esc_html__( 'Post Meta', 'awesome-one-page' ),
-        'panel'                 => 'awesome_one_page_post_settings',
+        'panel'                 => 'awesome_one_page_post_settings'
     ) );
 
     // Post Author
@@ -510,7 +523,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_post_meta_author', array(
         'label'                 => esc_html__( 'Post Author', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_post_meta_settings_sec',
-        'settings'              => 'awesome_one_page_post_meta_author',
+        'settings'              => 'awesome_one_page_post_meta_author'
     ) ) );
 
     // Post Date
@@ -523,7 +536,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_post_meta_date', array(
         'label'                 => esc_html__( 'Post Date', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_post_meta_settings_sec',
-        'settings'              => 'awesome_one_page_post_meta_date',
+        'settings'              => 'awesome_one_page_post_meta_date'
     ) ) );
 
     // Post Categories
@@ -536,7 +549,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_post_meta_categories', array(
         'label'                 => esc_html__( 'Post Categories', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_post_meta_settings_sec',
-        'settings'              => 'awesome_one_page_post_meta_categories',
+        'settings'              => 'awesome_one_page_post_meta_categories'
     ) ) );
 
     // Post Tags
@@ -549,7 +562,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_post_meta_tags', array(
         'label'                 => esc_html__( 'Post Tags', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_post_meta_settings_sec',
-        'settings'              => 'awesome_one_page_post_meta_tags',
+        'settings'              => 'awesome_one_page_post_meta_tags'
     ) ) );
 
     
@@ -564,7 +577,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     // General Settings
     $wp_customize->add_section( 'awesome_one_page_blog_general_sec', array(
         'title'                 => esc_html__( 'General Settings', 'awesome-one-page' ),
-        'panel'                 => 'awesome_one_page_blog_settings',
+        'panel'                 => 'awesome_one_page_blog_settings'
     ) );
 
     // blog global sidebar.
@@ -580,7 +593,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'label'              => esc_html__('Available Sidebar', 'awesome-one-page'),
         'description'        => esc_html__('Select default sidebar. This sidebar will be reflected in all pages unless unique layout is set for specific page as well as reflected in whole site archives, categories, search page etc.', 'awesome-one-page'),
         'section'            => 'awesome_one_page_blog_general_sec',
-        'settings'          => 'awesome_one_page_blog_global_sidebar',
+        'settings'           => 'awesome_one_page_blog_global_sidebar',
         'choices'            => array(
             'right_sidebar'                 => get_template_directory_uri() . '/inc/assets/images/right-sidebar.png',
             'left_sidebar'                  => get_template_directory_uri() . '/inc/assets/images/left-sidebar.png',
@@ -599,7 +612,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Font_Control(  $wp_customize, 'awesome_one_page_blog_post_excerpt_length', array(
         'label'                 => esc_html__( 'Excerpt Length', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_general_sec',
-        'settings'              => 'awesome_one_page_blog_post_excerpt_length',
+        'settings'              => 'awesome_one_page_blog_post_excerpt_length'
     ) ) );
 
     // Show Thumbnail
@@ -612,7 +625,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_blog_post_thumb_image', array(
         'label'                 => esc_html__( 'Show Thumbnail', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_general_sec',
-        'settings'              => 'awesome_one_page_blog_post_thumb_image',
+        'settings'              => 'awesome_one_page_blog_post_thumb_image'
     ) ) );
 
     // Show Read More
@@ -625,7 +638,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_blog_show_read_more', array(
         'label'                 => esc_html__( 'Show Read More', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_general_sec',
-        'settings'              => 'awesome_one_page_blog_show_read_more',
+        'settings'              => 'awesome_one_page_blog_show_read_more'
     ) ) );
 
     // Read More Text
@@ -639,7 +652,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'type'                  => 'text',
         'label'                 => esc_html__( 'Read More Text', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_general_sec',
-        'settings'              => 'awesome_one_page_blog_read_more_text',
+        'settings'              => 'awesome_one_page_blog_read_more_text'
     ) );
 
 
@@ -673,7 +686,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_blog_post_categories', array(
         'label'                 => esc_html__( 'Post Categories', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_post_meta_sec',
-        'settings'              => 'awesome_one_page_blog_post_categories',
+        'settings'              => 'awesome_one_page_blog_post_categories'
     ) ) );
 
     // Tags
@@ -686,7 +699,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_blog_post_tags', array(
         'label'                 => esc_html__( 'Show Tags', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_post_meta_sec',
-        'settings'              => 'awesome_one_page_blog_post_tags',
+        'settings'              => 'awesome_one_page_blog_post_tags'
     ) ) ); 
 
     // Comments
@@ -699,7 +712,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_blog_post_comments', array(
         'label'                 => esc_html__( 'Post Comments', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_blog_post_meta_sec',
-        'settings'              => 'awesome_one_page_blog_post_comments',
+        'settings'              => 'awesome_one_page_blog_post_comments'
     ) ) );
 
     
@@ -708,13 +721,13 @@ function awesome_one_page_customize_register( $wp_customize ) {
     // Footer
     $wp_customize->add_panel( 'awesome_one_page_footer_settings', array(
         'priority'              => 124,
-        'title'                 => esc_html__( 'Footer', 'awesome-one-page' ),
+        'title'                 => esc_html__( 'Footer', 'awesome-one-page' )
     ) );
 
     // General Settings
     $wp_customize->add_section( 'awesome_one_page_footer_settings_sec', array(
         'title'                 => esc_html__( 'General Settings', 'awesome-one-page' ),
-        'panel'                 => 'awesome_one_page_footer_settings',
+        'panel'                 => 'awesome_one_page_footer_settings'
     ) );
 
     // Go To Top Button
@@ -727,13 +740,13 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Checkbox_Control( $wp_customize, 'awesome_one_page_footer_go_to_top', array(
         'label'                 => esc_html__( 'Go To Top Button', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_footer_settings_sec',
-        'settings'              => 'awesome_one_page_footer_go_to_top',
+        'settings'              => 'awesome_one_page_footer_go_to_top'
     ) ) );
 
     // Footer Widgets
     $wp_customize->add_section( 'awesome_one_page_footer_widgets_sec', array(
         'title'                 => esc_html__( 'Footer Widgets', 'awesome-one-page' ),
-        'panel'                 => 'awesome_one_page_footer_settings',
+        'panel'                 => 'awesome_one_page_footer_settings'
     ) );
 
     $wp_customize->add_setting( 'awesome_one_page_footer_widgets_area', array(
@@ -743,16 +756,16 @@ function awesome_one_page_customize_register( $wp_customize ) {
     ) );
 
     $wp_customize->add_control( 'awesome_one_page_footer_widgets_area', array(
-            'label'    => esc_html__( 'Footer widget area', 'awesome-one-page' ),
+            'label'          => esc_html__( 'Footer widget area', 'awesome-one-page' ),
             'description'    => esc_html__( 'Choose the number of widget areas in the footer, then go to Appearance &gt; Widgets and add your widgets.', 'awesome-one-page' ),
-            'section'  => 'awesome_one_page_footer_widgets_sec',
-            'type'     => 'radio',
-            'choices'    => array(
+            'section'        => 'awesome_one_page_footer_widgets_sec',
+            'type'           => 'radio',
+            'choices'        => array(
                 '1' => esc_html__('One', 'awesome-one-page'),
                 '2' => esc_html__('Two', 'awesome-one-page'),
                 '3' => esc_html__('Three', 'awesome-one-page'),
                 '4' => esc_html__('Four', 'awesome-one-page')
-            ),
+            )
         )
     );
 
@@ -761,7 +774,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     // Custom CSS
     $wp_customize->add_section( 'awesome_one_page_custom_css', array(
         'priority'              => 125,
-        'title'                 => esc_html__( 'Custom CSS', 'awesome-one-page' ),
+        'title'                 => esc_html__( 'Custom CSS', 'awesome-one-page' )
     ) );
 
     $wp_customize->add_setting( 'awesome_one_page_custom_css_code', array(
@@ -774,7 +787,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
         'label'                 => esc_html__( 'Add Custom CSS Code', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_custom_css',
         'settings'              => 'awesome_one_page_custom_css_code',
-        'type'                  => 'textarea',
+        'type'                  => 'textarea'
     ) );
 
 /*--------------------------------------------------------------------------------------------------*/
@@ -782,7 +795,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     // Help & Support
     $wp_customize->add_section( 'awesome_one_page_help_support', array(
         'priority'              => 126,
-        'title'                 => esc_html__( 'Help & Support', 'awesome-one-page' ),
+        'title'                 => esc_html__( 'Help & Support', 'awesome-one-page' )
     ) );
 
     $wp_customize->add_setting( 'awesome_one_page_help_support_links', array(
@@ -794,7 +807,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Help_support_Control( $wp_customize, 'awesome_one_page_help_support_links', array(
         'label'                 => esc_html__( 'Help & Support', 'awesome-one-page' ),
         'section'               => 'awesome_one_page_help_support',
-        'settings'              => 'awesome_one_page_help_support_links',
+        'settings'              => 'awesome_one_page_help_support_links'
     ) ) );
 
     /**
