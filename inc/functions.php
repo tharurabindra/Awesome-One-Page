@@ -14,11 +14,8 @@ $aop_version = $aop_theme->get( 'Version' );
 function awesome_one_page_scripts() {
     global $aop_version;
 
-    // Enqueue Google fonts
-    $aop_font_args = array(
-        'family' => 'Open+Sans:400,600,700,400italic,300|Roboto:400,500,700,300,400italic',
-    );
-    wp_enqueue_style( 'awesome-one-page-fonts', add_query_arg( $aop_font_args, "//fonts.googleapis.com/css" ) );
+    // Add custom fonts, used in the main stylesheet.
+    wp_enqueue_style( 'awesome-one-page-fonts', awesome_one_page_fonts_url(), array(), null );
 
     // Enqueue Bootstrap Grid
     wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', false, '3.3.5', '' );
@@ -63,6 +60,37 @@ function awesome_one_page_scripts() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'awesome_one_page_scripts' );
+
+/*--------------------------------------------------------------------------------------------------*/
+
+if ( ! function_exists( 'awesome_one_page_fonts_url' ) ) :
+/**
+ * Register Google fonts for Flash.
+ *
+ * Create your own awesome_one_page_fonts_url() function to override in a child theme.
+ *
+ * @return string Google fonts URL for the theme.
+ */
+function awesome_one_page_fonts_url() {
+    $fonts_url = '';
+    $fonts     = array();
+    $subsets   = 'latin,latin-ext';
+
+    /* translators: If there are characters in your language that are not supported by Poppins, translate this to 'off'. Do not translate into your own language. */
+    if ( 'off' !== _x( 'on', 'Montserrat font: on or off', 'awesome-one-page' ) ) {
+        $fonts[] = 'Montserrat:400,700';
+    }
+
+    if ( $fonts ) {
+        $fonts_url = add_query_arg( array(
+            'family' => urlencode( implode( '|', $fonts ) ),
+            'subset' => urlencode( $subsets ),
+        ), 'https://fonts.googleapis.com/css' );
+    }
+
+    return $fonts_url;
+}
+endif;
 
 /*--------------------------------------------------------------------------------------------------*/
 
