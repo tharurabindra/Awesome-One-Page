@@ -66,7 +66,7 @@ function awesome_one_page_layout_meta_form( $awesome_one_page_layout_metabox_fie
 
 	<table class="form-table">
 		<tr>
-			<td colspan="4"><em class="f13">Choose Sidebar Template</em></td>
+			<td colspan="4"><em class="f13"><?php esc_html_e( 'Choose Sidebar Template', 'awesome-one-page' ); ?></em></td>
 		</tr>
 		<tr>
 			<td>
@@ -81,7 +81,8 @@ function awesome_one_page_layout_meta_form( $awesome_one_page_layout_metabox_fie
 						// Layout
 						case 'awesome_one_page_spacific_layout':
 							if( empty( $layout_meta ) && $img_count == '1' ) { 
-								$layout_meta = 'default_layout'; $default_class = 'aop-radio-image-selected'; 
+								$layout_meta = 'default_layout'; 
+								$default_class = 'aop-radio-image-selected'; 
 							}
 							if ( $field['value'] == $layout_meta ) { $default_class = 'aop-radio-image-selected'; }?>
 

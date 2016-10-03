@@ -22,7 +22,7 @@
    }
 ?>
 
-<aside id="footer-widgets" class="footer-widgets" role="complementary">
+<div id="footer-widgets" class="footer-widgets" role="complementary">
 	<?php do_action( 'aop_before_footer_sidebar' ); ?>
       <div class="container">
          <?php if ( is_active_sidebar( 'awesome_one_page_footer_sidebar_1' ) ) : ?>
@@ -47,4 +47,4 @@
          <?php endif; ?>
       </div>      
    <?php do_action( 'aop_after_footer_sidebar' ); ?>
-</aside><!-- #secondary -->
+</div><!-- #secondary -->

@@ -38,7 +38,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
                     </span>
 
                     <?php if ( ! empty( $this->description ) ) : ?>
-                        <span class="description customize-control-description"><?php echo $this->description; ?></span>
+                        <span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
                     <?php endif; ?>
                 </label>
                 <?php
@@ -61,20 +61,6 @@ function awesome_one_page_customize_register( $wp_customize ) {
             }
         }
 
-        // Demo Import Button
-        class WP_Customize_Demo_Import_Control extends WP_Customize_Control {
-
-            public function render_content() {
-
-                ?>
-                <label>
-                    <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-                    <input type="submit" id="<?php echo $this->id; ?>" name="<?php echo $this->id; ?>" value="<?php esc_html_e( 'Import Demo Content', 'awesome-one-page' ); ?>" class="dt-demo-data-import" />
-                </label>
-                <?php
-            }
-        }
-
         // Help & Support
         class WP_Customize_Help_support_Control extends WP_Customize_Control {
 
@@ -87,7 +73,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
                         <li><a href="#"><i class="dashicons dashicons-welcome-learn-more"></i> <?php esc_html_e( 'Documentation', 'awesome-one-page' ); ?></a></li>
                         <li><a href="#"><i class="dashicons dashicons-groups"></i> <?php esc_html_e( 'Support Forum', 'awesome-one-page' ); ?></a></li>
                         <li><a href="#"><i class="dashicons dashicons-tickets-alt"></i> <?php esc_html_e( 'Create Support Ticket', 'awesome-one-page' ); ?></a></li>
-                        <li><?php esc_html_e( 'If you like the GoodNews theme, we would love to receive a', 'awesome-one-page' ); ?> <a href="#"><span class="dt-customizer-stars">★★★★★</span></a> <?php esc_html_e( 'rating.', 'awesome-one-page' ); ?> <a href="#"><?php esc_html_e( 'Click Here', 'awesome-one-page' ); ?></a><?php esc_html_e( 'to rate this theme. Thanks', 'awesome-one-page' ); ?> <i class="dashicons dashicons-smiley"></i></li>
+                        <li><?php esc_html_e( 'If you like the GoodNews theme, we would love to receive a', 'awesome-one-page' ); ?> <a href="#"><span class="dt-customizer-stars"><?php echo esc_html( '★★★★★', 'awesome-one-page' ) ;?></span></a> <?php esc_html_e( 'rating.', 'awesome-one-page' ); ?> <a href="#"><?php esc_html_e( 'Click Here', 'awesome-one-page' ); ?></a><?php esc_html_e( 'to rate this theme. Thanks', 'awesome-one-page' ); ?> <i class="dashicons dashicons-smiley"></i></li>
                     </ul>
                 </div>
                 <?php
@@ -121,7 +107,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
                         <input <?php $this->link(); ?>style = 'display:none' type="radio" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
 
-                        <img src = '<?php echo esc_html( $label ); ?>' class = '<?php echo esc_attr( $class) ; ?>' />
+                        <img src = '<?php echo esc_url( $label ); ?>' class = '<?php echo esc_attr( $class) ; ?>' />
 
                     </label>
 
@@ -158,7 +144,6 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
                     <label for="<?php echo esc_attr( $value ); ?>">
                         <?php echo esc_html( $label ); ?>
-
                         <span class="awesome-one-page-radio-color">
                             <span class="awesome-one-page-color-checked"></span>
                         </span>
@@ -226,7 +211,7 @@ function awesome_one_page_customize_register( $wp_customize ) {
 
     // Breadcrumbs Delimiter
     $wp_customize->add_setting( 'awesome_one_page_breadcrumbs_sep', array(
-        'default'               => '/',
+        'default'               => esc_html__( '/', 'awesome-one-page' ),
         'capability'            => 'edit_theme_options',
         'sanitize_callback'     => 'awesome_one_page_sanitize_nohtml'
     ) );

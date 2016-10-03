@@ -251,29 +251,24 @@ if ( ! function_exists( 'awesome_one_page_breadcrumbs' ) ) :
 
 function awesome_one_page_breadcrumbs() {
 
+    global $post;
     $delimiter = get_theme_mod( 'awesome_one_page_breadcrumbs_sep' );
     if ( $delimiter == '' ) {
         $delimiter    = '/'; // delimiter between crumbs
     }
-
-    $delimiter = get_theme_mod( 'good_news_pro_breadcrumbs_sep' );
-    if ( $delimiter == '' ) {
-        $delimiter = '/';
-    }
-
-    global $post;
+    
     echo '<ul id="aop_breadcrumbs">';
     if ( !is_home() ) {
         echo '<li><a href="';
         echo esc_url( home_url() );
         echo '">';
         echo esc_html__( 'Home', 'awesome-one-page' );
-        echo '</a></li><li class="separator">' . $delimiter . '</li>';
+        echo '</a></li><li class="separator">' . esc_html( $delimiter ) . '</li>';
         if ( is_category() || is_single() ) {
             echo '<li>';
-            the_category( ' </li><li class="separator">' . $delimiter . '</li><li>' );
+            the_category( ' </li><li class="separator">' . esc_html( $delimiter ) . '</li><li>' );
             if ( is_single() ) {
-                echo '</li><li class="separator">' . $delimiter . '</li><li>';
+                echo '</li><li class="separator">' . esc_html( $delimiter ) . '</li><li>';
                 the_title();
                 echo '</li>';
             }
