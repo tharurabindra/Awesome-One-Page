@@ -237,7 +237,9 @@ class aop_featured_posts_widget extends WP_Widget {
                        <?php the_excerpt(); ?>
                     </div><!-- .featured-posts-content -->
 
-                    <a class="featured-posts-read-more" title="<?php echo esc_attr( $title_attribute ); ?>" href="<?php the_permalink(); ?>" alt="<?php echo esc_attr( $title_attribute ); ?>"><?php esc_html_e( 'Read More', 'awesome-one-page' ); ?></a>
+                      <div class="read-more clearfix">
+                        <a class="button post-button" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php esc_html_e( get_theme_mod( 'awesome_one_page_blog_read_more_text', esc_html__('Read More', 'awesome-one-page') ) ); ?></a>
+                      </div>
                   </div><!-- .featured-posts-column-3 -->
                 <?php endwhile; 
                 // Reset Post Data

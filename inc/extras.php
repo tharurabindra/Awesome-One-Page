@@ -248,61 +248,197 @@ if ( ! function_exists( 'awesome_one_page_breadcrumbs' ) ) :
 /**
  * Breadcrumbs
  */
+    function awesome_one_page_breadcrumbs() {
 
-function awesome_one_page_breadcrumbs() {
+        // Get the query & post information
+        global $post,$wp_query;
 
-    global $post;
-    $delimiter = get_theme_mod( 'awesome_one_page_breadcrumbs_sep' );
-    if ( $delimiter == '' ) {
-        $delimiter    = '/'; // delimiter between crumbs
-    }
-    
-    echo '<ul id="aop_breadcrumbs">';
-    if ( !is_home() ) {
-        echo '<li><a href="';
-        echo esc_url( home_url() );
-        echo '">';
-        echo esc_html__( 'Home', 'awesome-one-page' );
-        echo '</a></li><li class="separator">' . esc_html( $delimiter ) . '</li>';
-        if ( is_category() || is_single() ) {
-            echo '<li>';
-            the_category( ' </li><li class="separator">' . esc_html( $delimiter ) . '</li><li>' );
-            if ( is_single() ) {
-                echo '</li><li class="separator">' . esc_html( $delimiter ) . '</li><li>';
-                the_title();
-                echo '</li>';
-            }
-        } elseif ( is_page() ) {
-            if ( $post->post_parent ){
-                $anc = get_post_ancestors( $post->ID );
-                $title = get_the_title();
-                $output = '';
-                foreach ( $anc as $ancestor ) {
-                    $output = '<li><a href="'. esc_url( get_permalink( $ancestor ) ) .'" title="'. esc_attr( get_the_title( $ancestor ) ) .'">'. esc_attr( get_the_title( $ancestor ) ) .'</a></li> <li class="separator">' . $delimiter . '</li>' . $output;
-                }
-                echo $output;
-                echo esc_attr( $title );
-            } else {
-                echo '<li>'. the_title_attribute() .'</li>';
-            }
+        $delimiter = get_theme_mod( 'awesome_one_page_breadcrumbs_sep' );
+        if ( $delimiter == '' ) {
+            $delimiter    = '/'; // delimiter between crumbs
         }
-    } elseif ( is_tag() ) {
-        single_tag_title();
-    } elseif ( is_day() ) {
-        echo"<li>" . esc_html__( 'Archive for', 'awesome-one-page' ); the_time( 'F jS, Y' ); echo'</li>';
-    } elseif ( is_month() ) {
-        echo"<li>" . esc_html__( 'Archive for', 'awesome-one-page' ); the_time( 'F, Y' ); echo'</li>';
-    } elseif ( is_year() ) {
-        echo"<li>" . esc_html__( 'Archive for', 'awesome-one-page' ); the_time( 'Y' ); echo'</li>';
-    } elseif ( is_author( ) ) {
-        echo"<li>" . esc_html__( 'Author Archive', 'awesome-one-page' ); echo'</li>';
-    } elseif ( isset( $_GET['paged'] ) && !empty( $_GET['paged'] ) ) {
-        echo "<li>" . esc_html__( 'Blog Archive', 'awesome-one-page' ); echo'</li>';
-    } elseif ( is_search() ) {
-        echo"<li>" . esc_html__( 'Search Results', 'awesome-one-page' ); echo'</li>';
+        $home_title         = esc_html__('Home', 'awesome-one-page');
+
+        // Do not display on the homepage
+        if ( !is_front_page() ) {
+
+            // Build the breadcrums
+            echo '<ul class="trail-items">';
+
+            // Home page
+            echo '<li class="trail-item trail-begin"><a class="trail-home" href="' . esc_html( get_home_url() ) . '" title="' . $home_title . '"><span>' . $home_title . '</span></a></li>';
+            echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+
+            if ( is_archive() && is_tax() && !is_category() && !is_tag() ) {
+
+                // If post is a custom post type
+                $post_type = get_post_type();
+
+                // If it is a custom post type display name and link
+                if($post_type != 'post') {
+
+                    $post_type_object       = get_post_type_object($post_type);
+                    $post_type_archive_link = get_post_type_archive_link($post_type);
+
+                    echo '<li class="trail-item"><a class="item-taxonomy" href="' . esc_url( $post_type_archive ) . '" title="' . esc_attr( $post_type_object->labels->name ) . '"><span>' . esc_html( $post_type_object->labels->name ) . '</span></a></li>';
+                    echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+                }
+
+                $custom_taxonomy = get_queried_object()->name;
+                echo '<li class="trail-item"><span>' . esc_html( $custom_taxonomy ) . '</span></li>';
+                echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+
+            } elseif ( is_single() ) {
+
+                // If post is a custom post type
+                $post_type = get_post_type();
+
+                // If it is a custom post type display name and link
+                if($post_type != 'post') {
+
+                    $post_type_object = get_post_type_object($post_type);
+                    $post_type_archive = get_post_type_archive_link($post_type);
+
+                    echo '<li class="trail-item"><a class="item-custom-post-type" href="' . esc_url( $post_type_archive_link ) . '" title="' . esc_attr( $post_type_object->labels->name ) . '"><span>' . esc_html( $post_type_object->labels->name ) . '</span></a></li>';
+                    echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+                }
+
+                // Get post category info
+                $category = get_the_category();
+
+                if(!empty($category)) {
+
+                    // Get last category post is in
+                    $slice_array   = array_slice($category, -1);
+                    $last_category = array_pop($slice_array);
+
+                    // Get parent any categories and create array
+                    $get_cat_parents = rtrim(get_category_parents($last_category->term_id, true, ','),',');
+                    $cat_parents     = explode(',',$get_cat_parents);
+
+                    // Loop through parent categories and store in variable $cat_display
+                    $cat_display = '';
+                    foreach($cat_parents as $parents) {
+                        $cat_display .= '<li class="trail-item item-category"><span>'. $parents .'</span></li>';
+                        $cat_display .= '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+                    }
+
+                }
+
+                // Check if the post is in a category
+                if(!empty($last_category)) {
+                    echo $cat_display;
+                    echo '<li class="trail-item"><span>' . esc_html( get_the_title() ) . '</span></li>';
+
+                } else {
+
+                    echo '<li class="trail-item"><span>' . esc_html( get_the_title() ) . '</span></li>';
+
+                }
+
+            } elseif ( is_category() ) {
+
+                // Category page
+                echo '<li class="trail-item"><span>' . single_cat_title('', false) . '</span></li>';
+
+            } elseif ( is_page() ) {
+
+                // Standard page
+                if( $post->post_parent ){
+
+                    // If child page, get parents
+                    $anc = get_post_ancestors( $post->ID );
+
+                    // Get parents in the right order
+                    $anc = array_reverse($anc);
+
+                    // Parent page loop
+                    foreach ( $anc as $ancestor ) {
+                        $parents .= '<li class="trail-item"><a class="item-parent" href="' . esc_url ( get_permalink($ancestor) ) . '" title="' . esc_attr( get_the_title($ancestor) ) . '"><span>' . esc_html( get_the_title($ancestor) ) . '</span></a></li>';
+                    }
+
+                    // Display parent pages
+                    echo $parents;
+
+                    // Current page
+                    echo '<li class="trail-item"><span>' . esc_html( get_the_title() ) . '</span></li>';
+
+                } else {
+
+                    // Just display current page if not parents
+                    echo '<li class="trail-item"><span>' . esc_html( get_the_title() ) . '</span></li>';
+                }
+
+            } elseif ( is_tag() ) {
+
+                // Get tag information
+                $term_id        = get_query_var('tag_id');
+                $taxonomy       = 'post_tag';
+                $args           = 'include=' . $term_id;
+                $terms          = get_terms( $taxonomy, $args );
+                $get_term_id    = $terms[0]->term_id;
+                $get_term_slug  = $terms[0]->slug;
+                $get_term_name  = $terms[0]->name;
+
+                // Display the tag name
+                echo '<li class="trail-item"><span>' . esc_html( $get_term_name ) . '</span></li>';
+
+            } elseif ( is_day() ) {
+
+                // Year link
+                echo '<li class="trail-item"><a class="item-year" href="' . esc_url( get_year_link( get_the_time('Y') ) ) . '" title="' . esc_attr( get_the_time('Y') ). '"><span>' . esc_html( get_the_time('Y') ) . '</span></a></li>';
+                echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+
+                // Month link
+                echo '<li class="trail-item"><a class="item-month" href="' . esc_url( get_month_link( get_the_time('Y'), get_the_time('m') ) ) . '" title="' . esc_attr( get_the_time('M') ) . '"><span>' . esc_html( get_the_time('M') ) . '</span></a></li>';
+                echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+
+                // Day display
+                echo '<li class="trail-item"><span>' . esc_html( get_the_time('jS') ) .'</span></li>';
+
+            } elseif ( is_month() ) {
+
+                // Year link
+                echo '<li class="trail-item"><a class="item-year" href="' . esc_url( get_year_link( get_the_time('Y') ) ) . '" title="' . esc_attr( get_the_time('Y') ). '"><span>' . esc_html( get_the_time('Y') ) . '</span></a></li>';
+                echo '<li class="delimiter">'.esc_html( $delimiter ).'</li>';
+
+                // Month link
+                echo '<li class="trail-item"><span>' . esc_html( get_the_time('M') ) . '</span></li>';
+
+            } elseif ( is_year() ) {
+
+                // Display year archive
+                echo '<li class="trail-item"><span>' . esc_html( get_the_time('Y') ). '</span></li>';
+
+            } elseif ( is_author() ) {
+
+                // Get the author information
+                global $author;
+                $userdata = get_userdata( $author );
+
+                // Display author name
+                echo '<li class="trail-item"><span>' . esc_html( $userdata->display_name ). '</span></li>';
+
+            } elseif ( get_query_var('paged') ) {
+
+                // Paginated archives
+                echo '<li class="trail-item"><span>'.esc_html__( 'Page', 'awesome-one-page' ) . esc_html( get_query_var('paged') ) . '</span></li>';
+
+            } elseif ( is_search() ) {
+
+                // Search results page
+                echo '<li class="trail-item><span>' .esc_html__( 'Search results for: ', 'awesome-one-page' ) . esc_html( get_search_query() ) . '</span></li>';
+
+            } elseif ( is_404() ) {
+
+                // 404 page
+                echo '<li class="trail-item"><span>'.esc_html__('404 Error', 'awesome-one-page').'</span></li>';
+            }
+
+            echo '</ul>';
+
+        }
     }
-    echo '</ul>';
-}
 endif;
 
 /*--------------------------------------------------------------------------------------------------*/

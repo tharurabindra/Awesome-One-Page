@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Awesome One Page 1.0.0\n"
 "Report-Msgid-Bugs-To: precisethemes@gmail.com\n"
-"POT-Creation-Date: 2016-09-30 12:09:07+00:00\n"
+"POT-Creation-Date: 2016-10-04 10:45:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,360 +56,361 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:54
+#: header.php:61
 msgid "Primary Menu"
 msgstr ""
 
-#: inc/breadcrumbs.php:11
-msgid "Home"
-msgstr ""
-
-#: inc/breadcrumbs.php:130 inc/widgets/page-slider-widget.php:42
-msgid "Page"
-msgstr ""
-
-#: inc/customizer/customizer.php:72
-msgid "Import Demo Content"
-msgstr ""
-
-#: inc/customizer/customizer.php:87
+#: inc/customizer/customizer.php:73
 msgid "Documentation"
 msgstr ""
 
-#: inc/customizer/customizer.php:88
+#: inc/customizer/customizer.php:74
 msgid "Support Forum"
 msgstr ""
 
-#: inc/customizer/customizer.php:89
+#: inc/customizer/customizer.php:75
 msgid "Create Support Ticket"
 msgstr ""
 
-#: inc/customizer/customizer.php:90
+#: inc/customizer/customizer.php:76
 msgid "If you like the GoodNews theme, we would love to receive a"
 msgstr ""
 
-#: inc/customizer/customizer.php:90
+#: inc/customizer/customizer.php:76
 msgid "rating."
 msgstr ""
 
-#: inc/customizer/customizer.php:90
+#: inc/customizer/customizer.php:76
 msgid "Click Here"
 msgstr ""
 
-#: inc/customizer/customizer.php:90
+#: inc/customizer/customizer.php:76
 msgid "to rate this theme. Thanks"
 msgstr ""
 
-#: inc/customizer/customizer.php:178
+#: inc/customizer/customizer.php:163
 msgid "General"
 msgstr ""
 
-#: inc/customizer/customizer.php:184
+#: inc/customizer/customizer.php:169
 msgid "Basic"
 msgstr ""
 
-#: inc/customizer/customizer.php:196
+#: inc/customizer/customizer.php:181
 msgid "Activate Pre Loader"
 msgstr ""
 
-#: inc/customizer/customizer.php:209
+#: inc/customizer/customizer.php:194
 msgid "Activate Smooth Scroll"
 msgstr ""
 
-#: inc/customizer/customizer.php:222
+#: inc/customizer/customizer.php:207
 msgid "Activate Breadcrumbs"
 msgstr ""
 
-#: inc/customizer/customizer.php:236
+#: inc/customizer/customizer.php:214
+msgid "/"
+msgstr ""
+
+#: inc/customizer/customizer.php:221
 msgid "Breadcrumbs Delimiter"
 msgstr ""
 
-#: inc/customizer/customizer.php:250
+#: inc/customizer/customizer.php:235
 msgid "Website Layout"
 msgstr ""
 
-#: inc/customizer/customizer.php:251
+#: inc/customizer/customizer.php:236
 msgid "Choose your site layout. The change is reflected in whole site."
 msgstr ""
 
-#: inc/customizer/customizer.php:254
+#: inc/customizer/customizer.php:239
 msgid "Boxed layout"
 msgstr ""
 
-#: inc/customizer/customizer.php:255
+#: inc/customizer/customizer.php:240
 msgid "Wide layout"
 msgstr ""
 
-#: inc/customizer/customizer.php:263 inc/widgets/featured-posts-widget.php:105
-#: inc/widgets/fun-facts-widget.php:99 inc/widgets/portfolio-widget.php:88
-#: inc/widgets/services-widget.php:87 inc/widgets/social-icons-widget.php:118
-#: inc/widgets/teams-widget.php:88 inc/widgets/testimonials-widget.php:88
-#: inc/widgets/video-widget.php:81
+#: inc/customizer/customizer.php:248 inc/widgets/featured-posts-widget.php:99
+#: inc/widgets/fun-facts-widget.php:93 inc/widgets/portfolio-widget.php:82
+#: inc/widgets/services-widget.php:81 inc/widgets/social-icons-widget.php:112
+#: inc/widgets/teams-widget.php:82 inc/widgets/testimonials-widget.php:82
 msgid "Background Image"
 msgstr ""
 
-#: inc/customizer/customizer.php:272
+#: inc/customizer/customizer.php:257
 msgid "Header"
 msgstr ""
 
-#: inc/customizer/customizer.php:278
+#: inc/customizer/customizer.php:263
 msgid "Site Title & Tagline"
 msgstr ""
 
-#: inc/customizer/customizer.php:285
-msgid "Menu Style"
+#: inc/customizer/customizer.php:275
+msgid "Display Site Title"
+msgstr ""
+
+#: inc/customizer/customizer.php:288
+msgid "Display Tagline"
 msgstr ""
 
 #: inc/customizer/customizer.php:297
+msgid "Menu Style"
+msgstr ""
+
+#: inc/customizer/customizer.php:309
 msgid "Activate Sticky Menu"
 msgstr ""
 
-#: inc/customizer/customizer.php:311
+#: inc/customizer/customizer.php:323
 msgid "Menu style"
 msgstr ""
 
-#: inc/customizer/customizer.php:315
+#: inc/customizer/customizer.php:327
 msgid "Inline"
 msgstr ""
 
-#: inc/customizer/customizer.php:316
+#: inc/customizer/customizer.php:328
 msgid "Centered"
 msgstr ""
 
-#: inc/customizer/customizer.php:323
+#: inc/customizer/customizer.php:335
 msgid "Header Image"
 msgstr ""
 
-#: inc/customizer/customizer.php:333
+#: inc/customizer/customizer.php:347
+msgid "Activate Image Link Back to Home"
+msgstr ""
+
+#: inc/customizer/customizer.php:358
 msgid "Colors"
 msgstr ""
 
-#: inc/customizer/customizer.php:339 inc/widgets/featured-posts-widget.php:100
-#: inc/widgets/fun-facts-widget.php:94 inc/widgets/portfolio-widget.php:83
-#: inc/widgets/services-widget.php:82 inc/widgets/social-icons-widget.php:113
-#: inc/widgets/teams-widget.php:83 inc/widgets/testimonials-widget.php:83
-#: inc/widgets/video-widget.php:76
+#: inc/customizer/customizer.php:364 inc/widgets/featured-posts-widget.php:94
+#: inc/widgets/fun-facts-widget.php:88 inc/widgets/portfolio-widget.php:77
+#: inc/widgets/services-widget.php:76 inc/widgets/social-icons-widget.php:107
+#: inc/widgets/teams-widget.php:77 inc/widgets/testimonials-widget.php:77
 msgid "Background Color"
 msgstr ""
 
-#: inc/customizer/customizer.php:346
+#: inc/customizer/customizer.php:371
 msgid "Theme Color"
 msgstr ""
 
-#: inc/customizer/customizer.php:357
+#: inc/customizer/customizer.php:382
 msgid "Choose Theme Color"
 msgstr ""
 
-#: inc/customizer/customizer.php:362
+#: inc/customizer/customizer.php:387
 msgid "Watermelon"
 msgstr ""
 
-#: inc/customizer/customizer.php:363
+#: inc/customizer/customizer.php:388
 msgid "Red"
 msgstr ""
 
-#: inc/customizer/customizer.php:364
+#: inc/customizer/customizer.php:389
 msgid "Orange"
 msgstr ""
 
-#: inc/customizer/customizer.php:365
+#: inc/customizer/customizer.php:390
 msgid "Yellow"
 msgstr ""
 
-#: inc/customizer/customizer.php:366
+#: inc/customizer/customizer.php:391
 msgid "Lime"
 msgstr ""
 
-#: inc/customizer/customizer.php:367
+#: inc/customizer/customizer.php:392
 msgid "Green"
 msgstr ""
 
-#: inc/customizer/customizer.php:368
+#: inc/customizer/customizer.php:393
 msgid "Mint"
 msgstr ""
 
-#: inc/customizer/customizer.php:369
+#: inc/customizer/customizer.php:394
 msgid "Teal"
 msgstr ""
 
-#: inc/customizer/customizer.php:370
+#: inc/customizer/customizer.php:395
 msgid "Sky Blue"
 msgstr ""
 
-#: inc/customizer/customizer.php:371
+#: inc/customizer/customizer.php:396
 msgid "Blue"
 msgstr ""
 
-#: inc/customizer/customizer.php:372
+#: inc/customizer/customizer.php:397
 msgid "Purple"
 msgstr ""
 
-#: inc/customizer/customizer.php:373
+#: inc/customizer/customizer.php:398
 msgid "Pink"
 msgstr ""
 
-#: inc/customizer/customizer.php:374
+#: inc/customizer/customizer.php:399
 msgid "Magenta"
 msgstr ""
 
-#: inc/customizer/customizer.php:375
+#: inc/customizer/customizer.php:400
 msgid "Plum"
 msgstr ""
 
-#: inc/customizer/customizer.php:376
+#: inc/customizer/customizer.php:401
 msgid "Brown"
 msgstr ""
 
-#: inc/customizer/customizer.php:377
+#: inc/customizer/customizer.php:402
 msgid "Maroon"
 msgstr ""
 
-#: inc/customizer/customizer.php:389
+#: inc/customizer/customizer.php:414
 msgid "Custom Primary Color"
 msgstr ""
 
-#: inc/customizer/customizer.php:390
+#: inc/customizer/customizer.php:415
 msgid "You can override theme color by custom color"
 msgstr ""
 
-#: inc/customizer/customizer.php:403
+#: inc/customizer/customizer.php:428
 msgid "Secondary Color"
 msgstr ""
 
-#: inc/customizer/customizer.php:413
+#: inc/customizer/customizer.php:438
 msgid "Post Settings"
 msgstr ""
 
-#: inc/customizer/customizer.php:418 inc/customizer/customizer.php:539
-#: inc/customizer/customizer.php:689
+#: inc/customizer/customizer.php:443 inc/customizer/customizer.php:564
+#: inc/customizer/customizer.php:714
 msgid "General Settings"
 msgstr ""
 
-#: inc/customizer/customizer.php:432 inc/customizer/customizer.php:553
+#: inc/customizer/customizer.php:457 inc/customizer/customizer.php:578
 msgid "Available Sidebar"
 msgstr ""
 
-#: inc/customizer/customizer.php:433
+#: inc/customizer/customizer.php:458
 msgid ""
 "Select default layout for single posts. This layout will be reflected in "
 "all single posts unless unique layout is set for specific post."
 msgstr ""
 
-#: inc/customizer/customizer.php:452
+#: inc/customizer/customizer.php:477
 msgid "Next/Previous Article"
 msgstr ""
 
-#: inc/customizer/customizer.php:465
+#: inc/customizer/customizer.php:490
 msgid "Show Featured Image"
 msgstr ""
 
-#: inc/customizer/customizer.php:472 inc/customizer/customizer.php:621
+#: inc/customizer/customizer.php:497 inc/customizer/customizer.php:646
 msgid "Post Meta"
 msgstr ""
 
-#: inc/customizer/customizer.php:484
+#: inc/customizer/customizer.php:509
 msgid "Post Author"
 msgstr ""
 
-#: inc/customizer/customizer.php:497 inc/customizer/customizer.php:633
+#: inc/customizer/customizer.php:522 inc/customizer/customizer.php:658
 msgid "Post Date"
 msgstr ""
 
-#: inc/customizer/customizer.php:510 inc/customizer/customizer.php:647
+#: inc/customizer/customizer.php:535 inc/customizer/customizer.php:672
 msgid "Post Categories"
 msgstr ""
 
-#: inc/customizer/customizer.php:523
+#: inc/customizer/customizer.php:548
 msgid "Post Tags"
 msgstr ""
 
-#: inc/customizer/customizer.php:534
+#: inc/customizer/customizer.php:559
 msgid "Blog Settings"
 msgstr ""
 
-#: inc/customizer/customizer.php:554
+#: inc/customizer/customizer.php:579
 msgid ""
 "Select default sidebar. This sidebar will be reflected in all pages unless "
 "unique layout is set for specific page as well as reflected in whole site "
 "archives, categories, search page etc."
 msgstr ""
 
-#: inc/customizer/customizer.php:573
+#: inc/customizer/customizer.php:598
 msgid "Excerpt Length"
 msgstr ""
 
-#: inc/customizer/customizer.php:586
+#: inc/customizer/customizer.php:611
 msgid "Show Thumbnail"
 msgstr ""
 
-#: inc/customizer/customizer.php:599
+#: inc/customizer/customizer.php:624
 msgid "Show Read More"
 msgstr ""
 
-#: inc/customizer/customizer.php:606 inc/widgets/featured-posts-widget.php:260
-#: inc/widgets/post-slider-widget.php:213
+#: inc/customizer/customizer.php:631 inc/widgets/featured-posts-widget.php:240
 msgid "Read More"
 msgstr ""
 
-#: inc/customizer/customizer.php:613
+#: inc/customizer/customizer.php:638
 msgid "Read More Text"
 msgstr ""
 
-#: inc/customizer/customizer.php:660
+#: inc/customizer/customizer.php:685
 msgid "Show Tags"
 msgstr ""
 
-#: inc/customizer/customizer.php:673
+#: inc/customizer/customizer.php:698
 msgid "Post Comments"
 msgstr ""
 
-#: inc/customizer/customizer.php:684
+#: inc/customizer/customizer.php:709
 msgid "Footer"
 msgstr ""
 
-#: inc/customizer/customizer.php:701
+#: inc/customizer/customizer.php:726
 msgid "Go To Top Button"
 msgstr ""
 
-#: inc/customizer/customizer.php:708
+#: inc/customizer/customizer.php:733
 msgid "Footer Widgets"
 msgstr ""
 
-#: inc/customizer/customizer.php:719
+#: inc/customizer/customizer.php:744
 msgid "Footer widget area"
 msgstr ""
 
-#: inc/customizer/customizer.php:720
+#: inc/customizer/customizer.php:745
 msgid ""
 "Choose the number of widget areas in the footer, then go to Appearance &gt; "
 "Widgets and add your widgets."
 msgstr ""
 
-#: inc/customizer/customizer.php:724
+#: inc/customizer/customizer.php:749
 msgid "One"
 msgstr ""
 
-#: inc/customizer/customizer.php:725
+#: inc/customizer/customizer.php:750
 msgid "Two"
 msgstr ""
 
-#: inc/customizer/customizer.php:726
+#: inc/customizer/customizer.php:751
 msgid "Three"
 msgstr ""
 
-#: inc/customizer/customizer.php:727
+#: inc/customizer/customizer.php:752
 msgid "Four"
 msgstr ""
 
-#: inc/customizer/customizer.php:737
+#: inc/customizer/customizer.php:762
 msgid "Custom CSS"
 msgstr ""
 
-#: inc/customizer/customizer.php:747
+#: inc/customizer/customizer.php:772
 msgid "Add Custom CSS Code"
 msgstr ""
 
-#: inc/customizer/customizer.php:758 inc/customizer/customizer.php:768
+#: inc/customizer/customizer.php:783 inc/customizer/customizer.php:793
 msgid "Help & Support"
 msgstr ""
 
@@ -421,15 +422,35 @@ msgstr ""
 msgid "Next &rarr;"
 msgstr ""
 
-#: inc/functions.php:113
+#: inc/extras.php:265
+msgid "Home"
+msgstr ""
+
+#: inc/extras.php:292 inc/extras.php:294 inc/extras.php:296
+msgid "Archive for"
+msgstr ""
+
+#: inc/extras.php:298
+msgid "Author Archive"
+msgstr ""
+
+#: inc/extras.php:300
+msgid "Blog Archive"
+msgstr ""
+
+#: inc/extras.php:302
+msgid "Search Results"
+msgstr ""
+
+#: inc/functions.php:141
 msgid "https://wordpress.org/"
 msgstr ""
 
-#: inc/functions.php:114
+#: inc/functions.php:142
 msgid "Powered by %s"
 msgstr ""
 
-#: inc/functions.php:117
+#: inc/functions.php:145
 msgid "Theme: %2$s by %1$s."
 msgstr ""
 
@@ -437,7 +458,7 @@ msgstr ""
 msgid "Awesome One Page"
 msgstr ""
 
-#: inc/functions.php:117
+#: inc/functions.php:145
 msgid "http://precisethemes.com/"
 msgstr ""
 
@@ -465,64 +486,67 @@ msgstr ""
 msgid "No Sidebar Content Centered"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:150
+#: inc/metabox/metaboxes.php:69
+msgid "Choose Sidebar Template"
+msgstr ""
+
+#: inc/metabox/metaboxes.php:151
 msgid "Icon Class"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:152 inc/metabox/metaboxes.php:156
+#: inc/metabox/metaboxes.php:153 inc/metabox/metaboxes.php:157
 msgid "Designation"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:154
+#: inc/metabox/metaboxes.php:155
 msgid "Social Links"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:227
+#: inc/metabox/metaboxes.php:228
 msgid "If featured image is not used than display the icon in Services."
 msgstr ""
 
-#: inc/metabox/metaboxes.php:231
+#: inc/metabox/metaboxes.php:232
 msgid ""
 "<a href=\"%s\" target=\"_blank\">Refer here</a> for icon class. For "
 "example: <strong>fa-mobile</strong>"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:239
+#: inc/metabox/metaboxes.php:240
 msgid "Show designation in Team Widget."
 msgstr ""
 
-#: inc/metabox/metaboxes.php:247
+#: inc/metabox/metaboxes.php:248
 msgid "Social Link One:"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:255
+#: inc/metabox/metaboxes.php:256
 msgid "Social Link Two:"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:263
+#: inc/metabox/metaboxes.php:264
 msgid "Social Link Three:"
 msgstr ""
 
-#: inc/metabox/metaboxes.php:271
+#: inc/metabox/metaboxes.php:272
 msgid "Testimonial Designation"
 msgstr ""
 
 #: inc/template-tags.php:79 inc/template-tags.php:85 inc/template-tags.php:96
-#: inc/template-tags.php:102 inc/template-tags.php:184
-#: inc/template-tags.php:204
+#: inc/template-tags.php:102
 #. translators: used between list items, there is a space after the comma
 msgid ", "
 msgstr ""
 
-#: inc/template-tags.php:81 inc/template-tags.php:98 inc/template-tags.php:186
+#: inc/template-tags.php:81 inc/template-tags.php:98
 msgid "Posted in %1$s"
 msgstr ""
 
-#: inc/template-tags.php:87 inc/template-tags.php:104 inc/template-tags.php:206
+#: inc/template-tags.php:87 inc/template-tags.php:104
 msgid "Tagged %1$s"
 msgstr ""
 
-#: inc/template-tags.php:114 inc/template-tags.php:223
+#: inc/template-tags.php:114
 #. translators: %s: post title
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
@@ -540,139 +564,116 @@ msgstr ""
 msgid "AOP: Featured Posts"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:37
-#: inc/widgets/featured-posts-widget.php:38 inc/widgets/fun-facts-widget.php:36
-#: inc/widgets/fun-facts-widget.php:37 inc/widgets/page-slider-widget.php:35
-#: inc/widgets/page-slider-widget.php:36 inc/widgets/portfolio-widget.php:35
-#: inc/widgets/portfolio-widget.php:36 inc/widgets/services-widget.php:34
-#: inc/widgets/services-widget.php:35 inc/widgets/social-icons-widget.php:65
-#: inc/widgets/social-icons-widget.php:66 inc/widgets/teams-widget.php:35
-#: inc/widgets/teams-widget.php:36 inc/widgets/testimonials-widget.php:35
-#: inc/widgets/testimonials-widget.php:36 inc/widgets/video-widget.php:33
-#: inc/widgets/video-widget.php:34
+#: inc/widgets/featured-posts-widget.php:36
+#: inc/widgets/featured-posts-widget.php:37 inc/widgets/fun-facts-widget.php:35
+#: inc/widgets/fun-facts-widget.php:36 inc/widgets/page-slider-widget.php:37
+#: inc/widgets/page-slider-widget.php:38 inc/widgets/portfolio-widget.php:34
+#: inc/widgets/portfolio-widget.php:35 inc/widgets/services-widget.php:33
+#: inc/widgets/services-widget.php:34 inc/widgets/social-icons-widget.php:64
+#: inc/widgets/social-icons-widget.php:65 inc/widgets/teams-widget.php:34
+#: inc/widgets/teams-widget.php:35 inc/widgets/testimonials-widget.php:34
+#: inc/widgets/testimonials-widget.php:35 inc/widgets/video-widget.php:29
+#: inc/widgets/video-widget.php:30
 msgid "Title"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:42 inc/widgets/fun-facts-widget.php:41
-#: inc/widgets/portfolio-widget.php:40 inc/widgets/services-widget.php:39
-#: inc/widgets/social-icons-widget.php:70 inc/widgets/teams-widget.php:40
-#: inc/widgets/testimonials-widget.php:40 inc/widgets/video-widget.php:38
-msgid "Description:"
-msgstr ""
-
-#: inc/widgets/featured-posts-widget.php:43 inc/widgets/fun-facts-widget.php:42
-#: inc/widgets/portfolio-widget.php:41 inc/widgets/services-widget.php:40
-#: inc/widgets/social-icons-widget.php:71 inc/widgets/teams-widget.php:41
-#: inc/widgets/testimonials-widget.php:41 inc/widgets/video-widget.php:39
-msgid "Description"
-msgstr ""
-
-#: inc/widgets/featured-posts-widget.php:47
-#: inc/widgets/post-slider-widget.php:32
+#: inc/widgets/featured-posts-widget.php:41
 msgid "Show latest Posts"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:48
-#: inc/widgets/post-slider-widget.php:33
+#: inc/widgets/featured-posts-widget.php:42
 msgid "Show posts from a category"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:52
-#: inc/widgets/post-slider-widget.php:37
+#: inc/widgets/featured-posts-widget.php:46
 msgid "Select category"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:57 inc/widgets/portfolio-widget.php:45
-#: inc/widgets/post-slider-widget.php:42 inc/widgets/services-widget.php:44
-#: inc/widgets/teams-widget.php:45 inc/widgets/testimonials-widget.php:45
+#: inc/widgets/featured-posts-widget.php:51 inc/widgets/portfolio-widget.php:39
+#: inc/widgets/services-widget.php:38 inc/widgets/teams-widget.php:39
+#: inc/widgets/testimonials-widget.php:39
 msgid "Number of pages to display"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:62
-#: inc/widgets/post-slider-widget.php:47
+#: inc/widgets/featured-posts-widget.php:56
 msgid "Exclude Posts IDs"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:63 inc/widgets/portfolio-widget.php:51
-#: inc/widgets/post-slider-widget.php:48 inc/widgets/services-widget.php:50
-#: inc/widgets/teams-widget.php:51 inc/widgets/testimonials-widget.php:51
+#: inc/widgets/featured-posts-widget.php:57 inc/widgets/portfolio-widget.php:45
+#: inc/widgets/services-widget.php:44 inc/widgets/teams-widget.php:45
+#: inc/widgets/testimonials-widget.php:45
 msgid "11,43,50"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:68
-#: inc/widgets/post-slider-widget.php:53
+#: inc/widgets/featured-posts-widget.php:62
 msgid ""
 "Check to display the random post from either the chosen category or from "
 "latest post."
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:75 inc/widgets/fun-facts-widget.php:69
-#: inc/widgets/page-slider-widget.php:63 inc/widgets/portfolio-widget.php:58
-#: inc/widgets/post-slider-widget.php:60 inc/widgets/services-widget.php:57
-#: inc/widgets/social-icons-widget.php:88 inc/widgets/teams-widget.php:58
-#: inc/widgets/testimonials-widget.php:58 inc/widgets/video-widget.php:51
+#: inc/widgets/featured-posts-widget.php:69 inc/widgets/fun-facts-widget.php:63
+#: inc/widgets/page-slider-widget.php:65 inc/widgets/portfolio-widget.php:52
+#: inc/widgets/services-widget.php:51 inc/widgets/social-icons-widget.php:82
+#: inc/widgets/teams-widget.php:52 inc/widgets/testimonials-widget.php:52
+#: inc/widgets/video-widget.php:42
 msgid "Design Options"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:81
+#: inc/widgets/featured-posts-widget.php:75
 msgid ""
 "Tip: Enter the Featured Posts Section ID and use same for Menu item. Only "
 "used for One Page Menu."
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:85 inc/widgets/fun-facts-widget.php:79
-#: inc/widgets/page-slider-widget.php:73 inc/widgets/portfolio-widget.php:68
-#: inc/widgets/services-widget.php:67 inc/widgets/social-icons-widget.php:98
-#: inc/widgets/teams-widget.php:68 inc/widgets/testimonials-widget.php:68
-#: inc/widgets/video-widget.php:61
+#: inc/widgets/featured-posts-widget.php:79 inc/widgets/fun-facts-widget.php:73
+#: inc/widgets/page-slider-widget.php:75 inc/widgets/portfolio-widget.php:62
+#: inc/widgets/services-widget.php:61 inc/widgets/social-icons-widget.php:92
+#: inc/widgets/teams-widget.php:62 inc/widgets/testimonials-widget.php:62
+#: inc/widgets/video-widget.php:52
 msgid "Section ID"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:86
+#: inc/widgets/featured-posts-widget.php:80
 msgid "Blog"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:90 inc/widgets/fun-facts-widget.php:84
-#: inc/widgets/page-slider-widget.php:78 inc/widgets/portfolio-widget.php:73
-#: inc/widgets/post-slider-widget.php:66 inc/widgets/services-widget.php:72
-#: inc/widgets/social-icons-widget.php:103 inc/widgets/teams-widget.php:73
-#: inc/widgets/testimonials-widget.php:73 inc/widgets/video-widget.php:66
+#: inc/widgets/featured-posts-widget.php:84 inc/widgets/fun-facts-widget.php:78
+#: inc/widgets/page-slider-widget.php:80 inc/widgets/portfolio-widget.php:67
+#: inc/widgets/services-widget.php:66 inc/widgets/social-icons-widget.php:97
+#: inc/widgets/teams-widget.php:67 inc/widgets/testimonials-widget.php:67
+#: inc/widgets/video-widget.php:57
 msgid "Widget Title Color"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:95 inc/widgets/fun-facts-widget.php:89
-#: inc/widgets/page-slider-widget.php:83 inc/widgets/portfolio-widget.php:78
-#: inc/widgets/post-slider-widget.php:71 inc/widgets/services-widget.php:77
-#: inc/widgets/social-icons-widget.php:108 inc/widgets/teams-widget.php:78
-#: inc/widgets/testimonials-widget.php:78 inc/widgets/video-widget.php:71
+#: inc/widgets/featured-posts-widget.php:89 inc/widgets/fun-facts-widget.php:83
+#: inc/widgets/page-slider-widget.php:85 inc/widgets/portfolio-widget.php:72
+#: inc/widgets/services-widget.php:71 inc/widgets/social-icons-widget.php:102
+#: inc/widgets/teams-widget.php:72 inc/widgets/testimonials-widget.php:72
 msgid "Text Color"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:113
-#: inc/widgets/fun-facts-widget.php:107 inc/widgets/portfolio-widget.php:96
-#: inc/widgets/services-widget.php:95 inc/widgets/social-icons-widget.php:126
-#: inc/widgets/teams-widget.php:96 inc/widgets/testimonials-widget.php:96
-#: inc/widgets/video-widget.php:89
+#: inc/widgets/featured-posts-widget.php:107
+#: inc/widgets/fun-facts-widget.php:101 inc/widgets/portfolio-widget.php:90
+#: inc/widgets/services-widget.php:89 inc/widgets/social-icons-widget.php:120
+#: inc/widgets/teams-widget.php:90 inc/widgets/testimonials-widget.php:90
 msgid "Choose an image"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:113
-#: inc/widgets/fun-facts-widget.php:107 inc/widgets/portfolio-widget.php:96
-#: inc/widgets/services-widget.php:95 inc/widgets/social-icons-widget.php:126
-#: inc/widgets/teams-widget.php:96 inc/widgets/testimonials-widget.php:96
-#: inc/widgets/video-widget.php:89
+#: inc/widgets/featured-posts-widget.php:107
+#: inc/widgets/fun-facts-widget.php:101 inc/widgets/portfolio-widget.php:90
+#: inc/widgets/services-widget.php:89 inc/widgets/social-icons-widget.php:120
+#: inc/widgets/teams-widget.php:90 inc/widgets/testimonials-widget.php:90
 msgid "Use image"
 msgstr ""
 
-#: inc/widgets/featured-posts-widget.php:113
-#: inc/widgets/fun-facts-widget.php:107 inc/widgets/portfolio-widget.php:96
-#: inc/widgets/services-widget.php:95 inc/widgets/social-icons-widget.php:126
-#: inc/widgets/teams-widget.php:96 inc/widgets/testimonials-widget.php:96
-#: inc/widgets/video-widget.php:89
+#: inc/widgets/featured-posts-widget.php:107
+#: inc/widgets/fun-facts-widget.php:101 inc/widgets/portfolio-widget.php:90
+#: inc/widgets/services-widget.php:89 inc/widgets/social-icons-widget.php:120
+#: inc/widgets/teams-widget.php:90 inc/widgets/testimonials-widget.php:90
 msgid "Select an Image"
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:8 inc/widgets/fun-facts-widget.php:32
+#: inc/widgets/fun-facts-widget.php:8 inc/widgets/fun-facts-widget.php:31
 msgid "Show your visitors some facts about your organization."
 msgstr ""
 
@@ -680,29 +681,33 @@ msgstr ""
 msgid "AOP: Fun Facts"
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:48
+#: inc/widgets/fun-facts-widget.php:42
 msgid "Fact Detail:"
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:49
+#: inc/widgets/fun-facts-widget.php:43
 msgid "Achievement"
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:53
+#: inc/widgets/fun-facts-widget.php:47
 msgid "Fact number: "
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:58 inc/widgets/page-slider-widget.php:52
+#: inc/widgets/fun-facts-widget.php:52 inc/widgets/page-slider-widget.php:54
 msgid "Icon Class:"
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:75
+#: inc/widgets/fun-facts-widget.php:53
+msgid "fa-trophy"
+msgstr ""
+
+#: inc/widgets/fun-facts-widget.php:69
 msgid ""
 "Tip: Enter the Fun Facts Section ID and use same for Menu item. Only used "
 "for One Page Menu."
 msgstr ""
 
-#: inc/widgets/fun-facts-widget.php:80 inc/widgets/social-icons-widget.php:99
+#: inc/widgets/fun-facts-widget.php:74
 msgid "fun-facts"
 msgstr ""
 
@@ -716,49 +721,53 @@ msgstr ""
 msgid "AOP: Slider"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:31
+#: inc/widgets/page-slider-widget.php:33
 msgid "Only pages having thumbnail will display in Slider."
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:47
+#: inc/widgets/page-slider-widget.php:44
+msgid "Page"
+msgstr ""
+
+#: inc/widgets/page-slider-widget.php:49
 msgid "Button Text "
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:48
+#: inc/widgets/page-slider-widget.php:50
 msgid "Get in Touch"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:53
+#: inc/widgets/page-slider-widget.php:55
 msgid "http://url.com/"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:69
+#: inc/widgets/page-slider-widget.php:71
 msgid ""
 "Tip: Enter the Slider Section ID and use same for Menu item. Only used for "
 "One Page Menu."
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:74
+#: inc/widgets/page-slider-widget.php:76
 msgid "home"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:88
+#: inc/widgets/page-slider-widget.php:90
 msgid "Check to enable link in Slider Image."
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:93
+#: inc/widgets/page-slider-widget.php:95
 msgid "Show Navigation"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:99
+#: inc/widgets/page-slider-widget.php:101
 msgid "Navigation Type"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:101
+#: inc/widgets/page-slider-widget.php:103
 msgid "Arrow"
 msgstr ""
 
-#: inc/widgets/page-slider-widget.php:102
+#: inc/widgets/page-slider-widget.php:104
 msgid "Pagination"
 msgstr ""
 
@@ -770,39 +779,29 @@ msgstr ""
 msgid "AOP: Portfolio"
 msgstr ""
 
-#: inc/widgets/portfolio-widget.php:30
+#: inc/widgets/portfolio-widget.php:29
 msgid "This widget displays all pages related to Single Portfolio Template."
 msgstr ""
 
-#: inc/widgets/portfolio-widget.php:31
+#: inc/widgets/portfolio-widget.php:30
 msgid ""
 "Tip: to rearrange the portfolio order, edit each portfolio page and add a "
 "value in Page Attributes > Order"
 msgstr ""
 
-#: inc/widgets/portfolio-widget.php:50 inc/widgets/services-widget.php:49
-#: inc/widgets/teams-widget.php:50 inc/widgets/testimonials-widget.php:50
+#: inc/widgets/portfolio-widget.php:44 inc/widgets/services-widget.php:43
+#: inc/widgets/teams-widget.php:44 inc/widgets/testimonials-widget.php:44
 msgid "Exclude Page IDs"
 msgstr ""
 
-#: inc/widgets/portfolio-widget.php:64
+#: inc/widgets/portfolio-widget.php:58
 msgid ""
 "Tip: Enter the Portfolio Section ID and use same for Menu item. Only used "
 "for One Page Menu."
 msgstr ""
 
-#: inc/widgets/portfolio-widget.php:69
+#: inc/widgets/portfolio-widget.php:63
 msgid "portfolio"
-msgstr ""
-
-#: inc/widgets/post-slider-widget.php:8
-msgid ""
-"Display latest posts thumbnail or posts of specific category thumbnail in "
-"slide."
-msgstr ""
-
-#: inc/widgets/post-slider-widget.php:10
-msgid "AOP: Post Slider"
 msgstr ""
 
 #: inc/widgets/services-widget.php:7
@@ -813,27 +812,27 @@ msgstr ""
 msgid "AOP: Services"
 msgstr ""
 
-#: inc/widgets/services-widget.php:29
+#: inc/widgets/services-widget.php:28
 msgid "This widget displays all pages related to Single Service Template."
 msgstr ""
 
-#: inc/widgets/services-widget.php:30
+#: inc/widgets/services-widget.php:29
 msgid ""
 "Tip: to rearrange the services order, edit each service page and add a "
 "value in Page Attributes > Order"
 msgstr ""
 
-#: inc/widgets/services-widget.php:63
+#: inc/widgets/services-widget.php:57
 msgid ""
 "Tip: Enter the Service Section ID and use same for Menu item. Only used for "
 "One Page Menu."
 msgstr ""
 
-#: inc/widgets/services-widget.php:68
+#: inc/widgets/services-widget.php:62
 msgid "service"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:8 inc/widgets/social-icons-widget.php:61
+#: inc/widgets/social-icons-widget.php:8 inc/widgets/social-icons-widget.php:60
 msgid "Show your Social Icons."
 msgstr ""
 
@@ -841,62 +840,66 @@ msgstr ""
 msgid "AOP: Social Icons"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:28
+#: inc/widgets/social-icons-widget.php:27
 msgid "Facebook"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:29
+#: inc/widgets/social-icons-widget.php:28
 msgid "Twitter"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:30
+#: inc/widgets/social-icons-widget.php:29
 msgid "G plus"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:31
+#: inc/widgets/social-icons-widget.php:30
 msgid "Instagram"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:32
+#: inc/widgets/social-icons-widget.php:31
 msgid "Github"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:33
+#: inc/widgets/social-icons-widget.php:32
 msgid "Flickr"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:34
+#: inc/widgets/social-icons-widget.php:33
 msgid "Pinterest"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:35
+#: inc/widgets/social-icons-widget.php:34
 msgid "WordPress"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:36
+#: inc/widgets/social-icons-widget.php:35
 msgid "Youtube"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:37
+#: inc/widgets/social-icons-widget.php:36
 msgid "Video"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:38
+#: inc/widgets/social-icons-widget.php:37
 msgid "linkedin"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:39
+#: inc/widgets/social-icons-widget.php:38
 msgid "Behance"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:40
+#: inc/widgets/social-icons-widget.php:39
 msgid "Dribbble"
 msgstr ""
 
-#: inc/widgets/social-icons-widget.php:94
+#: inc/widgets/social-icons-widget.php:88
 msgid ""
 "Tip: Enter the Social Icons Section ID and use same for Menu item. Only "
 "used for One Page Menu."
+msgstr ""
+
+#: inc/widgets/social-icons-widget.php:93
+msgid "social"
 msgstr ""
 
 #: inc/widgets/teams-widget.php:8
@@ -907,23 +910,23 @@ msgstr ""
 msgid "AOP: Teams"
 msgstr ""
 
-#: inc/widgets/teams-widget.php:30
+#: inc/widgets/teams-widget.php:29
 msgid "This widget displays all pages related to Single Team Template."
 msgstr ""
 
-#: inc/widgets/teams-widget.php:31
+#: inc/widgets/teams-widget.php:30
 msgid ""
 "Tip: to rearrange the team order, edit each team page and add a value in "
 "Page Attributes > Order"
 msgstr ""
 
-#: inc/widgets/teams-widget.php:64
+#: inc/widgets/teams-widget.php:58
 msgid ""
 "Tip: Enter the Team Section ID and use same for Menu item. Only used for "
 "One Page Menu."
 msgstr ""
 
-#: inc/widgets/teams-widget.php:69
+#: inc/widgets/teams-widget.php:63
 msgid "team"
 msgstr ""
 
@@ -935,23 +938,23 @@ msgstr ""
 msgid "AOP: Testimonials"
 msgstr ""
 
-#: inc/widgets/testimonials-widget.php:30
+#: inc/widgets/testimonials-widget.php:29
 msgid "This widget displays all pages related to Single Testimonial Template."
 msgstr ""
 
-#: inc/widgets/testimonials-widget.php:31
+#: inc/widgets/testimonials-widget.php:30
 msgid ""
 "Tip: to rearrange the testimonial order, edit each testimonial page and add "
 "a value in Page Attributes > Order"
 msgstr ""
 
-#: inc/widgets/testimonials-widget.php:64
+#: inc/widgets/testimonials-widget.php:58
 msgid ""
 "Tip: Enter the Testimonial Section ID and use same for Menu item. Only used "
 "for One Page Menu."
 msgstr ""
 
-#: inc/widgets/testimonials-widget.php:69
+#: inc/widgets/testimonials-widget.php:63
 msgid "testimonial"
 msgstr ""
 
@@ -963,21 +966,21 @@ msgstr ""
 msgid "AOP: Video"
 msgstr ""
 
-#: inc/widgets/video-widget.php:29
+#: inc/widgets/video-widget.php:25
 msgid "This widget displays videos related to Youtube, Video etc."
 msgstr ""
 
-#: inc/widgets/video-widget.php:43
+#: inc/widgets/video-widget.php:34
 msgid "Paste the complete video URL"
 msgstr ""
 
-#: inc/widgets/video-widget.php:57
+#: inc/widgets/video-widget.php:48
 msgid ""
 "Tip: Enter the Video Section ID and use same for Menu item. Only used for "
 "One Page Menu."
 msgstr ""
 
-#: inc/widgets/video-widget.php:62
+#: inc/widgets/video-widget.php:53
 msgid "video"
 msgstr ""
 
@@ -1015,24 +1018,6 @@ msgstr ""
 
 #: search.php:19
 msgid "Search Results for: %s"
-msgstr ""
-
-#: sidebar-left.php:16 sidebar.php:16
-msgid "Example Widget"
-msgstr ""
-
-#: sidebar-left.php:17
-msgid ""
-"This is an example widget to show how the Left Sidebar looks by default. "
-"You can add custom widgets from the %swidgets screen%s in the admin. If "
-"custom widgets is added than this will be replaced by those widgets."
-msgstr ""
-
-#: sidebar.php:17
-msgid ""
-"This is an example widget to show how the Right Sidebar looks by default. "
-"You can add custom widgets from the %swidgets screen%s in the admin. If "
-"custom widgets is added than this will be replaced by those widgets."
 msgstr ""
 
 #: template-parts/content-none.php:14
@@ -1106,6 +1091,14 @@ msgstr ""
 #: inc/extras.php:175
 msgctxt "Next post link"
 msgid "Next Post &rarr;"
+msgstr ""
+
+#: inc/functions.php:80
+#. translators: If there are characters in your language that are not supported
+#. by Poppins, translate this to 'off'. Do not translate into your own
+#. language.
+msgctxt "Montserrat font: on or off"
+msgid "on"
 msgstr ""
 
 #: inc/template-tags.php:28

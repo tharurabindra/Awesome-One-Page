@@ -20,10 +20,10 @@
 		} );
 	} );
 
-	/* Shows a live preview of changing the breadcrumbs text. */
-	wp.customize( 'aop_breadcrumb_home_text', function( value ) {
+	/* Shows a live preview of changing the readmore text. */
+	wp.customize( 'awesome_one_page_blog_read_more_text', function( value ) {
 		value.bind( function( to ) {
-			$( '#aop-breadcrumbs' ).find('span:first').html( to ) ;
+			$( '.read-more a' ).html( to ) ;
 		});
 	});
 	
